@@ -1,0 +1,1319 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="网络安全工程师的学习笔记">
+      
+      
+        <meta name="author" content="Josh">
+      
+      
+      
+        <link rel="prev" href="../Attack%20and%20Defence/">
+      
+      
+        <link rel="next" href="../Metasploit/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
+    
+    
+      
+        <title>Cryptography - 网络安全工程师的学习笔记</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="网络安全工程师的学习笔记" class="md-header__button md-logo" aria-label="网络安全工程师的学习笔记" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            网络安全工程师的学习笔记
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cryptography
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="teal"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Coding%20Language/C/" class="md-tabs__link">
+          
+  
+  
+  Coding Language
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Computer%20Fundamentals/Linux/" class="md-tabs__link">
+          
+  
+  
+  Computer Fundamentals
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../AI%20Security/" class="md-tabs__link">
+          
+  
+  
+  Cyber Security
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Testing/Black-box%20Testing/" class="md-tabs__link">
+          
+  
+  
+  Testing
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="网络安全工程师的学习笔记" class="md-nav__button md-logo" aria-label="网络安全工程师的学习笔记" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    网络安全工程师的学习笔记
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Coding Language
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Coding Language
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Coding%20Language/C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Coding%20Language/Python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Python
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Computer Fundamentals
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Computer Fundamentals
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Computer%20Fundamentals/Linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linux
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Computer%20Fundamentals/Operating%20System/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Operating System
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Computer%20Fundamentals/Protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Protocol
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Computer%20Fundamentals/SQL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SQL
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cyber Security
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Cyber Security
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AI%20Security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI Security
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Attack%20and%20Defence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Attack and Defence
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Cryptography
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cryptography
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#aes" class="md-nav__link">
+    <span class="md-ellipsis">
+      AES
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sm4" class="md-nav__link">
+    <span class="md-ellipsis">
+      SM4
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SM4">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      核心定位与特性
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      算法原理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      与国际算法对比
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      分组密码的工作模式
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Metasploit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Metasploit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Network%20Security%20Equipment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Network Security Equipment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../OS%20Security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OS Security
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SonarQube/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SonarQube
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQLmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SQLmap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Vulnerabilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vulnerabilities
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Testing
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Testing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Testing/Black-box%20Testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Black-box Testing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p>openssl</p>
+<h1 id="_1">分组密码<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="aes">AES<a class="headerlink" href="#aes" title="Permanent link">&para;</a></h2>
+<h2 id="sm4">SM4<a class="headerlink" href="#sm4" title="Permanent link">&para;</a></h2>
+<h3 id="_2">核心定位与特性<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>SM4全称为“SM4分组密码算法”，由国家密码管理局发布，标准号为GB/T 32907-2016，其核心定位是满足国内商用领域的数据加密需求，替代部分国外算法实现自主可控。</p>
+<p>其核心特性主要包括三点：</p>
+<ol>
+<li><strong>分组与密钥长度固定</strong>：分组长度和密钥长度均为128位，这一设计平衡了安全性和计算效率，能有效抵御常见的密码分析攻击。</li>
+<li><strong>对称密码体制</strong>：加密和解密使用相同的密钥，操作流程对称，便于硬件和软件快速实现，适合对处理速度有要求的场景。</li>
+<li><strong>国产化自主可控</strong>：算法设计完全由国内团队完成，无外部后门风险，符合国家信息安全战略，是政务、金融等关键领域的首选加密算法之一。</li>
+</ol>
+<h3 id="_3">算法原理<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>SM4算法是一种典型的迭代型分组密码，基于“代换-置换网络（Substitution-Permutation Network，SPN）”结构设计，其核心设计思路是通过多轮次的非线性代换（混淆）和线性置换（扩散）操作，将明文数据转化为完全不可识别的密文，同时保证加密与解密过程的对称性和高效性。整体加密流程可细分为<strong>初始变换</strong>、<strong>32轮轮函数迭代</strong>、<strong>反初始变换</strong>三个核心阶段，而支撑整个流程的关键还有<strong>密钥扩展算法</strong>，用于生成每轮迭代所需的轮密钥。</p>
+<ol>
+<li>
+<p><strong>轮函数迭代（核心执行环节）</strong>：轮函数是SM4加密的核心模块，32轮迭代过程采用完全相同的结构，每轮操作都实现一次“混淆-扩散”循环。具体流程如下：首先，将128位明文分组划分为4个32位的字，记为X₀、X₁、X₂、X₃（后续每轮迭代的输入均为4个32位字）；然后，取后3个输入字Xᵢ₊₁、Xᵢ₊₂、Xᵢ₊₃与本轮轮密钥rkᵢ进行“轮函数F”运算，得到的结果再与第一个输入字Xᵢ进行异或（XOR）操作，生成新的字Xᵢ₊₄，同时将Xᵢ₊₁、Xᵢ₊₂、Xᵢ₊₃、Xᵢ₊₄作为下一轮迭代的输入，依次循环32轮。其中“轮函数F”包含四个关键子操作，按顺序执行： </p>
+</li>
+<li>
+<p><strong>字节代换（S盒变换）</strong>：这是实现非线性混淆的核心步骤。将32位输入字拆分为4个8位字节，每个字节通过SM4专用S盒进行查表替换。S盒是基于GF(2⁸)有限域上的逆运算和仿射变换设计的，具有良好的非线性特性和抗差分攻击能力，能有效打破输入与输出之间的线性关联； </p>
+</li>
+<li>
+<p><strong>行移位（字节移位）</strong>：对S盒输出的4个字节进行循环移位操作，第一个字节不移位，第二个字节左移1个字节，第三个字节左移2个字节，第四个字节左移3个字节。该操作通过位置置换实现字节级别的扩散，使单个字节的变化影响到多个位置； 3. <strong>列混合（线性变换）</strong>：对行移位后的4个字节进行线性变换，通过固定的线性矩阵与字节向量相乘（基于GF(2)域运算），将单个字节的信息扩散到整个32位字中，进一步增强数据的扩散效果； </p>
+</li>
+<li>
+<p><strong>轮密钥加（异或操作）</strong>：将列混合后的32位结果与本轮轮密钥rkᵢ进行异或运算，实现密钥信息与明文信息的深度融合。32轮迭代完成后，得到的4个32位字X₃₂、X₃₃、X₃₄、X₃₅需经过“反初始变换”（即将4个字按X₃₅、X₃₄、X₃₃、X₃₂的顺序重组为128位数据），最终得到128位密文。</p>
+</li>
+<li>
+<p><strong>密钥扩展算法（轮密钥生成）</strong>：SM4的加密和解密均依赖128位主密钥，但每轮轮函数需要独立的32位轮密钥，因此需通过密钥扩展算法将128位主密钥扩展为32个32位轮密钥（rk₀至rk₃₁）。具体步骤为：首先将128位主密钥拆分为4个32位字MK₀、MK₁、MK₂、MK₃，与4个固定的32位系统参数FK₀、FK₁、FK₂、FK₃分别异或，得到密钥扩展的初始输入字K₀、K₁、K₂、K₃；然后采用与轮函数类似的迭代方式生成后续密钥字，对于第i轮（i从0到31），取前4个密钥字中的后3个（Kᵢ₊₁、Kᵢ₊₂、Kᵢ₊₃）与一个固定的32位常量CKᵢ进行“密钥扩展函数G”运算，结果再与第一个密钥字Kᵢ异或，得到新的密钥字Kᵢ₊₄，其中Kᵢ₊₄即为第i轮的轮密钥rkᵢ。“密钥扩展函数G”同样包含S盒字节代换和线性变换操作，确保生成的轮密钥具有良好的随机性和独立性，避免因主密钥泄露或轮密钥关联性导致的安全风险。</p>
+</li>
+<li>
+<p><strong>解密原理（对称结构设计）</strong>：SM4的解密过程与加密过程在结构上完全对称，核心优势是无需重新生成解密密钥，仅需将加密时使用的32个轮密钥按逆序（即rk₃₁至rk₀）使用即可。这是因为轮函数具有“可逆性”——字节代换的逆操作可通过S盒的逆表实现，行移位的逆操作是反向循环移位，列混合的逆操作可通过逆线性矩阵实现，而异或操作本身是自逆的。因此，解密时只需将密文作为输入，按加密的反向流程执行32轮迭代（使用逆序轮密钥），再经过初始变换（与加密的反初始变换对称），即可还原出原始明文，这种对称设计极大简化了算法的硬件和软件实现复杂度。</p>
+</li>
+</ol>
+<h3 id="_4">与国际算法对比<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>目前国际上主流的分组密码算法是AES，SM4与AES在设计和应用上既有共性，也存在显著差异，具体对比如下：</p>
+<table>
+<thead>
+<tr>
+<th>对比维度</th>
+<th>SM4算法</th>
+<th>AES算法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>设计主体</td>
+<td>中国国家密码管理局</td>
+<td>美国国家标准与技术研究院（NIST）</td>
+</tr>
+<tr>
+<td>分组/密钥长度</td>
+<td>均固定为128位</td>
+<td>分组128位，密钥支持128/192/256位</td>
+</tr>
+<tr>
+<td>算法结构</td>
+<td>32轮SPN结构</td>
+<td>10/12/14轮SPN结构（依密钥长度）</td>
+</tr>
+<tr>
+<td>安全性</td>
+<td>抵御差分、线性等攻击，无公开安全漏洞</td>
+<td>国际公认安全，应用广泛，经过长期验证</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>国内政务、金融、物联网等需国产化合规的领域</td>
+<td>全球通用，适用于互联网、跨境业务等国际场景</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_5"><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>PKCS#7 标准规定，填充字节的值等于填充的长度（如填充 6 字节则每个字节为<code>0x06</code>），解密时通过最后一个字节的值即可知道需要去除多少填充。</p>
+<h2 id="_6">分组密码的工作模式<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h1 id="hash">Hash 函数<a class="headerlink" href="#hash" title="Permanent link">&para;</a></h1>
+<h2 id="md5">MD5<a class="headerlink" href="#md5" title="Permanent link">&para;</a></h2>
+<h2 id="sha">SHA<a class="headerlink" href="#sha" title="Permanent link">&para;</a></h2>
+<h2 id="sm3">SM3<a class="headerlink" href="#sm3" title="Permanent link">&para;</a></h2>
+<p>SM3是我国自主设计的密码杂凑算法（哈希算法），于2010年与SM2一同成为国家密码标准（GB/T 32905-2016），是我国商用密码体系的核心组成部分之一。其核心功能是将任意长度的输入数据（明文）映射为固定长度（256位）的输出数据（哈希值/摘要），具有抗碰撞性、抗原像性等关键安全特性，广泛配合SM2等算法使用，为数字签名、数据完整性校验、密钥派生等场景提供基础安全保障。</p>
+<p>SM3是一种迭代型密码杂凑算法，基于Merkle-Damgård结构设计，通过固定的运算步骤将任意长度的输入消息压缩为256位的哈希值。与国际通用的SHA-256算法相比，SM3在运算逻辑、轮函数设计上存在差异，但安全强度等效，且更适配我国密码体系的协同需求，常与SM2（签名/加密）、SM4（对称加密）协同工作，形成完整的密码保障链条。</p>
+<h3 id="_7">算法核心原理与运算流程<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>SM3的运算流程遵循迭代型杂凑算法的通用框架，分为“消息预处理”和“迭代压缩”两大阶段，最终通过“输出变换”得到256位哈希值。每个阶段的具体步骤如下：</p>
+<h4 id="_8">第一阶段：消息预处理<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<p>预处理的目的是将任意长度的原始消息转换为固定长度的消息块序列，为后续迭代压缩做准备，包括“消息填充”和“消息分组”两个步骤。</p>
+<h5 id="_9">消息填充<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h5>
+<p>填充的核心要求是使消息总长度满足“对512取余等于448”，具体步骤：</p>
+<ol>
+<li>在原始消息M后添加一个“1”比特，即二进制的“1”；</li>
+<li>在“1”后添加若干个“0”比特，添加的数量k满足“(原始消息长度 + 1 + k) mod 512 = 448”，k的取值范围为0≤k≤511；</li>
+<li>在填充的“0”后添加一个64位的整数，该整数表示原始消息M的长度（单位：比特），若原始消息长度超过2^64比特，仅取低64位。</li>
+</ol>
+<p>示例：若原始消息长度为1比特（值为“0”），则填充过程为：添加“1”→添加446个“0”→添加64位长度值“0x0000000000000001”，最终填充后消息长度为512比特（448+64）。</p>
+<h5 id="_10">消息分组<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h5>
+<p>将填充后的消息按512比特（64字节）为一个分组，划分为若干个消息块M_0, M_1, ..., M_{n-1}，若填充后消息长度为L，则n = L / 512，且n≥1。每个消息块将作为后续迭代压缩的输入单元。</p>
+<h4 id="_11">第二阶段：迭代压缩<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
+<p>迭代压缩是SM3的核心环节，以512位消息块为单位，通过“压缩函数f”对初始哈希值进行迭代更新，最终得到中间哈希值。该阶段涉及“初始值设置”“消息扩展”“压缩函数运算”三个关键步骤。</p>
+<h5 id="_12">初始哈希值设置<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h5>
+<p>SM3的初始哈希值（IV）为8个32位寄存器，其初始值由标准规定，采用十六进制表示为：</p>
+<p>IV = (A, B, C, D, E, F, G, H) = (0x7380166F, 0x4914B2B9, 0x172442D7, 0xDA8A0600, 0xA96F30BC, 0x163138AA, 0xE38DEE4D, 0xB0FB0E4E)</p>
+<p>这8个初始值是经过安全设计的固定常量，确保迭代压缩的初始状态具有随机性和安全性。</p>
+<h5 id="_13">消息扩展<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h5>
+<p>为增强算法的抗攻击能力，SM3将每个512位消息块M_i扩展为132个32位字W_0, W_1, ..., W_131，分为“前68个字扩展”和“后64个字扩展”两部分：</p>
+<ol>
+<li><strong>前68个字生成（W_0至W_67）</strong>：将512位消息块M_i按32位为单位划分为16个字W_0至W_15；对于W_j（16≤j≤67），通过以下公式计算：W_j = P1(W_{j-16} ⊕ W_{j-9} ⊕ (W_{j-3} &lt;&lt; 15)) ⊕ (W_{j-13} &lt;&lt; 7) ⊕ W_{j-6}。其中P1为置换函数，定义为P1(X) = X ⊕ (X &lt;&lt; 15) ⊕ (X &lt;&lt; 23)，“⊕”为异或运算，“&lt;&lt;”为左移运算。</li>
+<li><strong>后64个字生成（W_68至W_131）</strong>：对于W_j（68≤j≤131），通过公式W_j = W_{j-64} ⊕ W_{j-68}计算，用于后续压缩函数的轮运算。</li>
+</ol>
+<h5 id="_14">压缩函数运算<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h5>
+<p>压缩函数f以初始哈希值（或上一轮迭代的输出哈希值）和扩展后的132个字为输入，经过64轮迭代运算更新8个32位寄存器的值，得到本轮迭代的输出哈希值。具体步骤：</p>
+<ol>
+<li>将上一轮输出的哈希值（初始轮为IV）赋值给8个临时寄存器：a=A, b=B, c=C, d=D, e=E, f=F, g=G, h=H；</li>
+<li>进行64轮轮运算，每一轮以W_j和W_{j+68}（j从0到63）为输入，通过轮函数更新a-h的值。轮函数的核心是“布尔函数”和“置换运算”，其中布尔函数根据轮数不同分为FF_j和GG_j：        当0≤j≤15时，FF_j(X,Y,Z) = X ⊕ Y ⊕ Z，GG_j(X,Y,Z) = X ⊕ Y ⊕ Z；</li>
+<li>当16≤j≤63时，FF_j(X,Y,Z) = (X ∧ Y) ∨ (X ∧ Z) ∨ (Y ∧ Z)，GG_j(X,Y,Z) = (X ∧ Y) ∨ (¬X ∧ Z)；</li>
+<li>64轮运算结束后，将a-h分别与初始的A-H进行异或，得到本轮迭代的输出哈希值（A', B', C', D', E', F', G', H'），该值将作为下一个消息块的输入哈希值。</li>
+</ol>
+<h4 id="_15">第三阶段：输出变换<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
+<p>当所有消息块均完成迭代压缩后，最后一轮的输出哈希值（8个32位寄存器值）直接拼接为256位的最终哈希值，即SM3(M) = A' || B' || C' || D' || E' || F' || G' || H'（“||”表示字节拼接）。</p>
+<h3 id="sm3_1">SM3与国际算法的核心差异<a class="headerlink" href="#sm3_1" title="Permanent link">&para;</a></h3>
+<p>作为256位安全级别的杂凑算法，SM3常与国际通用的SHA-256对比，两者在安全强度上等效，但在设计细节和应用场景上存在显著差异，具体对比如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">对比维度</th>
+<th style="text-align: left;">SM3</th>
+<th style="text-align: left;">SHA-256</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">标准归属</td>
+<td style="text-align: left;">中国国家密码标准（GB/T 32905-2016）</td>
+<td style="text-align: left;">美国NIST标准（FIPS 180-4）</td>
+</tr>
+<tr>
+<td style="text-align: left;">消息扩展</td>
+<td style="text-align: left;">将512位块扩展为132个32位字，含P1置换函数，扩展逻辑更复杂</td>
+<td style="text-align: left;">将512位块扩展为64个32位字，无额外置换函数，扩展逻辑相对简洁</td>
+</tr>
+<tr>
+<td style="text-align: left;">轮函数设计</td>
+<td style="text-align: left;">64轮运算，布尔函数FF_j、GG_j分两段设计，含P0/P1置换</td>
+<td style="text-align: left;">64轮运算，布尔函数Ch、Maj固定，无额外置换</td>
+</tr>
+<tr>
+<td style="text-align: left;">初始哈希值</td>
+<td style="text-align: left;">自定义8个32位常量（如0x7380166F等）</td>
+<td style="text-align: left;">基于平方根和对数的小数部分取整（如0x6A09E667等）</td>
+</tr>
+<tr>
+<td style="text-align: left;">应用场景</td>
+<td style="text-align: left;">我国金融、政务、军工等关键领域强制合规，配合SM2/SM4使用</td>
+<td style="text-align: left;">国际通用场景（如TLS、区块链、软件签名等）</td>
+</tr>
+<tr>
+<td style="text-align: left;">实现效率</td>
+<td style="text-align: left;">软件实现效率略低于SHA-256，硬件实现适配性强</td>
+<td style="text-align: left;">通用CPU上软件实现效率较高，优化成熟</td>
+</tr>
+</tbody>
+</table>
+<h1 id="_16">公钥密码<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h1>
+<h2 id="rsa">RSA<a class="headerlink" href="#rsa" title="Permanent link">&para;</a></h2>
+<h2 id="elgamal">ElGamal<a class="headerlink" href="#elgamal" title="Permanent link">&para;</a></h2>
+<h2 id="rabin">Rabin<a class="headerlink" href="#rabin" title="Permanent link">&para;</a></h2>
+<h2 id="ecc">ECC<a class="headerlink" href="#ecc" title="Permanent link">&para;</a></h2>
+<h2 id="sm2">SM2<a class="headerlink" href="#sm2" title="Permanent link">&para;</a></h2>
+<p>SM2是我国自主设计的椭圆曲线公钥密码算法，于2010年正式成为国家密码标准（GB/T 32918-2016），可全面替代RSA算法，在安全性、性能和资源占用上均有显著优势，广泛应用于数字签名、密钥交换和数据加密等场景。</p>
+<h3 id="_17">算法核心定义<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<p>SM2算法的基础是椭圆曲线密码学（ECC），其核心是在特定有限域上的椭圆曲线群中进行运算，具体定义包含以下关键要素：</p>
+<ol>
+<li><strong>有限域选择</strong>：采用素数域$$\mathbb{F}_P$$，其中$$p$$是一个满足特定安全要求的大素数，标准中规定$$p$$的比特长度可为256位、384位等，256位是目前最常用的安全级别。</li>
+<li><strong>椭圆曲线方程</strong>：在$$\mathbb{F}_p$$上定义的椭圆曲线方程为$$y^2 = x^3 + ax + b \pmod{p}$$，其中$$a$$和$$b$$是满足$$4a^3 + 27b^2 \not\equiv 0 \pmod{p}$$的域元素，以确保曲线无奇异点。</li>
+<li><strong>基点与阶</strong>：存在一个特定的基点$$G=(x_G, y_G)$$，它是椭圆曲线上的一个生成元，其阶为$$n$$（即$$nG=O$$，$$O$$为无穷远点）。$$n$$必须是一个大素数，且满足$$n &gt; 2^{191}$$和$$n \not \mid p^k - 1$$（$$1 \leq k \leq 20$$），以抵抗离散对数相关攻击。</li>
+<li><strong>密钥对生成</strong>：</li>
+<li>私钥：随机选择一个整数$$d$$，满足$$1 &lt; d &lt; n - 1$$；</li>
+<li>公钥：通过椭圆曲线点乘计算$$P = dG$$，$$P$$是椭圆曲线上的一个点，与私钥$$d$$一一对应。</li>
+</ol>
+<h3 id="_18">核心运算流程<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<p>SM2算法的三大核心应用场景（数字签名、密钥交换、数据加密）对应不同的运算流程，具体如下：</p>
+<h4 id="_19">数字签名与验证<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h4>
+<p>用于确认数据完整性和发送者身份，是SM2最常用的功能，流程分为“签名生成”和“签名验证”两步。</p>
+<h5 id="_20">签名生成<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h5>
+<ol>
+<li>对待签名数据$$M$$进行哈希处理，使用SM3密码杂凑算法计算摘要$$e = SM3(M)$$；</li>
+<li>随机选择一个整数$$k$$，满足$$1 &lt; k &lt; n - 1$$，计算点$$K = kG = (x_K, y_K)$$；</li>
+<li>计算$$r = (e + x_K) \pmod{n}$$，若$$r = 0$$或$$r + k = n$$，则重新选择$$k$$；</li>
+<li>计算$$s = [(1 + d)^{-1} \cdot (k - r \cdot d)] \pmod{n}$$，若$$s = 0$$，则重新选择$$k$$；</li>
+<li>最终签名结果为$$(r, s)$$，与数据$$M$$一同发送给接收方。</li>
+</ol>
+<h5 id="_21">签名验证<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h5>
+<ol>
+<li>接收数据$$M$$和签名$$(r, s)$$，先验证$$r$$和$$s$$是否满足$$1 \leq r, s \leq n - 1$$，不满足则验证失败；</li>
+<li>计算摘要$$e = SM3(M$$)，并计算$$t = (r + s) \pmod{n}$$，若$$t = $$0，则验证失败；</li>
+<li>计算点$$K' = sG + t$$，若$$K' = $$O（无穷远点），则验证失败；</li>
+<li>设$$K' = (x_{K'}, y_{K'})$$，计算$$r' = (e + x_{K'}) \pmod{n}$$；</li>
+<li>若$$r' = r$$，则签名验证通过；否则验证失败。</li>
+</ol>
+<h4 id="_22">密钥交换<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h4>
+<p>用于通信双方在不安全信道上协商出一个共享会话密钥，流程需双方交互两次，以A（发起方）和B（响应方）为例：</p>
+<ol>
+<li><strong>初始化</strong>：A拥有私钥$$d_A$$和公钥$$P_A = d_AG $$；B拥有私钥$$d_B$$和公钥$$P_B = d_BG $$，双方已互相获取对方公钥。</li>
+<li><strong>第一轮交互（A→B）</strong>：</li>
+<li>A随机选整数$$k_A$$（$$1 &lt; k_A &lt; n - 1$$），计算$$K_A = k_AG $$，并将$$K_A$$发送给B；</li>
+<li><strong>第二轮交互（B→A）</strong>：</li>
+<li>B随机选整数$$k_B$$（$$1 &lt; k_B &lt; n - 1 $$），计算$$K_B = k_BG $$；</li>
+<li>B计算共享密钥材料$$S_B = d_B \cdot (K_A + [h]P_A)$$，其中$$h$$是椭圆曲线的余因子（标准中$$h=1$$）；</li>
+<li>B将$$K_B$$发送给A，并对$$K_A$$、$$K_B$$等信息生成验证数据；</li>
+<li><strong>A计算共享密钥</strong>：</li>
+<li>A验证B发送的验证数据，确认B身份；</li>
+<li>A计算共享密钥材料$$S_A = d_A \cdot (K_B + [h]P_B)$$；</li>
+<li><strong>密钥派生</strong>：A和B分别对$$S_A$$、$$S_B$$进行相同的密钥派生函数（KDF）处理，得到相同的会话密钥$$SK$$，用于后续数据加密。</li>
+</ol>
+<h4 id="_23">数据加密与解密<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h4>
+<p>用于对敏感数据进行加密，确保仅指定接收方能解密，流程如下：</p>
+<h5 id="_24">加密<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h5>
+<ol>
+<li>获取接收方公钥$$P$$，验证$$P$$是否为椭圆曲线上的有效点且$$nP = O$$，无效则终止；</li>
+<li>随机选整数$$k$$（$$1 &lt; k &lt; n - $$），计算$$C_1 = k$$G（作为解密所需的“临时公钥”）；</li>
+<li>计算点$$S = k$$，若$$S = O$$，则重新选择$$k$$；设$$S = (x_S, y_S$$，将$$x_s$$和$$y_y$$拼接为字节串$$xSyS$$；</li>
+<li>对明文$$M$$进行分组（若需），使用对称密码算法（如SM4），以$$KDF(xSyS, len)$$生成的密钥加密$$M$$，得到密文$$C_2$$；</li>
+<li>计算$$C_3 = SM3(xSyS || M)$$（用于验证明文完整性）；</li>
+<li>最终密文为$$C = C_1 || C_2 || C_3$$，发送给接收方。</li>
+</ol>
+<h5 id="_25">解密<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h5>
+<ol>
+<li>接收密文$$c$$，拆分出$$C_1$$、$$C_2$$、$$C_3$$，验证$$C_1$$是否为椭圆曲线上的有效点，无效则解密失败；</li>
+<li>用私钥$$d$$计算点$$S = dC_1$$，若$$S = O$$，则解密失败；设$$S = (x_S, y_S)$$，拼接为$$xSyS$$；</li>
+<li>生成对称密钥$$K = KDF(xSyS, len)$$，解密$$C_2$$得到明文$$M$$；</li>
+<li>计算$$C_3' = SM3(xSyS || M')$$，若$$C_3' = C_3$$，则明文有效，$$M'$$为原始明文；否则解密失败。</li>
+</ol>
+<h1 id="_26">数字签名<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h1>
+<h2 id="rsa_1">RSA<a class="headerlink" href="#rsa_1" title="Permanent link">&para;</a></h2>
+<h2 id="elgamal_1">Elgamal<a class="headerlink" href="#elgamal_1" title="Permanent link">&para;</a></h2>
+<h2 id="dsa">DSA<a class="headerlink" href="#dsa" title="Permanent link">&para;</a></h2>
+<h1 id="_27">密码协议<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h1>
+<h2 id="_28">密钥分配<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h2>
+<h2 id="_29">密钥协商<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h2>
+<h2 id="_30"><a class="headerlink" href="#_30" title="Permanent link">&para;</a></h2>
+<h2 id="_31">秘密共享<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h2>
+<h2 id="_32">身份识别<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h2>
+<h2 id="_33">零知识证明<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

