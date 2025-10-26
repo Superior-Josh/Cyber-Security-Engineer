@@ -1,7 +1,7 @@
 site_name: 网络安全工程师的学习笔记
 site_description: 网络安全工程师的学习笔记
 site_author: Josh
-site_url: https://github.com/Superior-Josh/Cyber-Security-Engineer.git
+site_url: https://Superior-Josh.github.io/Cyber-Security-Engineer
 
 # 主题配置
 theme:
@@ -41,3 +41,10 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.superfences
   - tables
+
+# 部署配置
+deploy:
+  repo: https://github.com/Superior-Josh/Cyber-Security-Engineer.git
+  branch: gh-pages
+  name: Superior-Josh
+  email: 916981349@qq.com

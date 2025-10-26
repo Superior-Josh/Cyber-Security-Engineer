@@ -1,0 +1,1328 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="网络安全工程师的学习笔记">
+      
+      
+        <meta name="author" content="Josh">
+      
+      
+        <link rel="canonical" href="https://Superior-Josh.github.io/Cyber-Security-Engineer/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/SQLmap/">
+      
+      
+        <link rel="prev" href="../SonarQube/">
+      
+      
+        <link rel="next" href="../%E5%AF%86%E7%A0%81%E5%AD%A6/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
+    
+    
+      
+        <title>SQLmap - 网络安全工程师的学习笔记</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="网络安全工程师的学习笔记" class="md-header__button md-logo" aria-label="网络安全工程师的学习笔记" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            网络安全工程师的学习笔记
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SQLmap
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="teal"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/C/" class="md-tabs__link">
+          
+  
+  
+  编程语言
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Linux/" class="md-tabs__link">
+          
+  
+  
+  计算机基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../AI%20%E5%AE%89%E5%85%A8/" class="md-tabs__link">
+          
+  
+  
+  网络空间安全
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%B5%8B%E8%AF%95/Black-box%20Testing/" class="md-tabs__link">
+          
+  
+  
+  测试
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="网络安全工程师的学习笔记" class="md-nav__button md-logo" aria-label="网络安全工程师的学习笔记" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    网络安全工程师的学习笔记
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    编程语言
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            编程语言
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Python
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    计算机基础
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            计算机基础
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linux
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    数据库
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    网络协议
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    计算机操作系统
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    网络空间安全
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            网络空间安全
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AI%20%E5%AE%89%E5%85%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI 安全
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Metasploit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Metasploit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SonarQube/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SonarQube
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    SQLmap
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    SQLmap
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      目标指定参数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="目标指定参数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#url" class="md-nav__link">
+    <span class="md-ellipsis">
+      直接指定 URL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      从文件加载目标
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post" class="md-nav__link">
+    <span class="md-ellipsis">
+      指定 POST 请求目标
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repeater" class="md-nav__link">
+    <span class="md-ellipsis">
+      加载请求包（Repeater 导出）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      其他目标形式
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      漏洞探测与配置参数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="漏洞探测与配置参数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      指定注入点参数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      调整检测级别与风险
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      指定数据库类型
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      注入类型控制
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      其他探测配置
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据获取与利用参数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数据获取与利用参数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      获取数据库基础信息
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      获取表名与列名
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      导出表中数据
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      执行系统命令与上传文件
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      高级功能参数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="高级功能参数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#payload" class="md-nav__link">
+    <span class="md-ellipsis">
+      自定义 Payload
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      保存与加载会话
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      静默模式与日志输出
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%AF%86%E7%A0%81%E5%AD%A6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    密码学
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%BC%8F%E6%B4%9E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    漏洞
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%AE%BE%E5%A4%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    网络安全设备
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    网络攻防
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    测试
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            测试
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B5%8B%E8%AF%95/Black-box%20Testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Black-box Testing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>SQLmap</h1>
+
+<h2 id="_1">目标指定参数<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="url">直接指定 URL<a class="headerlink" href="#url" title="Permanent link">&para;</a></h3>
+<p>使用 <code>-u</code> 或 <code>--url</code> 参数指定包含参数的目标 URL，这是最基础的用法。</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>sqlmap.py<span class="w"> </span>-u<span class="w"> </span><span class="s2">&quot;http://example.com/index.php?id=1&quot;</span>
+</code></pre></div>
+<p>说明：该命令会对 URL 中的 <code>id=1</code> 参数进行自动检测，判断是否存在 SQL 注入漏洞。</p>
+<h3 id="_2">从文件加载目标<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>当需要检测多个目标时，可将目标 URL 或请求信息写入文件，使用 <code>-m</code> 或 <code>--multiple-targets</code> 参数加载。</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>sqlmap.py<span class="w"> </span>-m<span class="w"> </span>targets.txt
+</code></pre></div>
+<p>说明：<code>targets.txt</code> 文件中每行一个目标 URL（如 <code>http://example.com/index.php?id=1</code>），SQLmap 会依次检测。</p>
+<h3 id="post">指定 POST 请求目标<a class="headerlink" href="#post" title="Permanent link">&para;</a></h3>
+<p>对于 POST 方式提交的参数（如表单提交），需使用 <code>--data</code>（数据）参数指定 POST 数据，同时用 <code>-u</code> 指定目标 URL。</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>sqlmap.py<span class="w"> </span>-u<span class="w"> </span><span class="s2">&quot;http://example.com/login.php&quot;</span><span class="w"> </span>--data<span class="w"> </span><span class="s2">&quot;username=admin&amp;password=123&quot;</span>
+</code></pre></div>
+<p>说明：该命令会检测 POST 数据中 <code>username</code> 和 <code>password</code> 参数是否存在注入漏洞。若需模拟表单提交的 Content-Type，可搭配 <code>--data-type</code> 参数（如 <code>--data-type=json</code> 用于 JSON 格式数据）。</p>
+<h3 id="repeater">加载请求包（Repeater 导出）<a class="headerlink" href="#repeater" title="Permanent link">&para;</a></h3>
+<p>若目标请求较复杂（如包含 Cookie、Referer 等头部信息），可在 Burp Suite 等工具中捕获请求后导出为文件，使用 <code>-r</code> 或 <code>--request</code> 参数加载。</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>sqlmap.py<span class="w"> </span>-r<span class="w"> </span>request.txt
+</code></pre></div>
+<p>说明：<code>request.txt</code> 为 Burp 导出的原始请求包（包含请求行、头部、请求体），SQLmap 会自动解析其中的参数和头部信息进行检测。</p>
+<h3 id="_3">其他目标形式<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>--cookie</code>：指定 Cookie 信息（适用于需登录的场景），：<code>--cookie "PHPSESSID=abc123; user=admin"</code>。</li>
+<li><code>--user-agent</code>：模拟指定浏览器的 User-Agent 头部，：<code>--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/118.0.0.0 Safari/537.36"</code>。</li>
+<li><code>--proxy</code>：通过代理服务器检测（如搭配 Burp 抓包），：<code>--proxy "http://127.0.0.1:8080"</code>。</li>
+</ul>
+<h2 id="_4">漏洞探测与配置参数<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>该类参数用于控制 SQLmap 的探测逻辑，包括注入类型、检测级别、数据库指纹等，可根据目标场景灵活调整。</p>
+<h3 id="_5">指定注入点参数<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>当 URL 或请求中有多个参数时，可使用 <code>-p</code> 或 <code>--param</code> 参数指定需要检测的注入点，提高检测效率。</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>sqlmap.py<span class="w"> </span>-u<span class="w"> </span><span class="s2">&quot;http://example.com/index.php?id=1&amp;page=2&quot;</span><span class="w"> </span>-p<span class="w"> </span>id
+</code></pre></div>
+<p>说明：仅检测 <code>id</code> 参数，忽略 <code>page</code> 参数。</p>
+<h3 id="_6">调整检测级别与风险<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>--level</code>：检测级别（1-5，默认 1），级别越高，检测的注入类型越全面，但耗时更长。级别 3 及以上会检测 Cookie、User-Agent 等头部参数的注入。</li>
+<li><code>--risk</code>：风险级别（1-4，默认 1），级别越高，使用的 Payload 越具攻击性，可能导致目标数据库报错或数据损坏（如风险 3 会使用 UPDATE/DELETE 语句）。</li>
+</ul>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>sqlmap.py<span class="w"> </span>-u<span class="w"> </span><span class="s2">&quot;http://example.com/index.php?id=1&quot;</span><span class="w"> </span>--level<span class="w"> </span><span class="m">3</span><span class="w"> </span>--risk<span class="w"> </span><span class="m">2</span>
+</code></pre></div>
+<p>说明：以级别 3 检测所有可能的参数（包括头部），使用风险级别 2 的 Payload。</p>
+<h3 id="_7">指定数据库类型<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>若已知目标数据库类型，可使用 <code>--dbms</code> 参数指定，跳过指纹识别步骤，直接针对该数据库检测。支持的数据库类型包括 mysql、oracle、mssql、postgresql 等。</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>sqlmap.py<span class="w"> </span>-u<span class="w"> </span><span class="s2">&quot;http://example.com/index.php?id=1&quot;</span><span class="w"> </span>--dbms<span class="w"> </span>mysql
+</code></pre></div>
+<p>说明：直接按 MySQL 数据库的特性进行注入检测。</p>
+<h3 id="_8">注入类型控制<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>使用 <code>--technique</code> 参数指定注入技术类型，默认会自动检测所有类型，指定后可缩小范围。支持的类型缩写：</p>
+<ul>
+<li>B：布尔盲注（基于返回页面内容是否变化）</li>
+<li>T：时间盲注（基于返回时间是否延迟）</li>
+<li>E：报错注入（基于数据库报错信息获取数据）</li>
+<li>U：联合查询注入（基于 UNION SELECT 语句）</li>
+<li>S：堆叠查询注入（基于 ; 分隔多条 SQL 语句）</li>
+<li>Q：内联查询注入（基于子查询结果嵌入原始查询返回）</li>
+</ul>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>sqlmap.py<span class="w"> </span>-u<span class="w"> </span><span class="s2">&quot;http://example.com/index.php?id=1&quot;</span><span class="w"> </span>--technique<span class="w"> </span>E,U
+</code></pre></div>
+<p>说明：仅使用报错注入和联合查询注入两种技术检测。</p>
+<h3 id="_9">其他探测配置<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>--threads</code>：设置线程数（默认 1，最大 10），提高检测速度，：<code>--threads 5</code>。注意：线程数过高可能被目标网站封禁 IP。</li>
+<li><code>--delay</code>：设置每个请求的延迟时间（单位：秒），避免请求过于频繁，：<code>--delay 1</code>（每 1 秒发送一个请求）。</li>
+<li><code>--timeout</code>：设置请求超时时间（单位：秒，默认 30），：<code>--timeout 60</code>。</li>
+</ul>
+<h2 id="_10">数据获取与利用参数<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<p>当检测到 SQL 注入漏洞后，可使用该类参数获取目标数据库的信息（如库名、表名、数据内容），甚至执行系统命令。</p>
+<h3 id="_11">获取数据库基础信息<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>--current-db</code>：获取当前连接的数据库名称。</li>
+<li><code>--current-user</code>：获取当前数据库用户名称。</li>
+<li><code>--is-dba</code>：判断当前数据库用户是否为管理员（DBA）。</li>
+<li><code>--dbs</code>：获取目标数据库服务器上的所有数据库名称。</li>
+</ul>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>sqlmap.py<span class="w"> </span>-u<span class="w"> </span><span class="s2">&quot;http://example.com/index.php?id=1&quot;</span><span class="w"> </span>--current-db<span class="w"> </span>--current-user
+</code></pre></div>
+<p>说明：检测漏洞的同时，获取当前数据库名和当前登录用户。</p>
+<h3 id="_12">获取表名与列名<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>--tables</code>：获取指定数据库中的所有表名，需搭配 <code>-D</code>（指定数据库）参数。</li>
+<li><code>--columns</code>：获取指定表中的所有列名，需搭配 <code>-D</code> 和 <code>-T</code>（指定表名）参数。</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">## 获取 testdb 数据库中的所有表名</span>
+python<span class="w"> </span>sqlmap.py<span class="w"> </span>-u<span class="w"> </span><span class="s2">&quot;http://example.com/index.php?id=1&quot;</span><span class="w"> </span>-D<span class="w"> </span>testdb<span class="w"> </span>--tables
+
+<span class="c1">## 获取 testdb 数据库中 users 表的所有列名</span>
+python<span class="w"> </span>sqlmap.py<span class="w"> </span>-u<span class="w"> </span><span class="s2">&quot;http://example.com/index.php?id=1&quot;</span><span class="w"> </span>-D<span class="w"> </span>testdb<span class="w"> </span>-T<span class="w"> </span>users<span class="w"> </span>--columns
+</code></pre></div>
+<h3 id="_13">导出表中数据<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>使用 <code>--dump</code> 参数导出指定表中的数据，可搭配 <code>-D</code>、<code>-T</code>、<code>-C</code>（指定列名）参数缩小导出范围。</p>
+<div class="highlight"><pre><span></span><code><span class="c1">## 导出 testdb 数据库中 users 表的所有数据</span>
+python<span class="w"> </span>sqlmap.py<span class="w"> </span>-u<span class="w"> </span><span class="s2">&quot;http://example.com/index.php?id=1&quot;</span><span class="w"> </span>-D<span class="w"> </span>testdb<span class="w"> </span>-T<span class="w"> </span>users<span class="w"> </span>--dump
+
+<span class="c1">## 仅导出 users 表中 username 和 password 列的数据</span>
+python<span class="w"> </span>sqlmap.py<span class="w"> </span>-u<span class="w"> </span><span class="s2">&quot;http://example.com/index.php?id=1&quot;</span><span class="w"> </span>-D<span class="w"> </span>testdb<span class="w"> </span>-T<span class="w"> </span>users<span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;username,password&quot;</span><span class="w"> </span>--dump
+
+<span class="c1">## 导出前 10 行数据（避免数据量过大）</span>
+python<span class="w"> </span>sqlmap.py<span class="w"> </span>-u<span class="w"> </span><span class="s2">&quot;http://example.com/index.php?id=1&quot;</span><span class="w"> </span>-D<span class="w"> </span>testdb<span class="w"> </span>-T<span class="w"> </span>users<span class="w"> </span>--dump<span class="w"> </span>--start<span class="w"> </span><span class="m">0</span><span class="w"> </span>--stop<span class="w"> </span><span class="m">9</span>
+</code></pre></div>
+<h3 id="_14">执行系统命令与上传文件<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p>当数据库用户为 DBA 且权限足够时，可通过 SQLmap 执行系统命令或上传文件，仅支持部分数据库（如 MySQL、SQL Server）。</p>
+<ul>
+<li><code>--os-shell</code>：获取操作系统交互shell（需 DBA 权限，支持 MySQL、PostgreSQL 等）。</li>
+<li><code>--os-cmd</code>：执行单条系统命令，：<code>--os-cmd "whoami"</code>。</li>
+<li><code>--file-read</code>：读取目标服务器上的文件，：<code>--file-read "/etc/passwd"</code>（Linux）或 <code>--file-read "C:\Windows\system32\drivers\etc\hosts"</code>（Windows）。</li>
+<li><code>--file-write</code>：上传本地文件到目标服务器，需搭配 <code>--file-dest</code> 指定目标路径，：<code>--file-write "local.php" --file-dest "/var/www/html/backdoor.php"</code>。该功能依赖数据库特定条件（如 MySQL 需<code>secure_file_priv</code>配置为空，且目标路径需有写入权限），并非所有支持<code>--os-shell</code>的数据库都能直接使用。</li>
+</ul>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>sqlmap.py<span class="w"> </span>-u<span class="w"> </span><span class="s2">&quot;http://example.com/index.php?id=1&quot;</span><span class="w"> </span>--os-shell
+</code></pre></div>
+<p>说明：若权限足够，会生成一个交互shell，可执行 <code>ls</code>、<code>dir</code> 等系统命令。</p>
+<h2 id="_15">高级功能参数<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
+<h3 id="payload">自定义 Payload<a class="headerlink" href="#payload" title="Permanent link">&para;</a></h3>
+<p>使用 <code>--payload</code> 参数指定自定义的 SQL 注入 Payload，适用于特殊场景下的漏洞利用。</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>sqlmap.py<span class="w"> </span>-u<span class="w"> </span><span class="s2">&quot;http://example.com/index.php?id=1&quot;</span><span class="w"> </span>--payload<span class="w"> </span><span class="s2">&quot;1 AND (SELECT 1 FROM users WHERE username=&#39;admin&#39;)=1&quot;</span>
+</code></pre></div>
+<h3 id="_16">保存与加载会话<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<p>对于耗时较长的检测任务，可使用 <code>--save</code> 保存会话状态，后续通过 <code>--load</code> 加载会话继续执行，避免重复检测。</p>
+<div class="highlight"><pre><span></span><code><span class="c1">## 保存会话到 session1 中</span>
+python<span class="w"> </span>sqlmap.py<span class="w"> </span>-u<span class="w"> </span><span class="s2">&quot;http://example.com/index.php?id=1&quot;</span><span class="w"> </span>--save<span class="w"> </span>session1
+
+<span class="c1">## 加载 session1 继续执行</span>
+python<span class="w"> </span>sqlmap.py<span class="w"> </span>--load<span class="w"> </span>session1
+</code></pre></div>
+<h3 id="_17">静默模式与日志输出<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>--silent</code>：静默模式，仅输出关键结果，减少冗余信息。</li>
+<li><code>--log-file</code>：将检测过程和结果保存到日志文件，：<code>--log-file sqlmap.log</code>。</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

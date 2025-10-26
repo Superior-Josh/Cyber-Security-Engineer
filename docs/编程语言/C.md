@@ -1,3 +1,5 @@
+[Linux C编程一站式学习](https://akaedu.github.io/book/index.html)
+
 ## GCC
 
 GCC（GNU Compiler Collection）是Linux下最常用的C/C++编译器，支持从源代码到可执行文件的完整编译流程。
