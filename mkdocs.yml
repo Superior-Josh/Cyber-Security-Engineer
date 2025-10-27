@@ -28,6 +28,7 @@ plugins:
   - mkdocs-simple-hooks:
       hooks:
         on_pre_build: "hooks:generate_nav"
+        on_page_markdown: "hooks:fix_image_paths"
 
 nav: []
 

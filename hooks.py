@@ -32,3 +32,6 @@ def generate_nav(config, **kwargs):
     
     # 覆盖配置中的nav
     config["nav"] = nav
+    
+def fix_image_paths(markdown, page, config, files):
+    return markdown.replace("../img/", "../../img/")
