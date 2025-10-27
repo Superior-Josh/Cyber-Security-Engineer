@@ -1763,10 +1763,10 @@
 </li>
 </ul>
 <p>这 10 轮加密过程之前会有一次密钥加法（因此，总共有 11 次密钥加法）。最后一轮稍有不同：没有列混淆操作。</p>
-<p><img src="..\img\AES.png" alt="AES" style="zoom:50%;" /></p>
+<p><img src="../../img/AES.png" alt="AES" style="zoom:50%;" /></p>
 <h5 id="aes_3">AES 的字节操作<a class="headerlink" href="#aes_3" title="Permanent link">&para;</a></h5>
 <p>AES 是一种面向字节的加密算法。被各轮操作处理的 128 位“状态”（state）被视为 16 个字节，并排列成一个矩阵的形式：</p>
-<p><img src="..\img\AES_matrix.png" alt="AES_matrix" style="zoom:80%;" /></p>
+<p><img src="../../img/AES_matrix.png" alt="AES_matrix" style="zoom:80%;" /></p>
 <ul>
 <li>
 <p>$\oplus$ ：按位异或</p>
@@ -1779,17 +1779,17 @@
 <p>​           $=(x^6+x^4+x+1)(x^7+x^6+x^3+x)/(x^8 + x^4 + x^3 + x + 1)$
 ​               $=0x01$</p>
 <h5 id="_2">字节代换<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h5>
-<p><img src="..\img\AES-SubBytes.svg.png" alt="AES-SubBytes.svg" style="zoom: 25%;" /></p>
+<p><img src="../../img/AES-SubBytes.svg.png" alt="AES-SubBytes.svg" style="zoom: 25%;" /></p>
 <p>矩阵中的各字节透过一个8位的<a href="https://en.wikipedia.org/wiki/Rijndael_S-box#Forward_S-box">S-box</a>进行转换。这个步骤提供了非线性的变换能力。</p>
 <h5 id="_3">行移位<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h5>
-<p><img src="..\img\AES-ShiftRows.svg.png" alt="AES-ShiftRows.svg" style="zoom: 33%;" /></p>
+<p><img src="../../img/AES-ShiftRows.svg.png" alt="AES-ShiftRows.svg" style="zoom: 33%;" /></p>
 <h5 id="_4">列混淆<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h5>
-<p><img src="..\img\AES-MixColumns.svg.png" alt="AES-MixColumns.svg" style="zoom: 25%;" /></p>
+<p><img src="../../img/AES-MixColumns.svg.png" alt="AES-MixColumns.svg" style="zoom: 25%;" /></p>
 <p>将每一列分别混合，通过与矩阵相乘来实现：</p>
-<p><img src="..\img\AES_matrix_times.png" alt="AES_matrix_times" style="zoom: 67%;" /></p>
+<p><img src="../../img/AES_matrix_times.png" alt="AES_matrix_times" style="zoom: 67%;" /></p>
 <p>每一列的四个字节透过<a href="https://zh.wikipedia.org/wiki/线性变换">线性变换</a>互相结合。每一列的四个元素分别当作 $1,x,x_2,x_3$ 的系数，合并即为 $GF(2^8)$ 中的一个多项式，接着将此多项式和一个固定的多项式 $c(x)=3x^3+x^2+x+2$ 在模 $x^4+1$ 下相乘。</p>
 <h5 id="_5">轮密钥加<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h5>
-<p><img src="..\img\AES-AddRoundKey.svg.png" alt="AES-AddRoundKey.svg" style="zoom: 33%;" /></p>
+<p><img src="../../img/AES-AddRoundKey.svg.png" alt="AES-AddRoundKey.svg" style="zoom: 33%;" /></p>
 <h4 id="_6">密钥调度<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
 <p>派生轮密钥 $K_i$ 的方法如下：将 $K$ 分成四个字 $W_0,W_1,W_2$ 和 $W_3$ 各32位。</p>
 <div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">:=</span><span class="mi">1</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">do</span>
@@ -1895,11 +1895,11 @@
 <ul>
 <li>加密：</li>
 </ul>
-<p><img src="..\img\Ecb_encryption.png" alt="Ecb_encryption" style="zoom: 80%;" /></p>
+<p><img src="../../img/Ecb_encryption.png" alt="Ecb_encryption" style="zoom: 80%;" /></p>
 <ul>
 <li>解密：</li>
 </ul>
-<p><img src="..\img\Ecb_decryption.png" alt="Ecb_decryption" style="zoom: 80%;" /></p>
+<p><img src="../../img/Ecb_decryption.png" alt="Ecb_decryption" style="zoom: 80%;" /></p>
 <ul>
 <li>ECB 不符合属性1和2。它满足3和4，但不如1和2重要。</li>
 </ul>
@@ -1907,7 +1907,7 @@
 <ul>
 <li>加密：</li>
 </ul>
-<p><img src="..\img\Cbc_encryption.png" alt="Cbc_encryption" style="zoom: 80%;" /></p>
+<p><img src="../../img/Cbc_encryption.png" alt="Cbc_encryption" style="zoom: 80%;" /></p>
 <p>​   $C_i=E_k(P_i \oplus C_{i-1} )$</p>
 <p>​   $C_0=IV$</p>
 <ul>
@@ -1927,7 +1927,7 @@
 <p>解密：</p>
 </li>
 </ul>
-<p><img src="..\img\Cbc_decryption.png" alt="Cbc_decryption" style="zoom:80%;" /></p>
+<p><img src="../../img/Cbc_decryption.png" alt="Cbc_decryption" style="zoom:80%;" /></p>
 <p>​   $P_i=D_k(C_i) \oplus C_{i-1}$</p>
 <p>​   $C_0=IV$</p>
 <ul>
@@ -1938,7 +1938,7 @@
 <ul>
 <li>加密：</li>
 </ul>
-<p><img src="..\img\Ctr_encryption.png" alt="Ctr_encryption" style="zoom:80%;" /></p>
+<p><img src="../../img/Ctr_encryption.png" alt="Ctr_encryption" style="zoom:80%;" /></p>
 <ul>
 <li>
 <p>CTR 满足属性1，3和4，但不满足属性2。</p>
@@ -1947,7 +1947,7 @@
 <p>解密：</p>
 </li>
 </ul>
-<p><img src="..\img\Ctr_decryption.png" alt="Ctr_decryption" style="zoom:80%;" /></p>
+<p><img src="../../img/Ctr_decryption.png" alt="Ctr_decryption" style="zoom:80%;" /></p>
 <h3 id="_12">加密系统的安全性<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <h4 id="_13">加密系统安全性的定义<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h4>
 <ol>
@@ -2159,7 +2159,7 @@
 <p>$n^{ed}=n^{ed-1}n=n^{k(q-1)}n=(n^{q-1})^kn=1^kn=n\bmod q$</p>
 <p>故 $n^{ed}=n \bmod N$ 得证</p>
 <h4 id="ind-cparsa">IND-CPA安全结构：使用RSA加密<a class="headerlink" href="#ind-cparsa" title="Permanent link">&para;</a></h4>
-<p><img src="..\img\Encryption using RSA.png" alt="Encryption using RSA" style="zoom:67%;" /></p>
+<p><img src="../../img/Encryption using RSA.png" alt="Encryption using RSA" style="zoom:67%;" /></p>
 <p>$c=m \oplus H(r)\space||\space RSA.ENC_{sk}(r)$</p>
 <h4 id="rsa_1">可以直接使用 RSA 实现单向安全吗<a class="headerlink" href="#rsa_1" title="Permanent link">&para;</a></h4>
 <ul>
@@ -2226,7 +2226,7 @@
 </li>
 </ul>
 <h4 id="ind-ccaoaep">IND-CCA安全结构：最优非对称加密（OAEP）<a class="headerlink" href="#ind-ccaoaep" title="Permanent link">&para;</a></h4>
-<p><img src="..\img\OAEP.png" alt="OAEP" style="zoom: 50%;" /></p>
+<p><img src="../../img/OAEP.png" alt="OAEP" style="zoom: 50%;" /></p>
 <p>$s=(m||0...0)\oplus G(r)$</p>
 <p>$t=r\oplus H(s)$</p>
 <p>$c=RSA.ENC_{pk}(s||t)$</p>
