@@ -1067,9 +1067,11 @@
 <p>当程序包含多个源文件（如 <code>main.c</code>、<code>func.c</code>）时，有两种编译方式：</p>
 <ol>
 <li>直接指定所有文件：<code>gcc main.c func.c -o app</code>，适合文件数量较少的场景。</li>
-<li>分步编译（推荐）：先将每个源文件编译为目标文件（<code>.o</code>），再链接成可执行文件，修改单个文件时无需重新编译所有文件。</li>
+<li>分步编译（推荐）：先将每个源文件编译为目标文件（<code>.o</code>），再链接成可执行文件，修改单个文件时无需重新编译所有文件。<ol>
 <li>编译目标文件：<code>gcc -c main.c -o main.o</code>、<code>gcc -c func.c -o func.o</code>。</li>
 <li>链接目标文件：<code>gcc main.o func.o -o app</code>。</li>
+</ol>
+</li>
 </ol>
 <h3 id="3">3. 常用编译选项<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <table>
@@ -1223,6 +1225,8 @@
     
     
       <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>
