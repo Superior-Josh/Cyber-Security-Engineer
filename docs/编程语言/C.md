@@ -18,8 +18,8 @@ GCC（GNU Compiler Collection）是Linux下最常用的C/C++编译器，支持�
 
 1. 直接指定所有文件：`gcc main.c func.c -o app`，适合文件数量较少的场景。
 2. 分步编译（推荐）：先将每个源文件编译为目标文件（`.o`），再链接成可执行文件，修改单个文件时无需重新编译所有文件。
-   1. 编译目标文件：`gcc -c main.c -o main.o`、`gcc -c func.c -o func.o`。
-   2. 链接目标文件：`gcc main.o func.o -o app`。
+    1. 编译目标文件：`gcc -c main.c -o main.o`、`gcc -c func.c -o func.o`。
+    1. 链接目标文件：`gcc main.o func.o -o app`。
 
 ### 3. 常用编译选项
 

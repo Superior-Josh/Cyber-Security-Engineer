@@ -52,6 +52,13 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.superfences
   - tables
+  - pymdownx.arithmatex:
+      generic: true
+      block_syntax: "dollar"
+
+extra_javascript:
+  #- javascripts/mathjax.js  # 自定义配置脚本
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js  # MathJax 核心库
 
 # 部署配置
 deploy:
