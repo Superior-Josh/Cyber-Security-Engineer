@@ -12,13 +12,13 @@
         <meta name="author" content="Josh">
       
       
-        <link rel="canonical" href="https://Superior-Josh.github.io/Cyber-Security-Engineer/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/SonarQube/">
+        <link rel="canonical" href="https://Superior-Josh.github.io/Cyber-Security-Engineer/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E6%A8%A1%E5%9E%8B%E5%AF%B9%E6%AF%94%E4%B8%8E%E9%80%89%E5%9E%8B/">
       
       
-        <link rel="prev" href="../SELinux%E4%B8%8EAppArmor%E8%AF%A6%E8%A7%A3/">
+        <link rel="prev" href="../%E7%BD%91%E7%BB%9C%E9%9A%94%E7%A6%BB%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90%EF%BC%9AVLAN%E3%80%81%E7%BD%91%E7%BB%9C%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E4%B8%8E%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C/">
       
       
-        <link rel="next" href="../SQLmap/">
+        <link rel="next" href="../%E9%98%B2%E7%81%AB%E5%A2%99%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%EF%BC%9Aiptables%E4%B8%8Enftables%E8%A7%84%E5%88%99%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -26,7 +26,7 @@
     
     
       
-        <title>SonarQube - 网络安全工程师的学习笔记</title>
+        <title>访问控制模型对比与选型 - 网络安全工程师的学习笔记</title>
       
     
     
@@ -77,6 +77,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -107,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              SonarQube
+              访问控制模型对比与选型
             
           </span>
         </div>
@@ -724,17 +729,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../SonarQube/" class="md-nav__link">
         
   
   
@@ -745,7 +743,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -916,10 +913,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E6%A8%A1%E5%9E%8B%E5%AF%B9%E6%AF%94%E4%B8%8E%E9%80%89%E5%9E%8B/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    访问控制模型对比与选型
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -930,6 +949,269 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#dacmacrbac" class="md-nav__link">
+    <span class="md-ellipsis">
+      自主访问控制（DAC）、强制访问控制（MAC）、基于角色的访问控制（RBAC）详解
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discretionary-access-control-dac" class="md-nav__link">
+    <span class="md-ellipsis">
+      一、自主访问控制（Discretionary Access Control, DAC）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、自主访问控制（Discretionary Access Control, DAC）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 定义
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 核心原理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 典型实现
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 优点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 缺点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. 适用场景
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mandatory-access-control-mac" class="md-nav__link">
+    <span class="md-ellipsis">
+      二、强制访问控制（Mandatory Access Control, MAC）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、强制访问控制（Mandatory Access Control, MAC）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 定义
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 核心原理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 典型实现
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 优点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 缺点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. 适用场景
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#role-based-access-control-rbac" class="md-nav__link">
+    <span class="md-ellipsis">
+      三、基于角色的访问控制（Role-Based Access Control, RBAC）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、基于角色的访问控制（Role-Based Access Control, RBAC）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 定义
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-ansi-incits-359" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 核心组件（ANSI INCITS 359 标准定义）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 核心原理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 扩展模型
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 典型实现
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. 优点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. 缺点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. 适用场景
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      四、三大模型核心对比表
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1054,9 +1336,332 @@
 
 
 
-  <h1>SonarQube</h1>
-
-
+<h1 id="_1">访问控制模型对比与选型<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h3 id="dacmacrbac">自主访问控制（DAC）、强制访问控制（MAC）、基于角色的访问控制（RBAC）详解<a class="headerlink" href="#dacmacrbac" title="Permanent link">&para;</a></h3>
+<p>在网络安全和系统权限管理中，访问控制是核心技术之一，用于确保只有授权主体（用户、进程、设备等）能访问特定客体（文件、数据库、网络资源等）。以下从 <strong>定义、核心原理、实现机制、典型场景、优缺点</strong> 等维度，详细解析三大经典访问控制模型：DAC、MAC、RBAC。</p>
+<h2 id="discretionary-access-control-dac">一、自主访问控制（Discretionary Access Control, DAC）<a class="headerlink" href="#discretionary-access-control-dac" title="Permanent link">&para;</a></h2>
+<h3 id="1">1. 定义<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>DAC 是最基础的访问控制模型，核心特点是 <strong>资源所有者拥有自主决定权</strong>：资源的创建者或所有者可以自主授予/撤销其他主体对该资源的访问权限，且权限可在主体间传递（如 A 授予 B 权限后，B 可能再授予 C）。</p>
+<h3 id="2">2. 核心原理<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>主体（Subject）</strong>：发起访问请求的实体（如用户、进程）。  </p>
+</li>
+<li>
+<p><strong>客体（Object）</strong>：被访问的资源（如文件、文件夹、数据库表）。  </p>
+</li>
+<li>
+<p><strong>访问控制列表（ACL）</strong>：每个客体关联一个权限列表，记录哪些主体拥有对该客体的何种权限（如读、写、执行）。  </p>
+</li>
+<li>
+<p><strong>权限传递</strong>：所有者可将权限转授给其他主体，形成“自主扩散”特性。</p>
+</li>
+</ul>
+<h3 id="3">3. 典型实现<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>文件系统</strong>：Unix/Linux 的文件权限（所有者、组、其他用户的 r/w/x 权限）、Windows 的文件共享权限（通过 ACL 配置用户/组权限）。  </p>
+</li>
+<li>
+<p><strong>数据库</strong>：MySQL 的表级权限（<code>GRANT SELECT/INSERT ON table TO user</code>），所有者可转授权限（需带 <code>WITH GRANT OPTION</code>）。  </p>
+</li>
+</ul>
+<h3 id="4">4. 优点<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>灵活性高：资源所有者可按需分配权限，适配小型团队或个人资源管理场景。  </p>
+</li>
+<li>
+<p>易用性强：配置简单，无需复杂的角色或策略设计，普通用户即可操作。  </p>
+</li>
+</ul>
+<h3 id="5">5. 缺点<a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>安全性弱：权限易扩散（如用户误授权、恶意转授），难以控制“权限泄露”。  </p>
+</li>
+<li>
+<p>管理成本高：缺乏集中管控，当用户/资源数量增多时，权限审计和回收困难（如员工离职后未回收权限）。  </p>
+</li>
+<li>
+<p>不支持最小权限原则：易出现“过度授权”（如普通用户获得管理员级别的文件修改权限）。  </p>
+</li>
+</ul>
+<h3 id="6">6. 适用场景<a class="headerlink" href="#6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>个人设备（如电脑文件管理）、小型团队协作（如部门内部共享文档）、对安全性要求较低的场景。</li>
+</ul>
+<h2 id="mandatory-access-control-mac">二、强制访问控制（Mandatory Access Control, MAC）<a class="headerlink" href="#mandatory-access-control-mac" title="Permanent link">&para;</a></h2>
+<h3 id="1_1">1. 定义<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
+<p>MAC 是高安全性的访问控制模型，核心特点是 <strong>权限由系统管理员统一配置的“强制策略”决定</strong>，资源所有者无法自主修改权限，主体与客体均被分配固定的“安全标签”，访问是否允许由系统根据标签自动判断，不依赖用户意愿。</p>
+<h3 id="2_1">2. 核心原理<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>安全标签（Security Label）</strong>：  </p>
+<ul>
+<li>
+<p>主体标签：代表主体的安全级别（如“秘密”“机密”“绝密”）或 clearance（授权等级）。  </p>
+</li>
+<li>
+<p>客体标签：代表客体的敏感级别（如“秘密”“机密”“绝密”）。  </p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>强制访问规则</strong>：系统预设严格的访问规则，只有满足规则的请求才被允许，常见规则包括：  </p>
+<ul>
+<li>
+<p><strong>Bell-LaPadula 模型（BLP）</strong>：侧重“机密性”，核心规则是“下读上写”（主体只能读取安全级别低于或等于自身的客体，只能写入安全级别高于或等于自身的客体），防止高敏感信息泄露。  </p>
+</li>
+<li>
+<p><strong>Biba 模型</strong>：侧重“完整性”，核心规则是“上读下写”（主体只能读取安全级别高于或等于自身的客体，只能写入安全级别低于或等于自身的客体），防止低完整性数据污染高完整性资源。  </p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>集中管控</strong>：所有权限策略由系统管理员配置，用户（包括资源所有者）无法修改，确保策略的刚性执行。</p>
+</li>
+</ul>
+<h3 id="3_1">3. 典型实现<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>操作系统</strong>：美国国防部的 Trusted Solaris、SELinux（Linux 安全增强模块，支持 MAC 模式，通过安全上下文标签控制访问）、AppArmor。  </p>
+</li>
+<li>
+<p><strong>军事/涉密系统</strong>：涉密计算机、军用通信设备（如主体标签为“绝密”的用户才能访问标签为“绝密”的作战计划文件）。  </p>
+</li>
+<li>
+<p><strong>数据库</strong>：Oracle 数据库的 Label Security 组件（通过标签控制用户对敏感数据的访问）。  </p>
+</li>
+</ul>
+<h3 id="4_1">4. 优点<a class="headerlink" href="#4_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>安全性极高：权限强制生效，无自主修改或转授可能，能有效防止权限滥用和信息泄露，满足涉密或高安全等级场景需求。  </p>
+</li>
+<li>
+<p>严格遵循最小权限和安全策略：访问规则由系统自动校验，避免人为误操作。  </p>
+</li>
+<li>
+<p>可审计性强：所有访问请求均由系统记录，便于安全审计和违规追溯。  </p>
+</li>
+</ul>
+<h3 id="5_1">5. 缺点<a class="headerlink" href="#5_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>灵活性极差：策略固定，无法适配动态变化的业务场景（如临时需要给低级别用户授权访问高敏感资源）。  </p>
+</li>
+<li>
+<p>配置复杂：需要管理员深入理解安全模型和业务需求，标签设计和策略配置成本高。  </p>
+</li>
+<li>
+<p>易用性差：普通用户无权限调整权限，可能影响工作效率（如紧急情况下无法快速获取所需资源访问权）。  </p>
+</li>
+</ul>
+<h3 id="6_1">6. 适用场景<a class="headerlink" href="#6_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>军事、政府、金融等涉密或高安全等级场景（如国家机密文件管理、银行核心数据存储）、对数据机密性/完整性要求极高的系统。</li>
+</ul>
+<h2 id="role-based-access-control-rbac">三、基于角色的访问控制（Role-Based Access Control, RBAC）<a class="headerlink" href="#role-based-access-control-rbac" title="Permanent link">&para;</a></h2>
+<h3 id="1_2">1. 定义<a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h3>
+<p>RBAC 是目前最主流的访问控制模型，核心特点是 <strong>“权限与角色关联，用户与角色关联”</strong>，通过角色作为“中间层”简化权限管理：管理员先定义角色并分配对应权限，再将用户分配到不同角色，用户通过所属角色间接获得权限，无需直接分配权限给用户。</p>
+<h3 id="2-ansi-incits-359">2. 核心组件（ANSI INCITS 359 标准定义）<a class="headerlink" href="#2-ansi-incits-359" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>用户（User）</strong>：发起访问请求的主体（如员工、系统账号）。  </p>
+</li>
+<li>
+<p><strong>角色（Role）</strong>：基于业务职责定义的权限集合（如“管理员”“普通员工”“审计员”）。  </p>
+</li>
+<li>
+<p><strong>权限（Permission）</strong>：主体对客体的操作许可（如“文件读取”“数据库修改”“系统配置”）。  </p>
+</li>
+<li>
+<p><strong>会话（Session）</strong>：用户登录后与角色的临时关联（支持“最小权限”，如用户可在不同会话中激活不同角色）。  </p>
+</li>
+</ul>
+<h3 id="3_2">3. 核心原理<a class="headerlink" href="#3_2" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>管理员根据业务需求，定义角色（如“电商系统-订单审核员”）；  </p>
+</li>
+<li>
+<p>为每个角色分配对应的权限（如“订单审核员”拥有“查看订单”“审核订单”权限，无“删除订单”权限）；  </p>
+</li>
+<li>
+<p>将用户分配到对应角色（如员工 A 分配到“订单审核员”角色）；  </p>
+</li>
+<li>
+<p>用户登录后，通过所属角色获得权限，系统校验角色权限是否匹配访问请求。  </p>
+</li>
+</ol>
+<h3 id="4_2">4. 扩展模型<a class="headerlink" href="#4_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>RBAC0（基础模型）</strong>：包含用户、角色、权限的三元关联（用户-角色-权限），是核心基础。  </p>
+</li>
+<li>
+<p><strong>RBAC1（角色层级）</strong>：支持角色继承（如“超级管理员”继承“普通管理员”的所有权限），简化角色配置。  </p>
+</li>
+<li>
+<p><strong>RBAC2（约束模型）</strong>：添加权限约束（如“互斥角色”：用户不能同时拥有“采购员”和“财务审核员”角色，防止舞弊）、“角色容量”（如“管理员”角色最多分配 5 个用户）。  </p>
+</li>
+<li>
+<p><strong>RBAC3（综合模型）</strong>：整合 RBAC1 和 RBAC2，支持角色层级和约束，适用于复杂企业场景。  </p>
+</li>
+</ul>
+<h3 id="5_2">5. 典型实现<a class="headerlink" href="#5_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>企业级系统</strong>：OA 系统（如钉钉、企业微信的角色权限配置）、ERP 系统（如 SAP 的用户角色管理）。  </p>
+</li>
+<li>
+<p><strong>云平台</strong>：AWS IAM（通过角色关联权限策略，用户/服务通过角色获取权限）、阿里云 RAM（资源访问控制，基于角色分配云资源权限）。  </p>
+</li>
+<li>
+<p><strong>操作系统</strong>：Windows Active Directory（通过“组”实现角色管理，如“Domain Admins”组对应管理员权限）。  </p>
+</li>
+<li>
+<p><strong>网络设备</strong>：华为、Cisco 路由器的 AAA 认证（通过 RADIUS 服务器分配角色权限，如“网络管理员”“监控员”）。  </p>
+</li>
+</ul>
+<h3 id="6_2">6. 优点<a class="headerlink" href="#6_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>简化权限管理：减少用户与权限的直接关联（如 100 个普通员工只需分配到“普通员工”角色，无需逐一配置权限），降低管理成本。  </p>
+</li>
+<li>
+<p>安全性强：支持最小权限原则（角色仅分配必要权限），权限集中管控，便于审计和回收（如员工离职时，只需移除其角色关联即可回收所有权限）。  </p>
+</li>
+<li>
+<p>灵活性高：角色可按需定义和调整，适配业务变化（如新增“数据分析师”角色，直接分配对应权限即可）。  </p>
+</li>
+<li>
+<p>可扩展性好：支持角色层级和约束，适配从小型团队到大型企业的复杂场景。  </p>
+</li>
+</ul>
+<h3 id="7">7. 缺点<a class="headerlink" href="#7" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>初始配置成本高：需要梳理业务职责、定义角色和权限矩阵，对管理员的业务理解要求较高。  </p>
+</li>
+<li>
+<p>角色冗余风险：若角色设计不合理（如角色过多、权限重叠），可能导致管理复杂。  </p>
+</li>
+</ul>
+<h3 id="8">8. 适用场景<a class="headerlink" href="#8" title="Permanent link">&para;</a></h3>
+<ul>
+<li>企业级应用、大型团队、云平台、网络设备管理等需要集中管控、权限复杂且频繁变化的场景（目前绝大多数商业系统和企业内部系统均采用 RBAC 模型）。</li>
+</ul>
+<h2 id="_2">四、三大模型核心对比表<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>自主访问控制（DAC）</th>
+<th>强制访问控制（MAC）</th>
+<th>基于角色的访问控制（RBAC）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>权限控制主体</td>
+<td>资源所有者（自主决定）</td>
+<td>系统管理员（强制策略）</td>
+<td>系统管理员（角色关联）</td>
+</tr>
+<tr>
+<td>核心关联</td>
+<td>用户 ↔ 权限</td>
+<td>主体标签 ↔ 客体标签（规则匹配）</td>
+<td>用户 ↔ 角色 ↔ 权限</td>
+</tr>
+<tr>
+<td>灵活性</td>
+<td>极高（自主分配）</td>
+<td>极低（策略固定）</td>
+<td>中高（角色可灵活定义）</td>
+</tr>
+<tr>
+<td>安全性</td>
+<td>低（权限易扩散）</td>
+<td>极高（强制策略，无自主修改）</td>
+<td>中高（集中管控，最小权限）</td>
+</tr>
+<tr>
+<td>管理成本</td>
+<td>低（分散管理）</td>
+<td>高（策略复杂，需专业配置）</td>
+<td>中（初始配置成本高，后续维护简单）</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>个人设备、小型团队、低安全需求</td>
+<td>涉密系统、高安全等级场景（军事、金融）</td>
+<td>企业级系统、大型团队、复杂权限场景</td>
+</tr>
+<tr>
+<td>典型实现</td>
+<td>Unix/Linux 文件权限、Windows ACL</td>
+<td>SELinux、Trusted Solaris、涉密系统</td>
+<td>AWS IAM、企业 OA、ERP 系统、AD 组</td>
+</tr>
+<tr>
+<td>## 五、总结与选型建议</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>
+<p><strong>选型核心原则</strong>：  </p>
+<ul>
+<li>
+<p>优先考虑 <strong>安全性需求</strong>：高安全场景（涉密、金融核心数据）选 MAC；普通安全需求选 RBAC；低安全需求选 DAC。  </p>
+</li>
+<li>
+<p>其次考虑 <strong>管理规模</strong>：用户/资源数量多（≥50）选 RBAC；数量少（&lt;10）选 DAC；MAC 仅适用于特定高安全场景。  </p>
+</li>
+<li>
+<p>最后考虑 <strong>业务灵活性</strong>：业务频繁变化、角色调整频繁选 RBAC；业务固定、无权限调整需求选 MAC；个人/小型协作选 DAC。  </p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>实际应用趋势</strong>：  </p>
+<ul>
+<li>
+<p>目前绝大多数企业级系统、云平台、网络设备均采用 <strong>RBAC 模型</strong>（或其扩展），因其平衡了安全性、灵活性和管理效率。  </p>
+</li>
+<li>
+<p>MAC 仅在涉密、军事等特殊场景使用，普通业务系统极少采用。  </p>
+</li>
+<li>
+<p>DAC 仅用于个人设备或简单共享场景，逐渐被 RBAC 替代（如企业文件共享已从“自主授权”改为“角色授权”）。  </p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>面试高频考点</strong>：  </p>
+<ul>
+<li>
+<p>DAC 核心：资源所有者自主授权，ACL 实现，安全性弱。  </p>
+</li>
+<li>
+<p>MAC 核心：安全标签、强制策略（BLP/Biba 模型），高安全性，适用于涉密场景。  </p>
+</li>
+<li>
+<p>RBAC 核心：用户-角色-权限，角色层级/约束，企业级主流模型，优势是简化管理、支持最小权限。  </p>
+</li>
+</ul>
+</li>
+</ol>
+<p>通过以上解析，可清晰理解三大访问控制模型的核心差异和适用场景，在面试中可结合具体技术实现（如 SELinux、AWS IAM）展开说明，体现技术深度。</p>
+<blockquote>
+<p>（注：文档部分内容可能由 AI 生成）</p>
+</blockquote>
 
 
 
