@@ -899,8 +899,19 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    网络隔离核心技术解析：VLAN、网络命名空间与容器网络
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -913,6 +924,176 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#vlan" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络隔离核心技术解析：VLAN、网络命名空间与容器网络
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      一、技术定位：网络隔离的分层实现逻辑
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vlan_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      二、VLAN：数据链路层的虚拟局域网隔离
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、VLAN：数据链路层的虚拟局域网隔离">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 核心定义与技术定位
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 核心技术特性与实现方式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 优势与适用场景
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      三、网络命名空间：操作系统内核级的网络隔离
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、网络命名空间：操作系统内核级的网络隔离">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 核心定义与技术定位
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 核心技术特性与实现方式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 优势与适用场景
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      四、容器网络：容器化场景的精细化隔离
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、容器网络：容器化场景的精细化隔离">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 核心定义与技术定位
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 核心网络模式与实现方式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 优势与适用场景
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      五、三大隔离技术核心区别对比
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -932,6 +1113,29 @@
   
   <span class="md-ellipsis">
     访问控制模型对比与选型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E8%BF%90%E8%A1%8C%E6%97%B6%E4%BF%9D%E6%8A%A4%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3%EF%BC%9AASLR%E3%80%81DEP_NX%E3%80%81Stack%20Canary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    运行时保护技术详解：ASLR、DEP_NX、Stack Canary
     
   </span>
   
@@ -1061,15 +1265,17 @@
 
 
 
-<h1 id="vlan">网络隔离核心技术解析：VLAN、网络命名空间与容器网络<a class="headerlink" href="#vlan" title="Permanent link">&para;</a></h1>
+  <h1>网络隔离核心技术解析：VLAN、网络命名空间与容器网络</h1>
+
+<h2 id="vlan">网络隔离核心技术解析：VLAN、网络命名空间与容器网络<a class="headerlink" href="#vlan" title="Permanent link">&para;</a></h2>
 <p>在网络架构设计中，网络隔离是保障数据安全、提升网络性能、简化管理的关键技术手段。其核心目标是将一个物理或逻辑网络划分为多个独立的“子网络”，使不同子网络间的流量默认无法直接交互，从而有效隔离业务流量、限制故障传播范围、防范跨域攻击。本文将聚焦三大主流网络隔离技术——VLAN、网络命名空间、容器网络，深入解析其技术原理、实现方式、核心特性及适用场景，为网络架构设计与优化提供技术支撑。</p>
-<h1 id="_1">一、技术定位：网络隔离的分层实现逻辑<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="_1">一、技术定位：网络隔离的分层实现逻辑<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>网络隔离技术根据隔离层级和实现范围的不同，可分为“物理层/数据链路层隔离”“网络层/操作系统层隔离”“应用层/容器层隔离”三大类。VLAN主要实现数据链路层的隔离，通过划分虚拟局域网将物理网络中的设备逻辑分组；网络命名空间实现操作系统内核级的网络隔离，为不同进程提供独立的网络协议栈；容器网络则是在容器化场景下，结合网络命名空间等技术实现容器间的精细化隔离。三者分别适配不同的网络规模和场景，既可以独立部署，也可结合使用构建多层次隔离体系。</p>
-<h1 id="vlan_1">二、VLAN：数据链路层的虚拟局域网隔离<a class="headerlink" href="#vlan_1" title="Permanent link">&para;</a></h1>
-<h2 id="1">1. 核心定义与技术定位<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<h2 id="vlan_1">二、VLAN：数据链路层的虚拟局域网隔离<a class="headerlink" href="#vlan_1" title="Permanent link">&para;</a></h2>
+<h3 id="1">1. 核心定义与技术定位<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <p>VLAN（Virtual Local Area Network，虚拟局域网）是一种基于IEEE 802.1Q标准的二层网络隔离技术，其核心原理是在以太网帧头部插入“VLAN标签（Tag）”，通过标签中的VLAN ID（1-4094，其中1-4094为可用值，0和4095为保留值）将同一物理网络中的设备划分为多个逻辑上独立的虚拟网络。不同VLAN ID的设备间默认无法直接通信，需通过三层设备（如路由器、三层交换机）转发才能实现交互，从而在数据链路层阻断广播风暴和跨VLAN的直接访问。</p>
 <p>VLAN解决了传统物理局域网“广播域过大导致性能下降”“设备物理位置限制分组”等问题，是企业局域网、数据中心基础网络中应用最广泛的隔离技术。</p>
-<h2 id="2">2. 核心技术特性与实现方式<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<h3 id="2">2. 核心技术特性与实现方式<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
 <p><strong>VLAN标签机制</strong>：以太网帧经过支持VLAN的交换机时，会被插入4字节的VLAN标签，包含TPID（标签协议标识，固定为0x8100）和TCI（标签控制信息，含3位优先级和12位VLAN ID）。交换机通过识别VLAN ID，将帧转发至同一VLAN的端口，不同VLAN的帧默认不转发，实现逻辑隔离。</p>
@@ -1093,14 +1299,14 @@
 <p><strong>扩展特性</strong>：支持VLAN聚合（Super VLAN），将多个VLAN划分为一个聚合组，共享同一网关，减少IP地址浪费；支持私有VLAN（Private VLAN），在同一VLAN内进一步划分隔离域，实现同一VLAN内设备的隔离。</p>
 </li>
 </ul>
-<h2 id="3">3. 优势与适用场景<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<h3 id="3">3. 优势与适用场景<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <p><strong>优势</strong>：基于标准协议，兼容性好，支持所有主流网络设备；实现简单，配置成本低，运维难度小；有效缩小广播域，提升网络性能；通过物理网络复用降低硬件投入成本。</p>
 <p><strong>适用场景</strong>：企业办公局域网（如按部门划分VLAN：研发部VLAN 10、财务部VLAN 20）；数据中心服务器区隔离（如Web服务器VLAN 100、数据库服务器VLAN 200）；校园网、酒店等多租户场景的网络隔离。</p>
-<h1 id="_2">三、网络命名空间：操作系统内核级的网络隔离<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
-<h2 id="1_1">1. 核心定义与技术定位<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h2>
+<h2 id="_2">三、网络命名空间：操作系统内核级的网络隔离<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="1_1">1. 核心定义与技术定位<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
 <p>网络命名空间（Network Namespace，简称netns）是Linux内核提供的一种内核级网络隔离技术，其核心原理是为进程或进程组创建独立的网络协议栈实例，每个网络命名空间拥有独立的网卡、IP地址、路由表、ARP缓存、防火墙规则（如iptables/nftables规则）等网络资源。不同网络命名空间内的进程无法直接通信，需通过“虚拟网络设备”（如veth pair、bridge、vxlan）连接才能实现交互，从而在操作系统层面实现网络资源的完全隔离。</p>
 <p>网络命名空间是容器网络隔离的核心底层技术，也可用于操作系统内多租户场景的网络隔离，相比VLAN的二层隔离，其隔离粒度更细、灵活性更高。</p>
-<h2 id="2_1">2. 核心技术特性与实现方式<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h2>
+<h3 id="2_1">2. 核心技术特性与实现方式<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
 <p><strong>独立的网络资源实例</strong>：每个网络命名空间拥有完全独立的网络协议栈组件，包括：独立的网卡（可通过虚拟设备创建）、独立的IP地址配置（如为命名空间内的网卡分配192.168.1.1/24）、独立的路由表（仅对命名空间内的进程生效）、独立的ARP缓存和防火墙规则，确保不同命名空间的网络配置互不干扰。</p>
@@ -1127,14 +1333,14 @@
 <p><strong>与进程的绑定关系</strong>：网络命名空间可通过进程PID绑定，新创建的进程可继承父进程的命名空间，也可通过<code>clone()</code>系统调用指定新的命名空间。当命名空间内无进程运行时，命名空间可被删除，释放网络资源。</p>
 </li>
 </ul>
-<h2 id="3_1">3. 优势与适用场景<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h2>
+<h3 id="3_1">3. 优势与适用场景<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
 <p><strong>优势</strong>：内核级隔离，隔离强度高，不同命名空间网络资源完全独立；配置灵活，可通过多种虚拟设备组合实现复杂的网络拓扑；资源占用低，无需额外硬件支持，仅消耗少量内核资源；是容器网络的核心底层技术，适配云原生场景。</p>
 <p><strong>适用场景</strong>：容器化环境的网络隔离（如Docker、Kubernetes容器的网络隔离）；操作系统内多租户场景（如一台服务器运行多个独立的网络服务，每个服务使用独立命名空间）；网络协议栈测试（如在不同命名空间测试不同的TCP/IP配置）。</p>
-<h1 id="_3">四、容器网络：容器化场景的精细化隔离<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h1>
-<h2 id="1_2">1. 核心定义与技术定位<a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h2>
+<h2 id="_3">四、容器网络：容器化场景的精细化隔离<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="1_2">1. 核心定义与技术定位<a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h3>
 <p>容器网络是面向容器化应用的网络隔离与通信技术，其核心目标是在保障容器间隔离的同时，实现容器与容器、容器与主机、容器与外部网络的高效通信。容器网络以“网络命名空间”为底层隔离基础，结合虚拟网桥、Overlay网络等技术，提供多种网络模式（如桥接模式、主机模式、Overlay模式），适配不同的容器部署场景（单机容器、跨主机容器集群）。</p>
 <p>容器网络的隔离粒度细化到“容器”级别，每个容器可拥有独立的网络配置，同时支持动态调整网络策略，是云原生时代的核心网络技术。</p>
-<h2 id="2_2">2. 核心网络模式与实现方式<a class="headerlink" href="#2_2" title="Permanent link">&para;</a></h2>
+<h3 id="2_2">2. 核心网络模式与实现方式<a class="headerlink" href="#2_2" title="Permanent link">&para;</a></h3>
 <p>以主流的Docker容器和Kubernetes容器编排平台为例，容器网络主要分为“单机容器网络模式”和“跨主机容器网络模式”两大类：</p>
 <ul>
 <li><strong>单机容器网络模式（Docker核心模式）</strong>：</li>
@@ -1151,10 +1357,10 @@
 <li><strong>Underlay模式（底层网络）</strong>：容器直接使用物理网络的IP地址，通过三层路由实现跨主机通信，网络性能接近物理机，但需物理网络支持（如支持VLAN透传），隔离性依赖物理网络的VLAN划分；</li>
 <li><strong>网络策略（Network Policy）</strong>：Kubernetes提供的精细化隔离机制，通过标签选择器指定容器组，配置“允许/拒绝”的通信规则（如仅允许Web容器访问数据库容器的3306端口），实现应用层的逻辑隔离。</li>
 </ul>
-<h2 id="3_2">3. 优势与适用场景<a class="headerlink" href="#3_2" title="Permanent link">&para;</a></h2>
+<h3 id="3_2">3. 优势与适用场景<a class="headerlink" href="#3_2" title="Permanent link">&para;</a></h3>
 <p><strong>优势</strong>：隔离粒度细，精确到容器级别；支持动态伸缩，容器创建/销毁时自动配置网络；适配云原生场景，与容器编排平台深度集成；提供丰富的网络模式，兼顾隔离性、性能和灵活性；支持网络策略实现应用层精细化管控。</p>
 <p><strong>适用场景</strong>：Docker单机容器部署（如开发测试环境的多容器应用）；Kubernetes容器集群（如生产环境的微服务架构，按服务划分容器组并配置网络策略）；云原生应用的跨区域部署（通过Overlay网络实现跨地域容器通信）。</p>
-<h1 id="_4">五、三大隔离技术核心区别对比<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h1>
+<h2 id="_4">五、三大隔离技术核心区别对比<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>

